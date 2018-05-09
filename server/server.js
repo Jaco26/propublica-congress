@@ -22,11 +22,11 @@ app.use(bodyParser.json());
 app.use(express.static('build'));
 
 // Routes //
-app.use('/congress/members', membersRouter);
-app.use('/congress/bills', billsRouter);
-app.use('/congress/votes', votesRouter);
-app.use('/congress/statements', statementsRouter);
-app.use('/congress/committees', committeesRouter);
+app.use('/api/congress/members', membersRouter);
+app.use('/api/congress/bills', billsRouter);
+app.use('/api/congress/votes', votesRouter);
+app.use('/api/congress/statements', statementsRouter);
+app.use('/api/congress/committees', committeesRouter);
 
 const port = process.env.PORT || 8081
 app.listen(port, () => console.log(`Server ready on port ${port}`))
