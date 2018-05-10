@@ -4,6 +4,7 @@ const morgan = require('morgan');
 require('dotenv').config();
 
 // Route includes
+// Propublica Routes
 const { 
   membersRouter, 
   billsRouter, 
@@ -11,6 +12,9 @@ const {
   statementsRouter,
   committeesRouter  
 } = require('./routes/propublica');
+
+// My database routes
+const myDatabaseRouter = require('./routes/database/database.routes')
 
 const app = express();
 
@@ -27,6 +31,7 @@ app.use('/api/congress/bills', billsRouter);
 app.use('/api/congress/votes', votesRouter);
 app.use('/api/congress/statements', statementsRouter);
 app.use('/api/congress/committees', committeesRouter);
+app.use('/api/database', myDatabaseRouter);
 
 const port = process.env.PORT || 8081
 app.listen(port, () => console.log(`Server ready on port ${port}`))

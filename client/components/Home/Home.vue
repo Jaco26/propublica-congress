@@ -2,8 +2,19 @@
   <div class="home-page">
     <h1>Hello!</h1>
     <p>This is the home page!</p>
-    <house-member-list />
-    <senate-member-list /> 
+    <div class="member-lists">
+      <div>
+        <senate-member-list />
+      </div>
+      <v-spacer></v-spacer>
+      <div>
+        <house-member-list />
+      </div>
+    </div>
+   
+    
+  
+   
   </div>
 </template>
 
@@ -39,6 +50,8 @@ export default {
 </script>
 
 <style>
-
+  .member-lists {
+    display: flex;
+  }
 </style>
 
