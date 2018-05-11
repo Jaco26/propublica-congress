@@ -8,11 +8,21 @@
 <script>
 
 import Navbar from './components/Navbar/Navbar';
+import { 
+  FETCH_BOOKMARKED_MEMBERS, 
+  FETCH_SENATE_MEMBERS, 
+  FETCH_HOUSE_MEMBERS } from './store/action-types';
+
 
 export default {
   name: 'App',
   components: {
     Navbar,
+  },
+  mounted(){
+    this.$store.dispatch(FETCH_BOOKMARKED_MEMBERS);
+    this.$store.dispatch(FETCH_SENATE_MEMBERS, {congress: 115, chamber: 'senate'});
+    this.$store.dispatch(FETCH_HOUSE_MEMBERS, {congress: 115, chamber: 'house'});
   }
 };
 </script>

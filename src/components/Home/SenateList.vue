@@ -29,8 +29,6 @@ export default {
       this.$store.dispatch(FETCH_SENATE_MEMBERS, {congress: 115, chamber: 'senate'}); 
     },
     bookmark(member){
-      console.log('SENATE LIST BOOKMARK');
-      
       this.$store.dispatch(BOOKMARK_MEMBER, {...member, chamber: 'senate'});
     }
   },

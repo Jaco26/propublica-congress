@@ -23,6 +23,9 @@ const store = new Vuex.Store({
     houseMembers: [],
     senateMembers: [],
     bookmarkedMembers: [],
+    selectedProfile: {},
+    selectedVotes: [],
+    selectedBills: [],
   },
   mutations: {
     SET_HOUSE_MEMBERS (state, payload) {
@@ -32,8 +35,17 @@ const store = new Vuex.Store({
       state.senateMembers = payload.results[0].members;
     },
     SET_BOOKMARKED_MEMBERS (state, payload) {
-      console.log('PAYLOAD', payload);
       state.bookmarkedMembers = payload;
+    },
+
+    SET_PROFILE (state, payload) {          
+      state.selectedProfile = payload.results[0];
+    },
+    SET_VOTES (state, payload) {
+      state.selectedVotes = payload.results[0].votes;
+    },
+    SET_BILLS (state, payload) {
+      state.selectedBills = payload.results[0].bills;
     }
   },
   actions: {
@@ -50,7 +62,21 @@ const store = new Vuex.Store({
     },
     async FETCH_BOOKMARKED_MEMBERS ({commit}) {
       commit(SET_BOOKMARKED_MEMBERS, await database.getBookmarkedMembers());
+    }, 
+
+    async FETCH_PROFILE ({commit}, payload) {
+      const { member_id } = payload;
+      commit('SET_PROFILE', await members.getSpecificMember(member_id))
+    },
+    async FETCH_VOTES ({commit}, payload) {
+      const {member_id} = payload;
+      commit('SET_VOTES', await members.getSpecificMembersVotePositions(member_id));
+    },
+    async FETCH_BILLS ({commit}, payload) {
+      const {member_id} = payload;
+      commit('SET_BILLS', await members.getBillsCosponsoredBySpecificMember(member_id));
     }
+
 
   }
 });

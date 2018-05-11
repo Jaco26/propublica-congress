@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const axios = require('axios');
+// const axios = require('axios');
 const Propublica = require('../../modules/Propublica');
 
 // GET LIST OF MEMBERS
@@ -36,30 +36,6 @@ router.get('/list/new', async (req, res) => {
     });
 });
 
-// GET LIST OF CURRENT MEMBERS BY STATE/DISTRICT
-router.get('/:chamber/:state/:district', async (req, res) => {
-  let chamber = req.params.chamber,
-      state = req.params.state,
-      district = req.params.district,
-      url;
-  switch (chamber) {
-    case 'house':
-      url = `/members/${chamber}/${state}/${dstrict}/current.json`;
-      break;
-    case 'senate':
-      url = `/members/${chamber}/${state}/current.json`;
-      break;
-    default: 
-      console.error('CHAMBER != house || senate');
-      res.sendStatus(500);
-  }
-  Propublica().get(url)
-    .then(response => res.send(response.data))
-    .catch(err => {
-      console.log(err);
-      res.sendStatus(500);
-    });
-});
 
 // GET LIST OF MEMBERS LEAVING OFFICE
 router.get('/list/leaving_office/:congress/:chamber', async (req, res) => {
@@ -117,10 +93,31 @@ router.get('/:congress/:chamber/:memberIdOne/:memberIdTwo/compare/bills', async 
 router.get('/bills/:memberId/:type', async (req, res) => {
   let memberId = req.params.memberId,
       type = req.params.type;
+      console.log('####################', type);
+      
   Propublica().get(`/members/${memberId}/bills/${type}.json`)
     .then(response => res.send(response.data))
     .catch(err => {
-      console.log(err);
+      console.log('**************************************************',err);
+      res.sendStatus(500);
+    });
+});
+
+// GET LIST OF CURRENT MEMBERS BY STATE/DISTRICT
+router.get('/:chamber/:state/:district', async (req, res) => {
+  let chamber = req.params.chamber,
+    state = req.params.state,
+    district = req.params.district,
+    url;
+  if (chamber == 'house') {
+    url = `/members/${chamber}/${state}/${dstrict}/current.json`;
+  } else if (chamber == 'senate') {
+    url = `/members/${chamber}/${state}/current.json`;
+  }
+  Propublica().get(url)
+    .then(response => res.send(response.data))
+    .catch(err => {
+      console.log('*******IN GET LIST OF CURRENT MEMBERS', err);
       res.sendStatus(500);
     });
 });

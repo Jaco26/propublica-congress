@@ -20,9 +20,10 @@
 
 <script>
 
-import {mapState} from 'vuex';
+import { mapState } from 'vuex';
 import HouseList from './HouseList';
 import SenateList from './SenateList';
+
 
 export default {
   data () {
