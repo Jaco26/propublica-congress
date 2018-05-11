@@ -16,28 +16,28 @@
 <script>
 
 import {FETCH_HOUSE_MEMBERS, BOOKMARK_MEMBER} from '../../store/action-types';
-import {mapState, mapActions} from 'vuex';
+import {mapState} from 'vuex';
 
 export default {
-  // name: 'HouseList'
-   data () {
+
+  data () {
     return {
+
     }
   },
   computed: mapState({
     houseMembers: state => state.houseMembers,
+
   }),
   methods: {
     getHouseMembers(){
       this.$store.dispatch(FETCH_HOUSE_MEMBERS, {congress: 115, chamber: 'house'});
     },
     bookmark(member){
-      this.$store.dispatch(BOOKMARK_MEMBER, member)
-    }
+       let payload = {...member, chamber: 'house'};       
+      this.$store.dispatch(BOOKMARK_MEMBER, payload);
+    },
   },
-  mounted () {
-    
-  }
 }
 </script>
 

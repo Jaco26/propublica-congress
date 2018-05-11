@@ -26,10 +26,12 @@ export default {
   }),
   methods: {
     getSenateMembers(){
-      this.$store.dispatch(FETCH_SENATE_MEMBERS, {congress: 115, chamber: 'senate'});
+      this.$store.dispatch(FETCH_SENATE_MEMBERS, {congress: 115, chamber: 'senate'}); 
     },
     bookmark(member){
-      this.$store.dispatch(BOOKMARK_MEMBER, {...member, chamber: 'senate'})
+      console.log('SENATE LIST BOOKMARK');
+      
+      this.$store.dispatch(BOOKMARK_MEMBER, {...member, chamber: 'senate'});
     }
   },
   mounted () {

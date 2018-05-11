@@ -37,17 +37,16 @@ const store = new Vuex.Store({
     }
   },
   actions: {
-    async FETCH_HOUSE_MEMBERS ({commit}, {congress, chamber}) {
+    async FETCH_HOUSE_MEMBERS ({commit}, payload) {
+      const { congress, chamber } = payload;
       commit(SET_HOUSE_MEMBERS, await members.getMemberList(congress, chamber));
     },
-    async FETCH_SENATE_MEMBERS ({commit}, {congress, chamber}) {
+    async FETCH_SENATE_MEMBERS ({commit}, payload) {
+      const {congress, chamber} = payload;
       commit(SET_SENATE_MEMBERS, await members.getMemberList(congress, chamber));
     },
-    async BOOKMARK_MEMBER ({dispatch}, member) {
-      let result = await database.bookmarkMember(member);
-      console.log(result);
-      
-      dispatch(FETCH_BOOKMARKED_MEMBERS);
+    async BOOKMARK_MEMBER ({dispatch}, payload) {
+      dispatch(FETCH_BOOKMARKED_MEMBERS, await database.bookmarkMember(payload));
     },
     async FETCH_BOOKMARKED_MEMBERS ({commit}) {
       commit(SET_BOOKMARKED_MEMBERS, await database.getBookmarkedMembers());

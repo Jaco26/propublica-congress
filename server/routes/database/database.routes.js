@@ -6,6 +6,8 @@ const pool = require('../../modules/pool');
 
 router.post('/members', async (req, res) => {
   let { id, chamber, first_name, last_name, in_office, party } = req.body;
+  console.log('CHAMMMMMMBER', chamber);
+  
   const sqlText = `INSERT INTO bookmarks (member_id, chamber, first_name, last_name, in_office, current_party)
   VALUES($1, $2, $3, $4, $5, $6);`;
   pool.query(sqlText, [id, chamber, first_name, last_name, in_office, party])
