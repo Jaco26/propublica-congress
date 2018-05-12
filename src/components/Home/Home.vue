@@ -15,7 +15,7 @@
 
 <script>
 
-import {mapState} from 'vuex';
+import {mapGetters} from 'vuex';
 
 export default {
  
@@ -24,9 +24,12 @@ export default {
       showModal: false,
     }
   },
-  computed: mapState({
-    senateMembers: state => state.senateMembers,
-  }),
+  computed:{
+    ...mapGetters({
+      senateMembers: 'senateMemberList',
+      houseMembers: 'houseMemberList',
+    }),
+  },
   methods: {
 
   },

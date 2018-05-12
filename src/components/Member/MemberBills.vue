@@ -28,13 +28,13 @@ export default {
     bills: state => state.selectedBills,
   }),
   methods: {
-    getBills(){
-      let member_id = this.$route.params.id
-      this.$store.dispatch('FETCH_BILLS', {member_id});
-    },
+    // getBills(){
+    //   let member_id = this.$route.params.id
+    //   this.$store.dispatch('FETCH_BILLS', {member_id});
+    // },
   },
   mounted(){
-    this.getBills()
+    // this.getBills()
   }
 }
 </script>

@@ -19,10 +19,9 @@ export default {
   components: {
     Navbar,
   },
-  mounted(){
-    this.$store.dispatch(FETCH_BOOKMARKED_MEMBERS);
-    this.$store.dispatch(FETCH_SENATE_MEMBERS, {congress: 115, chamber: 'senate'});
-    this.$store.dispatch(FETCH_HOUSE_MEMBERS, {congress: 115, chamber: 'house'});
+  created(){
+    this.$store.dispatch('FETCH_CONGRESS_MEMBERS', {congress: 115, chamber: 'senate'});
+    this.$store.dispatch('FETCH_CONGRESS_MEMBERS', {congress: 115, chamber: 'house'});
   }
 };
 </script>

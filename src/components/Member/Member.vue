@@ -38,7 +38,7 @@ import {mapState} from 'vuex';
 export default {
   data () {
     return {
-      person: {}
+      person: {},
     }
   },
   watch: {
@@ -47,14 +47,15 @@ export default {
   computed: mapState({
     senateMembers: state => state.senateMembers,
   }),
-  created () {
-    this.setPerson() 
+  mounted () {
+    this.setPerson();
+    this.getBills();
   },
   methods: {
     setPerson () {
         let personId = this.$route.params.id;
         this.person = this.senateMembers.filter(member => member.id == personId)[0];
-    }
+    },
   }
   
 }
