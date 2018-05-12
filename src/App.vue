@@ -8,7 +8,6 @@
 </template>
 
 <script>
-import Navbar from './components/Navbar/Navbar';
 import ResponsiveNav from './components/ResponsiveNav/ResponsiveNav';
 export default {
   name: 'App',
