@@ -1,11 +1,16 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from '@/components/Home/Home';
-import Bookmarks from '@/components/Bookmarks/Bookmarks';
-import Member from '@/components/Member/Member';
-import MemberVotes from '@/components/Member/MemberVotes';
-import MemberBills from '@/components/Member/MemberBills';
-import MemberStatements from '@/components/Member/MemberStatements';
+import Home from '@/components/Home';
+import Members from '@/components/Members/Members'
+import SenateMembers from '@/components/Members/Senate';
+import HouseMembers from '@/components/Members/House';
+import Member from '@/components/Members/Member/Member';
+import MemberVotes from '@/components/Members/Member/MemberVotes';
+import MemberBills from '@/components/Members/Member/MemberBills';
+import MemberStatements from '@/components/Members/Member/MemberStatements';
+import Votes from '@/components/Votes/Votes';
+import Bills from '@/components/Bills/Bills';
+import Statements from '@/components/Statements/Statements';
 
 Vue.use(Router);
 
@@ -17,28 +22,52 @@ export default new Router({
       component: Home,
     },
     {
-      path: '/bookmarks',
-      name: 'Bookmarks',
-      component: Bookmarks,
-    },
-    {
-      path: '/member/:id/',
-      component: Member,
+      path: '/members',
+      name: 'Members',
+      component: Members,
       children: [
         {
-          component: MemberBills,
-          path: 'bills',
+          component: SenateMembers,
+          path: 'senate',
         },
         {
-          component: MemberVotes,
-          path: 'votes'
+          component: HouseMembers,
+          path: 'house',
         },
-        
         {
-          component: MemberStatements,
-          path: 'statements'
-        },
+          component: Member,
+          path: ':id',
+          children: [
+            {
+              component: MemberBills,
+              path: 'bills',
+            },
+            {
+              component: MemberVotes,
+              path: 'votes'
+            },
+
+            {
+              component: MemberStatements,
+              path: 'statements'
+            },
+          ]
+        }
       ]
-    }
+    },
+    {
+      path: '/votes',
+      component: Votes,
+    },
+    {
+      path: '/bills',
+      component: Bills,
+    },
+    {
+      path: '/statements',
+      component: Statements,
+    },
+    
   ],
+  // mode: 'history'
 });

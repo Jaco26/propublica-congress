@@ -30,7 +30,9 @@
         <router-view></router-view>
       </v-flex>
     </v-layout>
+     <router-view></router-view>
   </v-container>
+ 
 </template>
 
 <script>
