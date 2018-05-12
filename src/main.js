@@ -7,7 +7,19 @@ import { sync } from 'vuex-router-sync';
 import store from '@/store/store';
 import Vuetify from 'vuetify';
 import 'vuetify/dist/vuetify.min.css';
-Vue.use(Vuetify);
+import 'material-design-icons-iconfont/dist/material-design-icons.css';
+
+Vue.use(Vuetify, {
+  theme: {
+    primary: "#7986CB",
+    secondary: "#e57373",
+    accent: "#9c27b0",
+    error: "#f44336",
+    warning: "#ffeb3b",
+    info: "#2196f3",
+    success: "#4caf50"
+  }
+});
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
