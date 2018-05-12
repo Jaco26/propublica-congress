@@ -46,7 +46,7 @@ const store = new Vuex.Store({
     },
     SET_BILLS (state, payload) {
       state.selectedBills = payload.results[0].bills;
-    }
+    },
   },
   actions: {
     async FETCH_HOUSE_MEMBERS ({commit}, payload) {
@@ -75,8 +75,7 @@ const store = new Vuex.Store({
     async FETCH_BILLS ({commit}, payload) {
       const {member_id} = payload;
       commit('SET_BILLS', await members.getBillsCosponsoredBySpecificMember(member_id));
-    }
-
+    },
 
   }
 });

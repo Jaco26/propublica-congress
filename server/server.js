@@ -23,7 +23,7 @@ app.use(morgan('combined'));
 app.use(bodyParser.json());
 
 // Serve static files
-app.use(express.static('build'));
+app.use(express.static('dist'));
 
 // Routes //
 app.use('/api/congress/members', membersRouter);

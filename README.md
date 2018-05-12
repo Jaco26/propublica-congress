@@ -12,5 +12,8 @@ npm install
 
 # serve with hot reload at localhost:8080
 npm run dev
+
+# start up express server 
+npm run server
 ```
 
