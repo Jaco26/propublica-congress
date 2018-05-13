@@ -2,21 +2,32 @@
    <v-container grid-list-md>
     <h1>Votes!</h1>
     <v-layout wrap>
-      <v-flex v-for="i in 39" :key="i">
-        {{i}}
+      <v-flex v-for="vote in votes" :key="vote.vote_id">
+        <v-card>
+          <v-card-title class="body-2">
+            {{vote.description}} {{vote.position}}
+          </v-card-title>
+          <v-card-text>
+            
+          </v-card-text>
+        </v-card>
+    
+
       </v-flex>
     </v-layout>
   </v-container>
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
 export default {
-  methods: {
-    getVotes(member){
-      this.$store.dispatch('FETCH_VOTES', member);
-    },
-   
-  }
+  computed: {
+    ...mapGetters({
+      votes: 'specificMemberVotes',
+    }),
+
+  },
+
 }
 </script>
 

@@ -14,7 +14,7 @@ import Statements from '@/components/Statements/Statements';
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -76,7 +76,9 @@ export default new Router({
       name: 'Statements',
       component: Statements,
     },
-    
   ],
-  // mode: 'history'
 });
+
+
+
+export default router;

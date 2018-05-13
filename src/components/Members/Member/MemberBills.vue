@@ -22,20 +22,15 @@
 </template>
 
 <script>
-import {mapState} from 'vuex';
+import {mapGetters} from 'vuex';
 export default {
-  computed: mapState({
-    bills: state => state.selectedBills,
-  }),
-  methods: {
-    // getBills(){
-    //   let member_id = this.$route.params.id
-    //   this.$store.dispatch('FETCH_BILLS', {member_id});
-    // },
+  computed: {
+    ...mapGetters({
+      bills: 'specificMemberBills',
+    }),
+
   },
-  mounted(){
-    // this.getBills()
-  }
+  
 }
 </script>
 

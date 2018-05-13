@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import memberService from '../../services/propublica/members.service';
 import {mapGetters} from 'vuex';
 export default {
   data () {
@@ -30,11 +31,9 @@ export default {
       memberIsLoading: 'memberIsLoading',
     })
   },
-  beforeRouteLeave (to, from, next) {
-    if(to.params.id){  
-      let chamber = from.name;
-      console.log( {member_id: to.params.id, chamber});
-      this.$store.dispatch('FETCH_MEMBER', {member_id: to.params.id, chamber});
+  async beforeRouteLeave (to, from, next) {
+    if(to.params.id) {
+      this.$store.commit('SET_SPECIFIC_MEMBER', await memberService.getSpecificMember(to.params.id));
       next();
     } else {
       next();

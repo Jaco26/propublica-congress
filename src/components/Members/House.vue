@@ -18,6 +18,8 @@
 
 <script>
 import {mapGetters} from 'vuex';
+import memberService from '../../services/propublica/members.service';
+
 export default {
   computed: {
     ...mapGetters({
@@ -25,16 +27,15 @@ export default {
       houseCongress: 'houseCongress',
     })
   },
-   beforeRouteLeave (to, from, next) {
-    if(to.params.id){  
-      let chamber = from.name;
-      console.log( {member_id: to.params.id, chamber});
-      this.$store.dispatch('FETCH_MEMBER', {member_id: to.params.id, chamber});
+  async beforeRouteLeave (to, from, next) {
+    if(to.params.id) {
+      this.$store.commit('SET_SPECIFIC_MEMBER', await memberService.getSpecificMember(to.params.id));
       next();
     } else {
       next();
     }
   }
+  
 }
 </script>
 
