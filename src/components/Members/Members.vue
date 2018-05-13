@@ -1,8 +1,9 @@
 <template>
   <div>
     <h1>The Members Page</h1>
-    {{this.$route.params.id}}
-    <router-view></router-view>
+    <v-btn router :to="'/members/senate'">Senate</v-btn>
+    <v-btn router :to="'/members/house'">House</v-btn>
+    <router-view />
   </div>
 </template>
 

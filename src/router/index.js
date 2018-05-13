@@ -28,27 +28,33 @@ export default new Router({
       children: [
         {
           component: SenateMembers,
+          name: 'Senate',
           path: 'senate',
         },
         {
           component: HouseMembers,
+          name: 'House',
           path: 'house',
         },
         {
           component: Member,
-          path: ':id',
+          name: 'Member',
+          path: 'member/:id',
           children: [
             {
               component: MemberBills,
+              name: 'MemberBills',
               path: 'bills',
             },
             {
               component: MemberVotes,
+              name: 'MemberVotes',
               path: 'votes'
             },
 
             {
               component: MemberStatements,
+              name: 'MemberStatements',
               path: 'statements'
             },
           ]
@@ -57,14 +63,17 @@ export default new Router({
     },
     {
       path: '/votes',
+      name: 'Votes',
       component: Votes,
     },
     {
       path: '/bills',
+      name: 'Bills',
       component: Bills,
     },
     {
       path: '/statements',
+      name: 'Statements',
       component: Statements,
     },
     

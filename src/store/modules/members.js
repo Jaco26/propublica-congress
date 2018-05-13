@@ -2,6 +2,7 @@ import memberService from '../../services/propublica/members.service';
 
 export default {
   state: {
+    memberIsLoading: false,
     house: {
       congress: '',
       membersList: [],
@@ -49,6 +50,12 @@ export default {
     },
     'SET_SENATE_MEMBER_PROFILE' (state, payload) {
       state.senate.member.profile = payload.results[0];
+    },
+    'IS_LOADING' (state) {
+      state.memberIsLoading = true;
+    },
+    'IS_DONE_LOADING' (state) {
+      state.memberIsLoading = false;
     }
 
   },
@@ -56,13 +63,16 @@ export default {
     async 'FETCH_CONGRESS_MEMBERS' ({commit}, {congress, chamber}) {
       commit('SET_MEMBERS_LIST', await memberService.getMemberList(congress, chamber));
     },
-    async 'FETCH_MEMBER' ({commit}, {member_id, chamber}) {
+    async 'FETCH_MEMBER' ({commit, state}, {member_id, chamber}) {
+      commit('IS_LOADING');
       switch (chamber) {
         case 'House':
           commit('SET_HOUSE_MEMBER_PROFILE', await memberService.getSpecificMember(member_id));
+          commit('IS_DONE_LOADING')
           return;
         case 'Senate':
           commit('SET_SENATE_MEMBER_PROFILE', await memberService.getSpecificMember(member_id));
+          commit('IS_DONE_LOADING')
           return;
         default:
           return;
@@ -71,10 +81,13 @@ export default {
     
   },
   getters: {
+    houseCongress: state => state.house.congress,
     houseMemberList: state => state.house.membersList,
-    houseMember: state => state.house.member,
+    houseMember: state => state.house.member.profile,
+    senateCongress: state => state.senate.congress,
     senateMemberList: state => state.senate.membersList,
-    senateMember: state => state.senate.member,
+    senateMember: state => state.senate.member.profile,
+    memberIsLoading: state => state.memberIsLoading,
   },
 };
 
