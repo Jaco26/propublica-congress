@@ -1,19 +1,31 @@
 <template>
-  <div>
-    <h1>This is the Home Page</h1>
-  </div>
-  <!-- <v-container grid-list-sm>
-    <v-layout wrap>
-      <v-flex xs6 md4 lg3 v-for="mem in senateMembers" :key="mem.member_id">
-        <v-card>
-          <v-card-title class="title">{{mem.first_name}} {{mem.last_name}} </v-card-title>
-          <v-card-actions>
-            <v-btn small :href="`#/members/member/${mem.id}`">Details</v-btn>
-          </v-card-actions>
-        </v-card> 
+  <v-container>
+    <v-layout>
+      <v-flex>
+        <h1>Welcome</h1>
+        <p><i>KnowThyCongress</i> is a user interface for data from the Propublica Congress API. </p>
       </v-flex>
     </v-layout>
-  </v-container> -->
+
+    <v-layout>
+      <v-flex>
+       <h1>Recent Votes</h1>
+      </v-flex>
+    </v-layout>
+
+    <v-layout>
+      <v-flex>
+        <h1>Recent Bills</h1>
+      </v-flex>
+    </v-layout>
+
+     <v-layout>
+      <v-flex>
+        <h1>Recent Statements</h1>
+      </v-flex>
+    </v-layout>
+
+  </v-container>
 </template>
 
 <script>

@@ -28,5 +28,26 @@ export default {
       .then(response => response.data)
       .catch(err => console.log(err));
   },
+
+  // THESE HAVE YET TO BE HANDLED ON THE SERVER 3:14PM May 13
+  getRecentPersonalExplanationsBySpecificMember: (memberId) => {
+    const congress = '115';
+    return axios.get(`/api/congress/members/explanations/${memberId}/${congress}`)
+      .then(response => response.data)
+      .catch(err => console.log(err));
+  },
+  getRecentPersonalExplanationsAboutVotesBySpecificMember: (memberId) => {
+    const congress = '115';
+    return axios.get(`/api/congress/members/vote/explanations/${memberId}/${congress}`)
+      .then(response => response.data)
+      .catch(err => console.log(err));
+  },
+  getRecentPersonalExplanationsForSpecificMemberByCategory: (memberId, category) => {
+    const congress = '115';
+    return axios.get(`/api/congress/members/${category}/explanations/${congress}`)
+      .then(response => response.data)
+      .catch(err => console.log(err));
+  },
+
 }
 
