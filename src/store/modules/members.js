@@ -53,9 +53,12 @@ export default {
       state.specificMember.bills = payload.results[0].bills;
     },
     'SET_MEMBER_VOTES' (state, payload) {
+      console.log(payload);
       state.specificMember.votes = payload.results[0].votes;
     },
-    'SET_MEMBER_STATEMENTS' (state, payload) {      
+    'SET_MEMBER_STATEMENTS' (state, payload) { 
+      console.log(payload);
+          
       state.specificMember.statements = payload.results;
     },
     'IS_LOADING' (state) {

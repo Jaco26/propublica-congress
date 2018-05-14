@@ -4,7 +4,7 @@ import Home from '@/components/Home';
 import Members from '@/components/Members/Members'
 import SenateMembers from '@/components/Members/Senate';
 import HouseMembers from '@/components/Members/House';
-import Member from '@/components/Members/Member/Member';
+import MemberDisplay from '@/components/Members/Member/MemberDisplay';
 import MemberVotes from '@/components/Members/Member/MemberVotes';
 import MemberBills from '@/components/Members/Member/MemberBills';
 import MemberStatements from '@/components/Members/Member/MemberStatements';
@@ -37,7 +37,7 @@ const router = new Router({
           path: 'house',
         },
         {
-          component: Member,
+          component: MemberDisplay,
           name: 'Member',
           path: 'member/:id',
           children: [
