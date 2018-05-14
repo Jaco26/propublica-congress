@@ -29,7 +29,7 @@ export default {
   },
   async beforeRouteLeave (to, from, next) {
     if(to.params.id) {
-      this.$store.commit('SET_SPECIFIC_MEMBER', await memberService.getSpecificMember(to.params.id));
+      this.$store.dispatch('FETCH_SPECIFIC_MEMBER', to.params.id);
       next();
     } else {
       next();

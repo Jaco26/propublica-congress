@@ -73,6 +73,11 @@ export default {
     async 'FETCH_CONGRESS_MEMBERS' ({commit}, {congress, chamber}) {
       commit('SET_MEMBERS_LIST', await memberService.getMemberList(congress, chamber));
     },
+    async 'FETCH_SPECIFIC_MEMBER' ({commit}, member_id) {
+      commit('IS_LOADING');
+      commit('SET_SPECIFIC_MEMBER', await memberService.getSpecificMember(member_id));
+      commit('IS_DONE_LOADING');
+    },
     async 'FETCH_MEMBER_BILLS' ({commit}, member_id) {
       commit('SET_MEMBER_BILLS', await memberService.getBillsCosponsoredBySpecificMember(member_id));
     },
