@@ -6,9 +6,10 @@
         <h1 class="text-xs-left">{{person.first_name}} {{person.last_name}}</h1>
       </v-flex>
       <v-flex align-end>
-        <v-btn :to="`/members/member/${person.member_id}/votes`">Votes</v-btn>
-        <v-btn :to="`/members/member/${person.member_id}/bills`">Bills</v-btn>
-        <v-btn :href="person.contact_form">Conact</v-btn> 
+        <v-btn @click="show('inVotes')">Votes</v-btn>
+        <v-btn @click="show('inBills')">Bills</v-btn>
+        <v-btn @click="show('inStatements')">Statements</v-btn>
+        <v-btn :href="person.roles[0].contact_form">Conact</v-btn> 
       </v-flex>
     </v-layout>
 
@@ -28,21 +29,31 @@
         <p>Total Votes: {{person.total_votes}}</p>
       </v-flex>
       <v-flex xs8>
-        <router-view></router-view>
+        <member-votes v-if="inVotes" />
+        <member-bills v-if="inBills" />
+        <member-statements v-if="inStatements" />
       </v-flex>
     </v-layout>
   </v-container>
-
-
- 
 </template>
 
 <script>
 import {mapGetters} from 'vuex';
+import MemberVotes from './MemberVotes';
+import MemberBills from './MemberBills';
+import MemberStatements from './MemberStatements';
 export default {
+  components: {
+    MemberVotes,
+    MemberBills,
+    MemberStatements,
+  },
   data () {
     return {
       chamber: '',
+      inBills: false,
+      inVotes: false,
+      inStatements: false
     }
   },
   computed: {
@@ -51,6 +62,14 @@ export default {
       person: 'specificMember',
     }),
   },
+  methods: {
+    show (x) {
+      this.inBills = false;
+      this.inVotes = false;
+      this.inStatements = false;
+      this[x] = true;
+    }
+  }
 
 }
 

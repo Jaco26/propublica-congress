@@ -22,5 +22,11 @@ export default {
       .then(response => response.data)
       .catch(err => console.log(err));
   },
+  getStatementsBySpecificMember: (memberId) => {
+    const congress = '115';
+    return axios.get(`/api/congress/members/statements/${memberId}/${congress}`)
+      .then(response => response.dataa)
+      .catch(err => console.log(err));
+  },
 }
 

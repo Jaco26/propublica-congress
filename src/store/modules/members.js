@@ -16,9 +16,10 @@ export default {
     },
     specificMember: {
       profile: {},
-      votes: {},
-      bills: {},
-      qtrlyOfficeExpns: {}
+      votes: [],
+      bills: [],
+      statements: [],
+      qtrlyOfficeExpns: {},
     },
     newMembers: [],
     memberComparison: {
@@ -46,12 +47,16 @@ export default {
       const {member_id} = state.specificMember.profile;
       this.dispatch('FETCH_MEMBER_BILLS', member_id);
       this.dispatch('FETCH_MEMBER_VOTES', member_id);
+      this.dispatch('FETCH_MEMBER_STATEMENTS', member_id);
     },
     'SET_MEMBER_BILLS' (state, payload) {
       state.specificMember.bills = payload.results[0].bills;
     },
     'SET_MEMBER_VOTES' (state, payload) {
       state.specificMember.votes = payload.results[0].votes;
+    },
+    'SET_MEMBER_STATEMENTS' (state, payload) {      
+      state.specificMember.statements = payload.results;
     },
     'IS_LOADING' (state) {
       state.memberIsLoading = true;
@@ -71,7 +76,9 @@ export default {
     async 'FETCH_MEMBER_VOTES'({ commit }, member_id) {
       commit('SET_MEMBER_VOTES', await memberService.getSpecificMembersVotePositions(member_id));
     },
-    
+    async 'FETCH_MEMBER_STATEMENTS' ({commit}, member_id) {
+      commit('SET_MEMBER_STATEMENTS', await memberService.getStatementsBySpecificMember(member_id));
+    }
     
   },
   getters: {
@@ -82,6 +89,7 @@ export default {
     specificMember: state => state.specificMember.profile,
     specificMemberBills: state => state.specificMember.bills,
     specificMemberVotes: state => state.specificMember.votes,
+    specificMemberStatements: state => state.specificMember.statements,
     memberIsLoading: state => state.memberIsLoading,
   },
 };

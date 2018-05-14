@@ -103,6 +103,18 @@ router.get('/bills/:memberId/:type', async (req, res) => {
     });
 });
 
+// GET CONGRESSIONAL STATEMENTS BY A SPECIFIC MEMBER
+router.get('/statements/:memberId/:congress', (req, res) => {
+  let memberId = req.params.memberId,
+      congress = req.params.congress;
+  Propublica().get(`/members/${memberId}/statements/${congress}.json`)
+    .then(response => res.send(response.data))
+    .catch(err => {
+      console.log(err);
+      res.sendStatus(500);
+    });
+});
+
 // GET LIST OF CURRENT MEMBERS BY STATE/DISTRICT
 router.get('/:chamber/:state/:district', async (req, res) => {
   let chamber = req.params.chamber,
