@@ -28,7 +28,7 @@ export default {
     ...mapGetters({
       senateMembers: 'senateMemberList',
       senateCongress: 'senateCongress',
-      memberIsLoading: 'memberIsLoading',
+      loading: 'memberIsLoading',
     })
   },
   async beforeRouteLeave (to, from, next) {

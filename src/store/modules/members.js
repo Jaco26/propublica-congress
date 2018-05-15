@@ -56,9 +56,7 @@ export default {
       console.log(payload);
       state.specificMember.votes = payload.results[0].votes;
     },
-    'SET_MEMBER_STATEMENTS' (state, payload) { 
-      console.log(payload);
-          
+    'SET_MEMBER_STATEMENTS' (state, payload) {           
       state.specificMember.statements = payload.results;
     },
     'IS_LOADING' (state) {
@@ -101,12 +99,6 @@ export default {
     memberIsLoading: state => state.memberIsLoading,
   },
 };
-
-
-
-
-
-
 
 
 

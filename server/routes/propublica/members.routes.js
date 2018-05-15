@@ -94,7 +94,6 @@ router.get('/bills/:memberId/:type', async (req, res) => {
   let memberId = req.params.memberId,
       type = req.params.type;
       console.log('####################', type);
-      
   Propublica().get(`/members/${memberId}/bills/${type}.json`)
     .then(response => res.send(response.data))
     .catch(err => {
