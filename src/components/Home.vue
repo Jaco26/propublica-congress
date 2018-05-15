@@ -1,8 +1,7 @@
 <template>
   <v-container>
     <v-layout>
-      
-      <v-flex m-2 xs5>
+      <v-flex m-2 xs12>
         <article> 
           <h1 class="headline">Welcome</h1>
           <v-flex mt-2> 
@@ -20,16 +19,29 @@
           </v-flex>
         </article>
       </v-flex>
-
-      <v-flex offset-xs1 xs6 >
-        <div mt-3 v-for="(exp, i) in recentExplanations" :key="i">
-          {{exp.name}} {{exp.party}} {{exp.state}} {{exp.date}} 
-            {{exp.category}} {{exp.text}}
-            <v-divider></v-divider>
-        </div>  
-      </v-flex>
-
     </v-layout>
+
+    <v-container grid-list-sm mt-5>
+      <v-layout column>
+        <v-flex class="grey lighten-3" xs6 sm6 md6 pa-2 mb-2 v-for="(exp, i) in recentExplanations" :key="i">
+          <v-layout>
+            <v-flex  class="text-xs-left">
+              <strong>{{exp.name}}</strong> <small>{{exp.party}} {{exp.state}}</small> <v-spacer></v-spacer> <span>{{exp.date}} </span>
+            </v-flex>
+            <v-flex offset-xs1 class="text-xs-right date"> 
+              {{exp.category}}
+            </v-flex>
+          </v-layout>
+          <v-divider></v-divider>
+          <v-layout mt-1>
+            <v-flex>
+                {{exp.text}}
+            </v-flex>
+          </v-layout>
+        </v-flex>
+      </v-layout>
+    </v-container>
+
   </v-container>
 </template>
 
@@ -39,14 +51,6 @@ import {mapGetters} from 'vuex';
 export default {
   data () {
     return {
-      items: [
-          { header: 'Today' },
-          { avatar: '/static/doc-images/lists/1.jpg', title: 'Brunch this weekend?', subtitle: "<span class='text--primary'>Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?" },
-          { divider: true, inset: true },
-          { avatar: '/static/doc-images/lists/2.jpg', title: 'Summer BBQ <span class="grey--text text--lighten-1">4</span>', subtitle: "<span class='text--primary'>to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend." },
-          { divider: true, inset: true },
-          { avatar: '/static/doc-images/lists/3.jpg', title: 'Oui oui', subtitle: "<span class='text--primary'>Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?" }
-        ]
     }
   },
   computed:{
@@ -64,6 +68,9 @@ export default {
 
 <style>
 
+.date {
+  color: #135458
+}
 
 
 </style>
