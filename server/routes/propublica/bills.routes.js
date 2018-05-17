@@ -18,11 +18,7 @@ router.get(`/subjects/bills/search`, (req, res) => {
     url = `/bills/search.json?query=${phrase}`;
   }
   Propublica().get(url)
-    .then(response => {
-      console.log(response.data.results);
-      
-      res.send(response.data)
-    })
+    .then(response => res.send(response.data))
     .catch(err => console.log(err));
 });
 
