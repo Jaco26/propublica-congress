@@ -28,17 +28,10 @@ export default {
     ...mapGetters({
       senateMembers: 'senateMemberList',
       senateCongress: 'senateCongress',
-      loading: 'memberIsLoading',
-    })
+    }),
+    
   },
-  async beforeRouteLeave (to, from, next) {
-    if(to.params.id) {
-      this.$store.dispatch('FETCH_SPECIFIC_MEMBER', to.params.id);
-      next();
-    } else {
-      next();
-    }
-  }
+
 }
 </script>
 

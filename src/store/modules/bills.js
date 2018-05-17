@@ -5,25 +5,27 @@ export default {
   state: {
     searchedBills: [],
     recentBills: {
+      searchParams: {
+        congress: '',
+        chamber: '',
+        type: '',
+      },
       list: [],
       congress: '',
       chamber: '',
-    }    
+    },
+
   },
   mutations: {
     'SET_SEARCHED_BILLS' (state, payload) {
-      console.log(payload.results[0].bills);
-      state.searchedBills = payload.results[0].bills;
-    },
-    'SET_RECENT' (state, payload) {
       console.log(payload);
       
+      state.searchedBills = payload.results[0].bills;
+    },
+    'SET_RECENT' (state, payload) {      
       state.recentBills.list = [...state.recentBills.list, ...payload.results[0].bills];
       state.recentBills.congress = payload.results[0].congress;
       state.recentBills.chamber = payload.results[0].chamber;
-
-      console.log(state.recentBills);
-      
     },
 
   },

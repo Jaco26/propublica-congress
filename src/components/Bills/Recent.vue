@@ -104,7 +104,8 @@ export default {
     },
     ...mapGetters({
       recentBills: 'bills/recentBills',
-    })
+    }),
+    
 
   },
   methods: {

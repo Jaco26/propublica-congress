@@ -25,17 +25,10 @@ export default {
     ...mapGetters({
       houseMembers: 'houseMemberList',
       houseCongress: 'houseCongress',
-    })
+    }),
+
   },
-  async beforeRouteLeave (to, from, next) {
-    if(to.params.id) {
-      this.$store.dispatch('FETCH_SPECIFIC_MEMBER', to.params.id);
-      next();
-    } else {
-      next();
-    }
-  }
-  
+
 }
 </script>
 
