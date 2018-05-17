@@ -22,6 +22,7 @@
 
 <script>
 import {mapGetters} from 'vuex';
+import store from '@/store/store';
 import MemberVotes from './MemberVotes';
 import MemberBills from './MemberBills';
 import MemberStatements from './MemberStatements';
@@ -53,6 +54,14 @@ export default {
       this.inVotes = false;
       this.inStatements = false;
       this[x] = true;
+    }
+  },
+  beforeRouteEnter (to, from, next) {
+    if(to.params.id) {
+      store.dispatch('FETCH_SPECIFIC_MEMBER', to.params.id);
+      next();
+    } else {
+      next();
     }
   }
 
