@@ -1,12 +1,11 @@
 <template>
   <v-container>
     <v-layout>
-      <v-flex sm4>
-          <bills-nav />
+      <v-flex sm3>
+          <bills-nav class="secondary" />
       </v-flex>
-      <v-flex xs12 sm8 class="primary lighten-4" >
-
-        <router-view ></router-view>
+      <v-flex xs12 sm9 class="primary lighten-4" >
+        <router-view></router-view>
       </v-flex>
     </v-layout>
   </v-container>

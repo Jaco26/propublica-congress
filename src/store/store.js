@@ -12,6 +12,7 @@ import votes from './modules/votes';
 import bills from './modules/bills';
 import statements from './modules/statements';
 
+
 // Give all Vue components access to my Vuex store
 Vue.use(Vuex);
 

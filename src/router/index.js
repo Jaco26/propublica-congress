@@ -75,23 +75,23 @@ const router = new Router({
       path: '/bills',
       name: 'Bills',
       component: Bills,
-      // children: [
-      //   {
-      //     component: Recent,
-      //     name: 'Recent',
-      //     path: 'recent',
-      //   }, 
-      //   {
-      //     component: Upcoming,
-      //     name: 'Upcomeing',
-      //     path: 'upcoming',
-      //   },
-      //   {
-      //     component: Search,
-      //     name: 'Search',
-      //     path: 'search',
-      //   }
-      // ]
+      children: [
+        {
+          component: Recent,
+          name: 'Recent',
+          path: 'recent',
+        }, 
+        {
+          component: Upcoming,
+          name: 'Upcomeing',
+          path: 'upcoming',
+        },
+        {
+          component: Search,
+          name: 'Search',
+          path: 'search',
+        }
+      ]
     },
     {
       path: '/statements',

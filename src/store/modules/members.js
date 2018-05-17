@@ -1,5 +1,4 @@
 import memberService from '../../services/propublica/members.service';
-import router from '../../router'
 
 export default {
   state: {

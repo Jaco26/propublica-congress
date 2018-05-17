@@ -32,11 +32,24 @@
           {{item.title}} 
         </v-btn>
       </v-toolbar-items>
+
+      <!-- <v-tabs
+        slot="extension"
+        v-model="tab"
+        color="primary"
+        align-with-title>
+        <v-tabs-slider color="yellow"></v-tabs-slider>
+        <v-tab v-for="item in menu" :key="item.title" @click="item.action">
+          {{ item.title }}
+        </v-tab>
+      </v-tabs> -->
+
     </v-toolbar>
   </div>
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
 export default {
   // props: ['menuItems', 'sideNav'],
   data () {
@@ -49,7 +62,43 @@ export default {
         {title: 'Bills', link: '/bills' },
         {title: 'Statements', link: '/statements'},
       ],
+        tab: null,
+      helperMenu: {
+         members: [
+          {
+            title: 'Senate',
+            options: ['Congress']
+          },
+          {
+            title: 'House',
+            options: ['Congress']
+          },
+          {
+            title: 'New Members',
+            action: () => alert('Hello')
+          },
+          {
+            title: 'Current Members',
+            options: ['State', 'District'],
+          },
+          {
+            title: 'Members Leaving Office',
+            options: ['Chamber', 'Congress'],
+          },
+        ],
+      },
+
+      
+       
     }
+  },
+  computed: {
+    ...mapGetters({
+        menu: 'menu'
+      }),
+      thisMenu: (menu) => {
+
+      }
   }
 }
 </script
@@ -57,3 +106,5 @@ export default {
 <style>
 
 </style>
+
+/**  */
