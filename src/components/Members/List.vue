@@ -13,17 +13,6 @@
                 <!-- <v-radio label="Both" value="both"></v-radio> -->
               </v-radio-group>
             </v-flex>
-            <!-- <v-flex class="px-2" xs4>
-              <v-select 
-                :items="billTypes"
-                v-model="selectedType"
-                :hint="`${selectedType.description}`"
-                persistent-hint
-                item-text="title"
-                label="Bill type"
-                single-line 
-              ></v-select>
-            </v-flex> -->
 
             <v-flex class="px-2" xs4>
               <v-select 
@@ -42,17 +31,28 @@
       </v-flex>
     </v-layout>
 
-    <!-- <v-layout column>
+    <v-layout column>
       <v-flex class="ma-4" v-for="(member, i) in members" :key="i">
+         <v-flex>
+          <router-link :to="`/members/member/${member.id}`"><strong>{{member.first_name}} {{member.last_name}}</strong></router-link> 
         
+        </v-flex>
+
+        <!-- <small>Title:</small> {{bill.title}}
+        <br>
+        <small>Latest Major Action:</small> {{bill.latest_major_action}} 
+        <br>
+        <small>Latest Major Action Date:</small> {{bill.latest_major_action_date}} -->
+
       </v-flex>
-    </v-layout> -->
+    </v-layout>
 
   </v-container>
   
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
 export default {
   data () {
     return {
@@ -61,9 +61,10 @@ export default {
     }
   },
   computed: {
-    congress () {
-      return this.$store.getters['fillers/congress']
-    },
+    ...mapGetters({
+      congress: 'fillers/congress',
+      members: 'members/list/list'
+    }),
     searchParams () {
       return {
         chamber: this.chamber,
@@ -77,7 +78,7 @@ export default {
       if(!congress || !chamber){
         alert('NO!')
       } else {
-        this.$store.dispatch('members/FETCH_CONGRESS_MEMBERS', this.searchParams);
+        this.$store.dispatch('members/list/FETCH_CONGRESS_MEMBERS', this.searchParams);
       }
       
     }

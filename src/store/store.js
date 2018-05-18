@@ -7,7 +7,7 @@ import database from '@/services/database/bookmarks.service';
 import { FETCH_HOUSE_MEMBERS, FETCH_SENATE_MEMBERS, BOOKMARK_MEMBER, FETCH_BOOKMARKED_MEMBERS } from './action-types';
 import { SET_HOUSE_MEMBERS, SET_SENATE_MEMBERS, SET_BOOKMARKED_MEMBERS } from './mutation-types';
 
-import members from './modules/members';
+import members from './modules/Members/members';
 import votes from './modules/votes';
 import bills from './modules/Bills/bills';
 import statements from './modules/statements';
