@@ -11,7 +11,7 @@
                 id="search-bills"
                 name="search-bills"
                 label="Search Bills"
-                v-model="searchPhrase" 
+                v-model="newSearchPhrase" 
                 append-icon="search"
               />
             </v-flex>
@@ -25,10 +25,10 @@
 
 
       <v-layout column>
-        <v-flex class="headline" v-if="searchedBills[0]" >
-          Results for <strong><i>{{searchedBillsSearchPhrase}}</i></strong> :
+        <v-flex class="headline" v-if="results[0]" >
+          Results for <strong><i>{{resultsSearchPhrase}}</i></strong> 
         </v-flex>
-        <v-flex class="ma-4" v-for="(bill, i) in searchedBills" :key="i">
+        <v-flex class="ma-4" v-for="(bill, i) in results" :key="i">
           <v-flex>
             <router-link :to="`/members/member/${bill.sponsor_id}`"><strong>{{bill.sponsor_name}}</strong></router-link> 
           {{bill.sponsor_party}}
@@ -43,8 +43,8 @@
           <br>
           <small>Learn more on</small> <a target="_blank" :href="`${bill.govtrack_url}`">Govtrack</a>
         </v-flex>
-        <v-progress-linear v-if="searchedBillsLoading" :indeterminate="true"></v-progress-linear>
-        <v-btn @click="getMore">Get More</v-btn>
+        <v-progress-linear v-if="isLoading" :indeterminate="true"></v-progress-linear>
+        <v-btn v-if="results[0]" @click="getMore">Get More</v-btn>
       </v-layout>
 
   </v-container>     
@@ -55,25 +55,36 @@
 import {mapGetters} from 'vuex';
 
 export default {
-  data () {
-    return {
-      searchPhrase: '',
-    }
-  },
+  // data () {
+  //   return {
+  //   }
+  // },
   computed: {
     ...mapGetters({
-      searchedBills: 'bills/search/results',
-      searchedBillsSearchPhrase: 'bills/search/searchPhrase',
-      searchedBillsLoading: 'bills/search/isLoading',
+      results: 'bills/search/results',
+      resultsSearchPhrase: 'bills/search/resultsSearchPhrase',
+      isLoading: 'bills/search/isLoading',
     }),
+    newSearchPhrase: {
+      get () {            
+        return this.$store.getters['bills/search/newSearchPhrase'];
+      },
+      set (value) {
+        this.$store.commit('bills/search/SET_NEW_SEARCH_PHRASE', value);        
+      },
+    }
 
   },
   methods: {
-    submit(){      
-      this.$store.dispatch('bills/search/SEARCH_BILLS', {searchPhrase: this.searchPhrase});
+    submit(){     
+      if (!this.newSearchPhrase) {
+        alert('You have to search for something');
+      } else {
+        this.$store.dispatch('bills/search/FETCH_FIRST_PAGE');
+      }
     },
     getMore () {
-      this.$store.dispatch('bills/search/SEARCH_BILLS');
+      this.$store.dispatch('bills/search/FETCH_NEXT_PAGE');
     }
 
   },
