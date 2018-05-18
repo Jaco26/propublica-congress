@@ -17,26 +17,27 @@ import {mapGetters} from 'vuex';
 
 
 import BillsNav from './BillsNav'
+
 export default {
   components: {
     BillsNav,
   },
-  data () {
-    return {
-      searchPhrase: ''
-    }
-  },
-  methods: {
-    submit(){      
-      this.$store.dispatch('bills/SEARCH_BILLS', this.searchPhrase);
-    }
-  },
-  computed: {
-    ...mapGetters({
-      searchedBills: 'bills/searchedBills',
-    }),
+  // data () {
+  //   return {
+  //     searchPhrase: ''
+  //   }
+  // },
+  // methods: {
+  //   submit(){      
+  //     this.$store.dispatch('bills/SEARCH_BILLS', this.searchPhrase);
+  //   }
+  // },
+  // computed: {
+  //   ...mapGetters({
+  //     searchedBills: 'bills/searchedBills',
+  //   }),
 
-  },
+  // },
 
 
 }

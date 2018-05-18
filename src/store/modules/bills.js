@@ -7,6 +7,7 @@ export default {
       list: [],
       searchPhrase: '',
       offset: 0,
+      isLoading: false,
     },
     recentBills: {
       searchParams: {
@@ -42,6 +43,14 @@ export default {
       }    
     },
 
+    'IS_LOADING' (state) {
+      state.searchedBills.isLoading = true;
+    },
+
+    'IS_DONE_LOADING' (state) {
+      state.searchedBills.isLoading = false;
+    },
+
     'SET_RECENT' (state, payload) {      
       state.recentBills.list = [...state.recentBills.list, ...payload.results[0].bills];
       state.recentBills.congress = payload.results[0].congress;
@@ -51,16 +60,21 @@ export default {
   },
   actions: {
     async 'SEARCH_BILLS' ({commit, state}, payload) {
+      commit('IS_LOADING');
       let searchPhrase;
       if (payload) {
         searchPhrase = payload.searchPhrase;
       } else {
         searchPhrase = state.searchedBills.searchPhrase;
       }
-      commit('SET_SEARCHED_BILLS_OFFSET', {searchPhrase})
+      commit('SET_SEARCHED_BILLS_OFFSET', {searchPhrase});
       const offset = state.searchedBills.offset;
       const returned = await billsService.searchBills(searchPhrase, offset);
       commit('SET_SEARCHED_BILLS', {searchPhrase, returned});
+      commit('IS_DONE_LOADING');
+    },
+    async 'FETCH_NEXT_PAGE' ({commit, state}) {
+
     },
     async 'FETCH_RECENT' ({commit}, payload) {
       commit('SET_RECENT', await billsService.getRecent(payload));
@@ -71,7 +85,10 @@ export default {
   getters: {
     searchedBills: state => state.searchedBills.list,
     searchedBillsSearchPhrase: state => state.searchedBills.searchPhrase,
+    searchedBillsLoading: state => state.searchedBills.isLoading,
+
     recentBills: state => state.recentBills.list,
+
   },
 };
 

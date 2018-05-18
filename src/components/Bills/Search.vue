@@ -41,6 +41,7 @@
           <br>
           <small>Learn more on</small> <a target="_blank" :href="`${bill.govtrack_url}`">Govtrack</a>
         </v-flex>
+        <v-progress-linear v-if="searchedBillsLoading" :indeterminate="true"></v-progress-linear>
         <v-btn @click="getMore">Get More</v-btn>
       </v-layout>
 
@@ -60,7 +61,8 @@ export default {
   computed: {
     ...mapGetters({
       searchedBills: 'bills/searchedBills',
-      searchedBillsSearchPhrase: 'bills/searchedBillsSearchPhrase'
+      searchedBillsSearchPhrase: 'bills/searchedBillsSearchPhrase',
+      searchedBillsLoading: 'bills/searchedBillsLoading',
     }),
 
   },
