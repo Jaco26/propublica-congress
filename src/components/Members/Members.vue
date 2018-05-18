@@ -1,15 +1,29 @@
 <template>
-  <div>
-    <h1>The Members Page</h1>
-    <v-btn router :to="'/members/senate'">Senate</v-btn>
-    <v-btn router :to="'/members/house'">House</v-btn>
-    <router-view />
-  </div>
+ <v-container>
+    <v-layout>
+      <v-flex sm3>
+          <secondary-nav :items="items" class="secondary" />
+      </v-flex>
+      <v-flex xs12 sm9>
+        <router-view></router-view>
+      </v-flex>
+    </v-layout>
+      <!-- <v-btn router :to="'/members/senate'">Senate</v-btn>
+      <v-btn router :to="'/members/house'">House</v-btn> -->
+  </v-container>
 </template>
 
 <script>
+import SecondaryNav from '@/components/SecondaryNav';
 export default {
-
+  components: {
+    SecondaryNav,
+  },
+  computed: {
+    items () {
+      return this.$store.getters['members/navItems'];
+    },
+  },
 }
 </script>
 

@@ -7,6 +7,11 @@ export default {
     search
   },
   state: {
+    navItems: [
+      { title: 'Search Bills', route: '/bills/search' },
+      { title: 'Get Recent Bills', route: '/bills/recent' },
+      { title: 'Get Upcoming Bills', route: '/bills/upcoming' },
+    ],
     recentBills: {
       searchParams: {
         congress: '',
@@ -43,7 +48,7 @@ export default {
     // searchedBillsLoading: state => state.searchedBills.isLoading,
 
     recentBills: state => state.recentBills.list,
-
+    navItems: state => state.navItems,
   },
 };
 

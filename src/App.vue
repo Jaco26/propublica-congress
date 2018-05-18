@@ -19,8 +19,8 @@ export default {
     }
   },
   created(){
-    this.$store.dispatch('FETCH_CONGRESS_MEMBERS', {congress: 115, chamber: 'senate'});
-    this.$store.dispatch('FETCH_CONGRESS_MEMBERS', {congress: 115, chamber: 'house'});
+    // this.$store.dispatch('FETCH_CONGRESS_MEMBERS', {congress: 115, chamber: 'senate'});
+    // this.$store.dispatch('FETCH_CONGRESS_MEMBERS', {congress: 115, chamber: 'house'});
     this.$store.dispatch('votes/FETCH_RECENT_EXPLANATIONS', {congress: 115});
   }
 };

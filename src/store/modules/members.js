@@ -1,7 +1,16 @@
 import memberService from '../../services/propublica/members.service';
 
 export default {
+  namespaced: true,
+  modules: {
+
+  },
   state: {
+    navItems: [
+      { title: 'Members', route: '/members/list' },
+      { title: 'New Members', route: '/members/new' },
+      { title: 'Members Leaving Office', route: '/members/leaving' },
+    ],
     memberIsLoading: false,
     house: {
       congress: '',
@@ -96,6 +105,7 @@ export default {
     specificMemberVotes: state => state.specificMember.votes,
     specificMemberStatements: state => state.specificMember.statements,
     memberIsLoading: state => state.memberIsLoading,
+    navItems: state => state.navItems,
   },
 };
 

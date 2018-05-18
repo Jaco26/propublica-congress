@@ -2,7 +2,7 @@
   <v-container>
     <v-layout>
       <v-flex sm3>
-          <bills-nav class="secondary" />
+          <secondary-nav :items="items" class="secondary" />
       </v-flex>
       <v-flex xs12 sm9>
         <router-view></router-view>
@@ -12,33 +12,16 @@
 </template>
 
 <script>
-
-import {mapGetters} from 'vuex';
-
-
-import BillsNav from './BillsNav'
-
+import SecondaryNav from '@/components/SecondaryNav';
 export default {
   components: {
-    BillsNav,
+    SecondaryNav,
   },
-  // data () {
-  //   return {
-  //     searchPhrase: ''
-  //   }
-  // },
-  // methods: {
-  //   submit(){      
-  //     this.$store.dispatch('bills/SEARCH_BILLS', this.searchPhrase);
-  //   }
-  // },
-  // computed: {
-  //   ...mapGetters({
-  //     searchedBills: 'bills/searchedBills',
-  //   }),
-
-  // },
-
+  computed: {
+    items () {
+      return this.$store.getters['bills/navItems'];
+    } 
+  },
 
 }
 </script>
