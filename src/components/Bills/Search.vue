@@ -16,7 +16,7 @@
               />
             </v-flex>
             <v-flex xs4 align-content-end>
-              <v-btn light>Submit</v-btn>
+              <v-btn light @click="submit">Submit</v-btn>
             </v-flex>
           </v-layout>
           </v-form>
@@ -24,7 +24,7 @@
       </v-layout>
 
 
-       <v-layout column>
+      <v-layout column>
         <v-flex class="ma-4" v-for="(bill, i) in searchedBills" :key="i">
           <v-flex>
             <router-link :to="`/members/member/${bill.sponsor_id}`"><strong>{{bill.sponsor_name}}</strong></router-link> 
@@ -36,6 +36,7 @@
           <br>
           <small>Latest Major Action Date:</small> {{bill.latest_major_action_date}}
         </v-flex>
+        <v-btn @click="getMore">Get More</v-btn>
       </v-layout>
 
   </v-container>     
@@ -59,8 +60,11 @@ export default {
   },
   methods: {
     submit(){      
-      this.$store.dispatch('bills/SEARCH_BILLS', this.searchPhrase);
+      this.$store.dispatch('bills/SEARCH_BILLS', {searchPhrase: this.searchPhrase});
     },
+    getMore () {
+      this.$store.dispatch('bills/SEARCH_BILLS');
+    }
 
   }
 }
