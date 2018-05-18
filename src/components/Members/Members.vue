@@ -2,7 +2,7 @@
  <v-container>
     <v-layout>
       <v-flex sm3>
-          <secondary-nav :items="items" class="secondary" />
+          <secondary-nav :items="items"  />
       </v-flex>
       <v-flex xs12 sm9>
         <router-view></router-view>

@@ -2,17 +2,17 @@ export default {
   namespaced: true,
   state: {
     congress: [
-      { title: '115', hint: 'In session from 2017-2018' },
-      { title: '114', hint: 'In session from 2015-2016' },
-      { title: '113', hint: 'In session from 2013-2014' },
-      { title: '112', hint: 'In session from 2011-2012' },
-      { title: '111', hint: 'In session from 2009-2010' },
-      { title: '110', hint: 'In session from 2007-2008' },
-      { title: '109', hint: 'In session from 2005-2006' },
-      { title: '108', hint: 'In session from 2003-2004' },
-      { title: '107', hint: 'In session from 2001-2002' },
-      { title: '106', hint: 'In session from 1999-2000' },
-      { title: '105', hint: 'In session from 1997-1998' },
+      { title: '115', description: 'In session from 2017-2018' },
+      { title: '114', description: 'In session from 2015-2016' },
+      { title: '113', description: 'In session from 2013-2014' },
+      { title: '112', description: 'In session from 2011-2012' },
+      { title: '111', description: 'In session from 2009-2010' },
+      { title: '110', description: 'In session from 2007-2008' },
+      { title: '109', description: 'In session from 2005-2006' },
+      { title: '108', description: 'In session from 2003-2004' },
+      { title: '107', description: 'In session from 2001-2002' },
+      { title: '106', description: 'In session from 1999-2000' },
+      { title: '105', description: 'In session from 1997-1998' },
     ],
     explanationCategories: [
       { title: 'voted-incorrectly', description: 'Voted yes or no by mistake' },
@@ -39,6 +39,10 @@ export default {
       { title: 'enacted', description: 'Get bills ordered by the date they were enacted' },
       { title: 'vetoed', description: 'Get bills ordered by date they were vetoed' },
     ],
-    
+  },
+  getters: {
+    congress: state => state.congress,
+    explanationCategories: state => state.explanationCategories,
+    billTypes: state => state.billTypes,
   }
 }

@@ -12,6 +12,8 @@ import votes from './modules/votes';
 import bills from './modules/Bills/bills';
 import statements from './modules/statements';
 
+import fillers from './modules/Fillers/congressChamber';
+
 
 // Give all Vue components access to my Vuex store
 Vue.use(Vuex);
@@ -23,6 +25,7 @@ const store = new Vuex.Store({
     votes,
     bills,
     statements,
+    fillers,
   },
 });
 

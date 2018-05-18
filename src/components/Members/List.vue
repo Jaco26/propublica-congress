@@ -10,10 +10,10 @@
               <v-radio-group v-model="chamber" class=" ">
                 <v-radio label="Senate" value="senate"></v-radio>
                 <v-radio label="House" value="house"></v-radio>
-                <v-radio label="Both" value="both"></v-radio>
+                <!-- <v-radio label="Both" value="both"></v-radio> -->
               </v-radio-group>
             </v-flex>
-            <v-flex class="px-2" xs4>
+            <!-- <v-flex class="px-2" xs4>
               <v-select 
                 :items="billTypes"
                 v-model="selectedType"
@@ -23,7 +23,7 @@
                 label="Bill type"
                 single-line 
               ></v-select>
-            </v-flex>
+            </v-flex> -->
 
             <v-flex class="px-2" xs4>
               <v-select 
@@ -42,65 +42,47 @@
       </v-flex>
     </v-layout>
 
-    <v-layout column>
-      <v-flex class="ma-4" v-for="(bill, i) in recentBills" :key="i">
-        <v-flex>
-          <router-link :to="`/members/member/${bill.sponsor_id}`"><strong>{{bill.sponsor_name}}</strong></router-link> 
-        {{bill.sponsor_party}}
-        </v-flex>
-
-        <small>Title:</small> {{bill.title}}
-        <br>
-        <small>Latest Major Action:</small> {{bill.latest_major_action}} 
-        <br>
-        <small>Latest Major Action Date:</small> {{bill.latest_major_action_date}}
-
+    <!-- <v-layout column>
+      <v-flex class="ma-4" v-for="(member, i) in members" :key="i">
+        
       </v-flex>
-    </v-layout>
+    </v-layout> -->
 
   </v-container>
   
 </template>
 
 <script>
-import {mapGetters} from 'vuex';
 export default {
   data () {
     return {
-      message: '',
       chamber: '',
-      selectedType: {title: '', description: ''},
       selectedCongress: {title: '', description: ''},
     }
   },
   computed: {
+    congress () {
+      return this.$store.getters['fillers/congress']
+    },
     searchParams () {
       return {
-        congress: this.selectedCongress.title,
         chamber: this.chamber,
-        type: this.selectedType.title,
-      }      
+        congress: this.selectedCongress.title,
+      };
     },
-    ...mapGetters({
-      recentBills: 'bills/recentBills',
-      congress: 'fillers/congress',
-      billTypes: 'fillers/billTypes',
-    }),
-    
-
   },
   methods: {
     submit () {
-      let {congress, chamber, type} = this.searchParams;
-      if(!congress || !chamber || !type){
+      let {congress, chamber} = this.searchParams;
+      if(!congress || !chamber){
         alert('NO!')
       } else {
-        this.$store.dispatch('bills/FETCH_RECENT', this.searchParams);
+        this.$store.dispatch('members/FETCH_CONGRESS_MEMBERS', this.searchParams);
       }
       
     }
   }
-
+  
 }
 </script>
 
