@@ -35,6 +35,8 @@
           </v-flex>
           <small>Title:</small> {{bill.title}}
           <br>
+         <small>Bill Summary:</small> {{bill.summary}}
+          <br>
           <small>Latest Major Action:</small> {{bill.latest_major_action}} 
           <br>
           <small>Latest Major Action Date:</small> {{bill.latest_major_action_date}}
@@ -60,18 +62,18 @@ export default {
   },
   computed: {
     ...mapGetters({
-      searchedBills: 'bills/searchedBills',
-      searchedBillsSearchPhrase: 'bills/searchedBillsSearchPhrase',
-      searchedBillsLoading: 'bills/searchedBillsLoading',
+      searchedBills: 'bills/search/results',
+      searchedBillsSearchPhrase: 'bills/search/searchPhrase',
+      searchedBillsLoading: 'bills/search/isLoading',
     }),
 
   },
   methods: {
     submit(){      
-      this.$store.dispatch('bills/SEARCH_BILLS', {searchPhrase: this.searchPhrase});
+      this.$store.dispatch('bills/search/SEARCH_BILLS', {searchPhrase: this.searchPhrase});
     },
     getMore () {
-      this.$store.dispatch('bills/SEARCH_BILLS');
+      this.$store.dispatch('bills/search/SEARCH_BILLS');
     }
 
   },
