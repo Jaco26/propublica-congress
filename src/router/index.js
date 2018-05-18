@@ -73,6 +73,7 @@ const router = new Router({
     },
     {
       path: '/bills',
+      redirect: '/bills/search',
       name: 'Bills',
       component: Bills,
       children: [
