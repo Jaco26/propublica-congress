@@ -25,6 +25,9 @@
 
 
       <v-layout column>
+        <v-flex class="headline" v-if="searchedBills[0]" >
+          Results for <strong><i>{{searchedBillsSearchPhrase}}</i></strong> :
+        </v-flex>
         <v-flex class="ma-4" v-for="(bill, i) in searchedBills" :key="i">
           <v-flex>
             <router-link :to="`/members/member/${bill.sponsor_id}`"><strong>{{bill.sponsor_name}}</strong></router-link> 
@@ -35,6 +38,8 @@
           <small>Latest Major Action:</small> {{bill.latest_major_action}} 
           <br>
           <small>Latest Major Action Date:</small> {{bill.latest_major_action_date}}
+          <br>
+          <small>Learn more on</small> <a target="_blank" :href="`${bill.govtrack_url}`">Govtrack</a>
         </v-flex>
         <v-btn @click="getMore">Get More</v-btn>
       </v-layout>
@@ -55,6 +60,7 @@ export default {
   computed: {
     ...mapGetters({
       searchedBills: 'bills/searchedBills',
+      searchedBillsSearchPhrase: 'bills/searchedBillsSearchPhrase'
     }),
 
   },
@@ -66,7 +72,7 @@ export default {
       this.$store.dispatch('bills/SEARCH_BILLS');
     }
 
-  }
+  },
 }
 </script>
 

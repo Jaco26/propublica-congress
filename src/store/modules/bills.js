@@ -70,6 +70,7 @@ export default {
   },
   getters: {
     searchedBills: state => state.searchedBills.list,
+    searchedBillsSearchPhrase: state => state.searchedBills.searchPhrase,
     recentBills: state => state.recentBills.list,
   },
 };
