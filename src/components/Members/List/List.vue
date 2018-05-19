@@ -49,9 +49,8 @@
     <v-container grid-list-sm>
       <v-layout wrap>
         <v-flex xs6 sm3 class="ma-4" v-for="(member, i) in members" :key="i">
-          
-            <router-link :to="`/members/member/${member.id}`"><strong>{{member.first_name}} {{member.last_name}}</strong></router-link> 
-     
+          <router-link :to="`/members/member/${member.id}`"><strong>{{member.first_name}} {{member.last_name}}</strong></router-link> 
+          {{member.state}}  {{member.party}}
         </v-flex>
       </v-layout>
     </v-container>
