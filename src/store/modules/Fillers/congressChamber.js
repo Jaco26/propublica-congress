@@ -1,19 +1,6 @@
 export default {
   namespaced: true,
   state: {
-    congress: [
-      { title: '115', description: 'In session from 2017-2018' },
-      { title: '114', description: 'In session from 2015-2016' },
-      { title: '113', description: 'In session from 2013-2014' },
-      { title: '112', description: 'In session from 2011-2012' },
-      { title: '111', description: 'In session from 2009-2010' },
-      { title: '110', description: 'In session from 2007-2008' },
-      { title: '109', description: 'In session from 2005-2006' },
-      { title: '108', description: 'In session from 2003-2004' },
-      { title: '107', description: 'In session from 2001-2002' },
-      { title: '106', description: 'In session from 1999-2000' },
-      { title: '105', description: 'In session from 1997-1998' },
-    ],
     explanationCategories: [
       { title: 'voted-incorrectly', description: 'Voted yes or no by mistake' },
       { title: 'official-business', description: 'Away on official congressional business' },
@@ -41,8 +28,24 @@ export default {
     ],
   },
   getters: {
-    congress: state => state.congress,
     explanationCategories: state => state.explanationCategories,
     billTypes: state => state.billTypes,
+    congressFunc: () => (earliestCongress) => {
+      let currentCongress = 115
+      let year1 = 2017;
+      let year2 = 2018
+      let resultArray = [];
+      let offset = 1
+      for (let i = currentCongress; i >= earliestCongress; i--) {
+        let congressObj = {
+          title: i.toString(),
+          description: `In session from ${year1}-${year2}`
+        };
+        resultArray.push(congressObj);
+        year1 -= 2;
+        year2 -= 2;
+      }
+      return resultArray;
+    },
   }
 }

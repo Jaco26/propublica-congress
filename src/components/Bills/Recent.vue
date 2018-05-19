@@ -83,9 +83,12 @@ export default {
     },
     ...mapGetters({
       recentBills: 'bills/recentBills',
-      congress: 'fillers/congress',
+      congressFunc: 'fillers/congressFunc',
       billTypes: 'fillers/billTypes',
     }),
+    congress () {
+      return this.congressFunc(105);
+    } 
     
 
   },

@@ -62,9 +62,18 @@ export default {
   },
   computed: {
     ...mapGetters({
-      congress: 'fillers/congress',
+      congressFunc: 'fillers/congressFunc',
       members: 'members/list/list'
     }),
+    congress () {
+      if (this.chamber == 'house') {
+        return this.congressFunc(102);
+      } else if (this.chamber == 'senate') {
+        return this.congressFunc(80);
+      } else {
+        return {title: 'Select a chamber'}
+      }
+    },
     searchParams () {
       return {
         chamber: this.chamber,
@@ -80,7 +89,6 @@ export default {
       } else {
         this.$store.dispatch('members/list/FETCH_CONGRESS_MEMBERS', this.searchParams);
       }
-      
     }
   }
   
