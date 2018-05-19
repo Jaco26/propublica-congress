@@ -43,7 +43,7 @@
           <br>
           <small>Learn more on</small> <a target="_blank" :href="`${bill.govtrack_url}`">Govtrack</a>
         </v-flex>
-        <v-progress-linear v-if="isLoading" :indeterminate="true"></v-progress-linear>
+        <v-progress-linear v-if="isLoading" indeterminate></v-progress-linear>
         <v-btn v-if="results[0]" @click="getMore">Get More</v-btn>
       </v-layout>
 

@@ -4,7 +4,7 @@
     <!-- I need a form for users to select:
       1: congress, 2: chamber, 3: type -->
       <v-flex class="grey lighten-4" >
-        <v-form class="pa--">
+        <v-form class="">
           <v-layout>
             <v-flex class="px-4">
               <v-radio-group v-model="chamber" class=" ">
@@ -33,20 +33,12 @@
 
     <v-layout column>
       <v-flex class="ma-4" v-for="(member, i) in members" :key="i">
-         <v-flex>
+         <!-- <v-flex> -->
           <router-link :to="`/members/member/${member.id}`"><strong>{{member.first_name}} {{member.last_name}}</strong></router-link> 
-        
-        </v-flex>
-
-        <!-- <small>Title:</small> {{bill.title}}
-        <br>
-        <small>Latest Major Action:</small> {{bill.latest_major_action}} 
-        <br>
-        <small>Latest Major Action Date:</small> {{bill.latest_major_action_date}} -->
-
+        <!-- </v-flex> -->
       </v-flex>
+      <v-progress-linear v-if="isLoading" indeterminate></v-progress-linear>
     </v-layout>
-
   </v-container>
   
 </template>
@@ -60,10 +52,22 @@ export default {
       selectedCongress: {title: '', description: ''},
     }
   },
+  methods: {
+    submit () {
+      let {congress, chamber} = this.searchParams;
+      if(!congress || !chamber){
+        alert('NO!')
+      } else {
+        this.$store.dispatch('members/list/FETCH_CONGRESS_MEMBERS', this.searchParams);
+      }
+    },
+
+  },
   computed: {
     ...mapGetters({
       congressFunc: 'fillers/congressFunc',
-      members: 'members/list/list'
+      members: 'members/list/list',
+      isLoading: 'members/list/isLoading',
     }),
     congress () {
       if (this.chamber == 'house') {
@@ -81,16 +85,6 @@ export default {
       };
     },
   },
-  methods: {
-    submit () {
-      let {congress, chamber} = this.searchParams;
-      if(!congress || !chamber){
-        alert('NO!')
-      } else {
-        this.$store.dispatch('members/list/FETCH_CONGRESS_MEMBERS', this.searchParams);
-      }
-    }
-  }
   
 }
 </script>

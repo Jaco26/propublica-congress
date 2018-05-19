@@ -4,14 +4,9 @@ import Router from 'vue-router';
 import Home from '@/components/Home';
 // Members components
 import Members from '@/components/Members/Members';
-import List from '@/components/Members/List';
+import List from '@/components/Members/List/List';
 import Member from '@/components/Members/Member/Member';
-// import SenateMembers from '@/components/Members/Senate';
-// import HouseMembers from '@/components/Members/House';
-// import MemberDisplay from '@/components/Members/Member/MemberDisplay';
-// import MemberVotes from '@/components/Members/Member/MemberVotes';
-// import MemberBills from '@/components/Members/Member/MemberBills';
-// import MemberStatements from '@/components/Members/Member/MemberStatements';
+
 // Votes componenets
 import Votes from '@/components/Votes/Votes';
 // Bills components
