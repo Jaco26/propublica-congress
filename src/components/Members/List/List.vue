@@ -5,16 +5,15 @@
       1: congress, 2: chamber, 3: type -->
       <v-flex class="grey lighten-4" >
         <v-form class="">
-          <v-layout>
-            <v-flex class="px-4">
-              <v-radio-group v-model="chamber" class=" ">
+          <v-layout align-center justify-center>
+            <v-flex class="pl-4" xs4>
+              <v-radio-group row v-model="chamber">
                 <v-radio label="Senate" value="senate"></v-radio>
                 <v-radio label="House" value="house"></v-radio>
                 <!-- <v-radio label="Both" value="both"></v-radio> -->
               </v-radio-group>
             </v-flex>
-
-            <v-flex class="px-2" xs4>
+            <v-flex xs2 class="mr-3">
               <v-select 
                 :items="congress"
                 v-model="selectedCongress"
@@ -23,22 +22,51 @@
                 item-text="title"
                 label="Congress"
                 single-line 
+              
               ></v-select>
             </v-flex>
-            <v-btn @click="submit">Submit</v-btn>
+            <v-flex xs2>
+              <v-btn @click="submit">Submit</v-btn>
+            </v-flex>
+
+            <v-spacer></v-spacer>
+         
+            <v-flex v-if="membersList[0]">
+              <v-layout class="pa-1" align-center justify-center>
+                <v-toolbar flat xs8>
+                  <v-text-field v-model="filterPhrase" label="filter results"></v-text-field>
+                </v-toolbar>
+              </v-layout>
+              
+            </v-flex>
           </v-layout>
         </v-form>
       </v-flex>
     </v-layout>
 
-    <v-layout column>
+    <v-progress-linear v-if="isLoading" indeterminate></v-progress-linear>
+
+    <v-container grid-list-sm>
+      <v-layout wrap>
+        <v-flex xs6 sm3 class="ma-4" v-for="(member, i) in members" :key="i">
+          
+            <router-link :to="`/members/member/${member.id}`"><strong>{{member.first_name}} {{member.last_name}}</strong></router-link> 
+     
+        </v-flex>
+      </v-layout>
+    </v-container>
+
+    <!-- <v-layout column>
       <v-flex class="ma-4" v-for="(member, i) in members" :key="i">
-         <!-- <v-flex> -->
+         <v-flex>
           <router-link :to="`/members/member/${member.id}`"><strong>{{member.first_name}} {{member.last_name}}</strong></router-link> 
-        <!-- </v-flex> -->
+        </v-flex>
       </v-flex>
       <v-progress-linear v-if="isLoading" indeterminate></v-progress-linear>
-    </v-layout>
+    </v-layout> -->
+
+
+    
   </v-container>
   
 </template>
@@ -50,6 +78,7 @@ export default {
     return {
       chamber: '',
       selectedCongress: {title: '', description: ''},
+      filterPhrase: '',
     }
   },
   methods: {
@@ -66,7 +95,7 @@ export default {
   computed: {
     ...mapGetters({
       congressFunc: 'fillers/congressFunc',
-      members: 'members/list/list',
+      membersList: 'members/list/list',
       isLoading: 'members/list/isLoading',
     }),
     congress () {
@@ -84,6 +113,17 @@ export default {
         congress: this.selectedCongress.title,
       };
     },
+    members () {
+      if (this.filterPhrase == '') {
+        return this.membersList;
+      } else {
+        return this.membersList.filter(member => {
+          let re = new RegExp(this.filterPhrase, 'gi');
+          return member.first_name.match(re) || member.last_name.match(re); 
+        });
+      }
+    },
+
   },
   
 }

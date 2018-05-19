@@ -7,12 +7,6 @@ export default {
     list: [],
     congress: '',
     chamber: '',
-    compare: {
-      memberOneId: '',
-      memberTwoId: '',
-      votes: {},
-      bills: {},
-    }
   },
   mutations: {
     'SET_MEMBERS_LIST' (state, payload) {      
@@ -25,7 +19,8 @@ export default {
     },
     'IS_DONE_LOADING' (state) {
       state.isLoading = false;
-    }
+    },
+  
   },  
   actions: {
     async 'FETCH_CONGRESS_MEMBERS'({ commit }, { congress, chamber }) {
