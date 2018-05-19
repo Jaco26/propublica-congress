@@ -12,11 +12,11 @@ export default {
   },
   mutations: {
     'SET_SPECIFIC_MEMBER'(state, payload) {
-      state.specificMember.profile = payload.results[0];
+      state.profile = payload.results[0];
       const { member_id } = state.profile;
-      this.dispatch('FETCH_MEMBER_BILLS', member_id);
-      this.dispatch('FETCH_MEMBER_VOTES', member_id);
-      this.dispatch('FETCH_MEMBER_STATEMENTS', member_id);
+      this.dispatch('members/specificMember/FETCH_MEMBER_BILLS', member_id);
+      this.dispatch('members/specificMember/FETCH_MEMBER_VOTES', member_id);
+      this.dispatch('members/specificMember/FETCH_MEMBER_STATEMENTS', member_id);
     },
     'SET_MEMBER_BILLS'(state, payload) {
       state.bills = payload.results[0].bills;
@@ -29,14 +29,14 @@ export default {
       state.statements = payload.results;
     },
     'IS_LOADING'(state) {
-      state.issLoading = true;
+      state.isLoading = true;
     },
     'IS_DONE_LOADING'(state) {
-      state.issLoading = false;
+      state.isLoading = false;
     }
   },
   actions: {
-    async 'FETCH_SPECIFIC_MEMBER'({ commit }, member_id) {
+    async 'FETCH_MEMBER'({ commit }, member_id) {
       commit('IS_LOADING');
       commit('SET_SPECIFIC_MEMBER', await memberService.getSpecificMember(member_id));
       commit('IS_DONE_LOADING');

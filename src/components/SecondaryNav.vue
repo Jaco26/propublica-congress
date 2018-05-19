@@ -2,7 +2,7 @@
    <v-card class="pa-3">
     <v-navigation-drawer stateless permanent floating value="true">
       <v-list dense class="pt-3">
-        <v-list-tile v-for="item in items" :key="item.title" router :to="item.route">
+        <v-list-tile v-for="item in items" :key="item.title" router :to="item.path">
           <v-list-tile-content>
             <v-list-tile-title class="subheading"><b> {{item.title}}</b> </v-list-tile-title>
           </v-list-tile-content>

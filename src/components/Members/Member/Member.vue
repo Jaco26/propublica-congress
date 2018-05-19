@@ -10,11 +10,11 @@
     </v-layout>
 
     <v-layout row >
-      <member-profile xs3 align-content-space-between />
+      <profile :person="person" :isLoading="isLoading" xs3 align-content-space-between />
       <v-flex xs8>
-        <member-votes v-if="inVotes" />
-        <member-bills v-if="inBills" />
-        <member-statements v-if="inStatements" />
+        <votes :votes="votes" v-if="inVotes" />
+        <bills :bills="bills" v-if="inBills" />
+        <statements :statements="statements" v-if="inStatements" />
       </v-flex>
     </v-layout>
   </v-container>
@@ -23,16 +23,16 @@
 <script>
 import {mapGetters} from 'vuex';
 import store from '@/store/store';
-import MemberVotes from './MemberVotes';
-import MemberBills from './MemberBills';
-import MemberStatements from './MemberStatements';
-import MemberProfile from './MemberProfile';
+import Votes from './Votes';
+import Bills from './Bills';
+import Statements from './Statements';
+import Profile from './Profile';
 export default {
   components: {
-    MemberVotes,
-    MemberBills,
-    MemberStatements,
-    MemberProfile,
+    Votes,
+    Bills,
+    Statements,
+    Profile,
   },
   data () {
     return {
@@ -44,8 +44,11 @@ export default {
   },
   computed: {
     ...mapGetters({
-      memberIsLoading: 'memberIsLoading',
-      person: 'specificMember',
+      person: 'members/specificMember/member',
+      bills: 'members/specificMember/bills',
+      votes: 'members/specificMember/votes',
+      statements: 'members/specificMember/statements',
+      isLoading: 'members/specificMember/isLoading',
     }),
   },
   methods: {
@@ -58,7 +61,7 @@ export default {
   },
   beforeRouteEnter (to, from, next) {
     if(to.params.id) {
-      store.dispatch('FETCH_SPECIFIC_MEMBER', to.params.id);
+      store.dispatch('members/specificMember/FETCH_MEMBER', to.params.id);
       next();
     } else {
       next();

@@ -21,12 +21,13 @@
 <script>
 import {mapGetters} from 'vuex';
 export default {
-  computed: {
-    ...mapGetters({
-      votes: 'specificMemberVotes',
-    }),
+  props: ['votes'],
+  // computed: {
+  //   ...mapGetters({
+  //     votes: 'specificMemberVotes',
+  //   }),
 
-  },
+  // },
 
 }
 </script>

@@ -24,12 +24,13 @@
 <script>
 import {mapGetters} from 'vuex';
 export default {
-  computed: {
-    ...mapGetters({
-      bills: 'specificMemberBills',
-    }),
+  props: ['bills']
+  // computed: {
+  //   ...mapGetters({
+  //     bills: 'specificMemberBills',
+  //   }),
 
-  },
+  // },
   
 }
 </script>

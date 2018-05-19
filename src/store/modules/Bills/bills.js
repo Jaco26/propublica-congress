@@ -8,9 +8,9 @@ export default {
   },
   state: {
     navItems: [
-      { title: 'Search Bills', route: '/bills/search' },
-      { title: 'Get Recent Bills', route: '/bills/recent' },
-      { title: 'Get Upcoming Bills', route: '/bills/upcoming' },
+      { title: 'Search Bills', path: '/bills/search' },
+      { title: 'Get Recent Bills', path: '/bills/recent' },
+      { title: 'Get Upcoming Bills', path: '/bills/upcoming' },
     ],
     recentBills: {
       searchParams: {

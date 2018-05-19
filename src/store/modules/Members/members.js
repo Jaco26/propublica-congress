@@ -10,9 +10,9 @@ export default {
   },
   state: {
     navItems: [
-      { title: 'Members', route: '/members/list' },
-      { title: 'New Members', route: '/members/new' },
-      { title: 'Members Leaving Office', route: '/members/leaving' },
+      { title: 'Members', path: '/members/list' },
+      { title: 'New Members', path: '/members/new' },
+      { title: 'Members Leaving Office', path: '/members/leaving' },
     ],
     // house: {
     //   congress: '',

@@ -5,12 +5,13 @@ import Home from '@/components/Home';
 // Members components
 import Members from '@/components/Members/Members';
 import List from '@/components/Members/List';
-import SenateMembers from '@/components/Members/Senate';
-import HouseMembers from '@/components/Members/House';
-import MemberDisplay from '@/components/Members/Member/MemberDisplay';
-import MemberVotes from '@/components/Members/Member/MemberVotes';
-import MemberBills from '@/components/Members/Member/MemberBills';
-import MemberStatements from '@/components/Members/Member/MemberStatements';
+import Member from '@/components/Members/Member/Member';
+// import SenateMembers from '@/components/Members/Senate';
+// import HouseMembers from '@/components/Members/House';
+// import MemberDisplay from '@/components/Members/Member/MemberDisplay';
+// import MemberVotes from '@/components/Members/Member/MemberVotes';
+// import MemberBills from '@/components/Members/Member/MemberBills';
+// import MemberStatements from '@/components/Members/Member/MemberStatements';
 // Votes componenets
 import Votes from '@/components/Votes/Votes';
 // Bills components
@@ -35,12 +36,20 @@ const router = new Router({
       path: '/members',
       name: 'Members',
       component: Members,
+      redirect: '/members/list',
       children: [
         {
           path: 'list',
           name: 'List',
           component: List,
         },
+        {
+          path: 'member/:id',
+          name: 'Member',
+          component: Member,
+        },
+      
+        
         // {
         //   component: SenateMembers,
         //   name: 'Senate',
@@ -56,7 +65,7 @@ const router = new Router({
         //   name: 'Member',
         //   path: 'member/:id',
         //   children: [
-        //     {
+            // {
         //       component: MemberBills,
         //       name: 'MemberBills',
         //       path: 'bills',

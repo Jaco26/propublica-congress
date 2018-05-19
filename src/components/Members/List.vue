@@ -71,7 +71,7 @@ export default {
       } else if (this.chamber == 'senate') {
         return this.congressFunc(80);
       } else {
-        return {title: 'Select a chamber'}
+        return [{title: 'Select a chamber'}];
       }
     },
     searchParams () {

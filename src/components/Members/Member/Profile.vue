@@ -2,12 +2,12 @@
   <v-container>
     <v-layout>
       <v-flex>
-         <v-progress-linear v-if="memberIsLoading" :size="50" indeterminate color="primary"></v-progress-linear>
+         <v-progress-linear v-if="isLoading" :size="50" indeterminate color="primary"></v-progress-linear>
       </v-flex>
     </v-layout>
     <v-layout>
       <v-flex>
-        <v-expansion-panel v-if="person.first_name && !memberIsLoading" popout expand>
+        <v-expansion-panel v-if="person.first_name && !isLoading" popout expand>
           <div class="display-1">{{person.first_name}} {{person.last_name}}</div>
           <v-expansion-panel-content v-for="(role, i) in person.roles" :key="i">
             <div slot="header">Congress: {{role.congress}}, Chamber: {{role.chamber}}, Party: {{person.current_party}}, State: {{role.state}}, District: {{role.district}}.</div>
@@ -39,21 +39,26 @@
 
 <script>
 import {mapGetters} from 'vuex';
-import MemberVotes from './MemberVotes';
-import MemberBills from './MemberBills';
-import MemberStatements from './MemberStatements';
+// import MemberVotes from './MemberVotes';
+// import MemberBills from './MemberBills';
+// import MemberStatements from './MemberStatements';
 export default {
+  props: ['person', 'isLoading'],
   data () {
     return {
       
     }
   },
-  computed: {
-    ...mapGetters({
-      person: 'specificMember',
-      memberIsLoading: 'memberIsLoading',
-    }),
-  },
+  // computed: {
+  //   ...mapGetters({
+  //     person: 'members/specificMember/member',
+  //     bills: 'members/specificMember/bills',
+  //     votes: 'members/specificMember/votes',
+  //     statements: 'members/specificMember/statements',
+  //     memberIsLoading: 'members/specificMember/isLoading',
+
+  //   }),
+  // },
 
 
 }
