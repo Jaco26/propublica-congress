@@ -43,10 +43,6 @@ export default {
 
   },
   getters: {
-    // searchedBills: state => state.searchedBills.list,
-    // searchedBillsSearchPhrase: state => state.searchedBills.searchPhrase,
-    // searchedBillsLoading: state => state.searchedBills.isLoading,
-
     recentBills: state => state.recentBills.list,
     navItems: state => state.navItems,
   },

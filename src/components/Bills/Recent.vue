@@ -42,7 +42,43 @@
       </v-flex>
     </v-layout>
 
-    <v-layout column>
+
+    <v-container grid-list-sm mt-5>
+        <v-layout column>
+          <v-flex class="grey lighten-3" xs6 sm6 md6 pa-2 mb-2 v-for="(bill, i) in recentBills" :key="i">
+            <v-layout>
+              <v-flex  class="text-xs-left">
+                <router-link :to="`/members/member/${bill.sponsor_id}`"><strong>{{bill.sponsor_name}}</strong></router-link> 
+                 <small> {{bill.sponsor_party}}, {{bill.sponsor_state}} </small> 
+              </v-flex>
+              <v-flex offset-xs1 class="text-xs-right date"> 
+                Last Major Action Date: {{bill.latest_major_action_date}}
+              </v-flex>
+            </v-layout>
+            <v-divider></v-divider>
+             <v-layout v-if="bill.title">
+               <v-flex v-if="bill.title">
+                 <small><b>Bill Title:</b></small> {{bill.title}}
+              </v-flex>
+            </v-layout>
+            <v-layout v-if="bill.latest_major_action">
+               <v-flex>
+                 <small><b>Latest Major Action:</b></small> {{bill.latest_major_action}}
+              </v-flex>
+            </v-layout>
+            <!-- <v-layout v-if="bill.summary" mt-1>
+              <v-flex>
+                 <small><b>Bill Summary:</b></small> {{bill.summary}}
+              </v-flex>
+            </v-layout> -->
+            <v-divider></v-divider>
+           <small>Learn more on</small> <a target="_blank" :href="`${bill.govtrack_url}`">Govtrack</a>
+          </v-flex>
+        </v-layout>
+      </v-container>
+
+
+    <!-- <v-layout column>
       <v-flex class="ma-4" v-for="(bill, i) in recentBills" :key="i">
         <v-flex>
           <router-link :to="`/members/member/${bill.sponsor_id}`"><strong>{{bill.sponsor_name}}</strong></router-link> 
@@ -56,7 +92,7 @@
         <small>Latest Major Action Date:</small> {{bill.latest_major_action_date}}
 
       </v-flex>
-    </v-layout>
+    </v-layout> -->
 
   </v-container>
   

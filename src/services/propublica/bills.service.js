@@ -6,7 +6,7 @@ export default {
       .then(response => response.data)
       .catch(err => console.log(err));
   },
-  getRecent: ({congress, chamber, type}) => {
+  getRecent: ({congress, chamber, type, offset}) => {
     return axios.get(`/api/congress/bills/recent/${type}/${congress}/${chamber}`)
       .then(response => response.data)
       .catch(err => console.log(err));
