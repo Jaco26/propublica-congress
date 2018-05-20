@@ -7,7 +7,7 @@ export default {
       .catch(err => console.log(err));
   },
   getRecent: ({congress, chamber, type, offset}) => {
-    return axios.get(`/api/congress/bills/recent/${type}/${congress}/${chamber}`)
+    return axios.get(`/api/congress/bills/recent/${type}/${congress}/${chamber}?offset=${offset}`)
       .then(response => response.data)
       .catch(err => console.log(err));
   },

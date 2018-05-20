@@ -1,4 +1,4 @@
-import billsService from '@/components/propublica/bills.service';
+import billsService from '@/services/propublica/bills.service';
 
 export default { 
   namespaced: true,
@@ -20,7 +20,7 @@ export default {
       if(payload.results[0].offset == 0) {
         state.bills.list = payload.results[0].bills;
       } else {
-        state.bill.list = [...state.bills.list, ...payload.results[0].bills];
+        state.bills.list = [...state.bills.list, ...payload.results[0].bills];
       }
     
     },
@@ -35,7 +35,7 @@ export default {
       }
     },
     'SET_SEARCH_PARAMS' (state, payload) {
-      if (payload.congress) {
+      if (payload) {
         const {congress, chamber, type} = payload;
         state.bills.searchParams.congress = congress;
         state.bills.searchParams.chamber = chamber;
@@ -50,15 +50,26 @@ export default {
     },
   },
   actions: {
-    async 'FETCH_RECENT_BILLS' ({commit, state}, payload) {
+    async 'FETCH_BILLS' ({commit, state}, payload) {
       commit('IS_LOADING');
-      commit('SET_SEARCH_OFFSET', payload ? true: null);
+      commit('SET_OFFSET', payload ? true: null);
       commit('SET_SEARCH_PARAMS', payload);
       const offset = state.bills.offset;
-      const search = {...payload, offset}
+      let search;
+      if (payload) {
+        search = { ...payload, offset }
+      } else {
+        search = {...state.bills.searchParams, offset}
+      }
+      console.log(search);
+      
       commit('SET_RECENT', await billsService.getRecent(search));
       commit('IS_DONE_LOADING');
-      
-    }
+    },
+
+  },
+  getters: {
+    bills: state => state.bills.list,
+    isLoading: state => state.bills.isLoading,
   }
 }

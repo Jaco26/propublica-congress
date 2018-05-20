@@ -28,8 +28,9 @@ router.get(`/subjects/bills/search`, (req, res) => {
 router.get(`/recent/:type/:congress/:chamber`, (req, res) => {
   let type = req.params.type,
       congress = req.params.congress,
-      chamber = req.params.chamber;
-  Propublica().get(`/${congress}/${chamber}/bills/${type}.json`)
+      chamber = req.params.chamber,
+      offset = req.query.offset;
+  Propublica().get(`/${congress}/${chamber}/bills/${type}.json?offset=${offset}`)
     .then(response => res.send(response.data))
     .catch(err => {
       console.log(err);

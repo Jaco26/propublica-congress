@@ -75,8 +75,10 @@
            <small>Learn more on</small> <a target="_blank" :href="`${bill.govtrack_url}`">Govtrack</a>
           </v-flex>
         </v-layout>
-      </v-container>
 
+      </v-container>
+      <v-progress-linear v-if="isLoading" indeterminate></v-progress-linear>
+      <v-btn block v-if="recentBills[0]" @click="getNextPage">Get More</v-btn>
 
     <!-- <v-layout column>
       <v-flex class="ma-4" v-for="(bill, i) in recentBills" :key="i">
@@ -118,9 +120,10 @@ export default {
       }      
     },
     ...mapGetters({
-      recentBills: 'bills/recentBills',
+      recentBills: 'bills/recent/bills',
       congressFunc: 'fillers/congressFunc',
       billTypes: 'fillers/billTypes',
+      isLoading: 'bills/recent/isLoading'
     }),
     congress () {
       return this.congressFunc(105);
@@ -134,9 +137,11 @@ export default {
       if(!congress || !chamber || !type){
         alert('NO!')
       } else {
-        this.$store.dispatch('bills/FETCH_RECENT', this.searchParams);
+        this.$store.dispatch('bills/recent/FETCH_BILLS', this.searchParams);
       }
-      
+    },
+    getNextPage () {
+      this.$store.dispatch('bills/recent/FETCH_BILLS');
     }
   }
 
