@@ -1,11 +1,14 @@
 <template>
   <v-container>
     <v-toolbar>
-      <v-btn active flat @click="show('inProfile')">Profile</v-btn>
-      <v-btn flat @click="show('inVotes')">Votes</v-btn>
-      <v-btn flat @click="show('inBills')">Bills</v-btn>
-      <v-btn flat @click="show('inStatements')">Statements</v-btn>
-      <!-- <v-btn :href="person.roles[0].contact_form">Conact</v-btn>  -->
+      <v-toolbar-title class="headline"> {{person.first_name}} {{person.last_name}} </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-toolbar-items>
+        <v-btn active flat @click="show('inProfile')">Roles</v-btn>
+        <v-btn flat @click="show('inVotes')">Votes</v-btn>
+        <v-btn flat @click="show('inBills')">Bills</v-btn>
+        <v-btn flat @click="show('inStatements')">Statements</v-btn>
+      </v-toolbar-items>
     </v-toolbar>
 
     <profile :person="person" :isLoading="isLoading" v-if="inProfile" />
@@ -50,7 +53,7 @@ export default {
   },
   methods: {
     show (x) {
-      console.log(this.person);
+      console.log(this.person.roles);
       
       this.inBills = false;
       this.inVotes = false;

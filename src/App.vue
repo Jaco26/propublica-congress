@@ -14,10 +14,6 @@ export default {
   components: {
     'responsive-nav': ResponsiveNav, 
   },
-  data () {
-    return {
-    }
-  },
   created(){
     // this.$store.dispatch('FETCH_CONGRESS_MEMBERS', {congress: 115, chamber: 'senate'});
     // this.$store.dispatch('FETCH_CONGRESS_MEMBERS', {congress: 115, chamber: 'house'});
