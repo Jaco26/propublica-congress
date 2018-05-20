@@ -28,4 +28,8 @@ export default {
 
 <style>
 
+  .date {
+    color: #135458
+  }
+
 </style>

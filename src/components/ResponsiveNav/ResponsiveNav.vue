@@ -33,17 +33,6 @@
         </v-btn>
       </v-toolbar-items>
 
-      <!-- <v-tabs
-        slot="extension"
-        v-model="tab"
-        color="primary"
-        align-with-title>
-        <v-tabs-slider color="yellow"></v-tabs-slider>
-        <v-tab v-for="item in menu" :key="item.title" @click="item.action">
-          {{ item.title }}
-        </v-tab>
-      </v-tabs> -->
-
     </v-toolbar>
   </div>
 </template>

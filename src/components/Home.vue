@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-layout>
-      <v-flex m-2 xs12>
+      <v-flex m-2 xs12 sm6>
         <article> 
           <h1 class="headline">Welcome</h1>
           <v-flex mt-2> 

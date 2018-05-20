@@ -66,35 +66,14 @@
                  <small><b>Latest Major Action:</b></small> {{bill.latest_major_action}}
               </v-flex>
             </v-layout>
-            <!-- <v-layout v-if="bill.summary" mt-1>
-              <v-flex>
-                 <small><b>Bill Summary:</b></small> {{bill.summary}}
-              </v-flex>
-            </v-layout> -->
             <v-divider></v-divider>
            <small>Learn more on</small> <a target="_blank" :href="`${bill.govtrack_url}`">Govtrack</a>
           </v-flex>
         </v-layout>
-
       </v-container>
+      
       <v-progress-linear v-if="isLoading" indeterminate></v-progress-linear>
       <v-btn block v-if="recentBills[0]" @click="getNextPage">Get More</v-btn>
-
-    <!-- <v-layout column>
-      <v-flex class="ma-4" v-for="(bill, i) in recentBills" :key="i">
-        <v-flex>
-          <router-link :to="`/members/member/${bill.sponsor_id}`"><strong>{{bill.sponsor_name}}</strong></router-link> 
-        {{bill.sponsor_party}}
-        </v-flex>
-
-        <small>Title:</small> {{bill.title}}
-        <br>
-        <small>Latest Major Action:</small> {{bill.latest_major_action}} 
-        <br>
-        <small>Latest Major Action Date:</small> {{bill.latest_major_action_date}}
-
-      </v-flex>
-    </v-layout> -->
 
   </v-container>
   

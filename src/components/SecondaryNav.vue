@@ -1,5 +1,5 @@
 <template>
-   <v-card class="pa-3">
+   <v-card class="pa-3" prominent>
     <v-navigation-drawer stateless permanent floating value="true">
       <v-list dense class="pt-3">
         <v-list-tile v-for="item in items" :key="item.title" router :to="item.path">
@@ -16,7 +16,13 @@
 
 export default {
   props: ['items'],
+  // data () {
+  //   return {
+  //     sideNav: false,
+  //   }
+  // }
 }
+
 </script>
 
 <style>

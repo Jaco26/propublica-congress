@@ -66,7 +66,15 @@ export default {
     } else {
       next();
     }
-  }
+  },
+  beforeRouteUpdate (to, from, next) {
+    if (to.params.id) {
+      store.dispatch('members/specificMember/FETCH_MEMBER', to.params.id);
+      next();
+    } else {
+      next();
+    }
+  },
 
 }
 
