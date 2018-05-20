@@ -6,6 +6,7 @@
       </v-flex>
     </v-layout>
     <v-layout>
+
       <v-flex>
         <v-expansion-panel v-if="person.first_name && !isLoading" popout expand>
           <div class="display-1">{{person.first_name}} {{person.last_name}}</div>
