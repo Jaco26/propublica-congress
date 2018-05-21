@@ -1,21 +1,24 @@
 <template>
   <v-container>
-    <v-toolbar>
-      <v-toolbar-title class="headline"> {{person.first_name}} {{person.last_name}} </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-toolbar-items>
-        <v-btn active flat @click="show('inProfile')">Roles</v-btn>
-        <v-btn flat @click="show('inVotes')">Votes</v-btn>
-        <v-btn flat @click="show('inBills')">Bills</v-btn>
-        <v-btn flat @click="show('inStatements')">Statements</v-btn>
-      </v-toolbar-items>
-    </v-toolbar>
+    <v-layout>
+      <v-flex xs12 lg10>
+        <v-toolbar>
+          <v-toolbar-title class="headline"> {{person.first_name}} {{person.last_name}} </v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-toolbar-items>
+            <v-btn active flat @click="show('inProfile')">Roles</v-btn>
+            <v-btn flat @click="show('inVotes')">Votes</v-btn>
+            <v-btn flat @click="show('inBills')">Bills</v-btn>
+            <v-btn flat @click="show('inStatements')">Statements</v-btn>
+          </v-toolbar-items>
+        </v-toolbar>
 
-    <profile :person="person" :isLoading="isLoading" v-if="inProfile" />
-    <votes :votes="votes" v-if="inVotes" />
-    <bills :bills="bills" v-if="inBills" />
-    <statements :statements="statements" v-if="inStatements" />
-
+        <profile :person="person" :isLoading="isLoading" v-if="inProfile" />
+        <votes :votes="votes" v-if="inVotes" />
+        <bills :bills="bills" v-if="inBills" />
+        <statements :statements="statements" v-if="inStatements" />
+      </v-flex>
+    </v-layout>
   </v-container>
 </template>
 
