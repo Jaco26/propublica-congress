@@ -3,7 +3,7 @@
     <responsive-nav></responsive-nav>
     <v-container>
       <v-layout justify-center>
-        <v-flex xs12 lg10>
+        <v-flex xs12 xl10>
           <router-view  />
         </v-flex>
       </v-layout>
@@ -21,8 +21,7 @@ export default {
     'responsive-nav': ResponsiveNav, 
   },
   created(){
-    // this.$store.dispatch('FETCH_CONGRESS_MEMBERS', {congress: 115, chamber: 'senate'});
-    // this.$store.dispatch('FETCH_CONGRESS_MEMBERS', {congress: 115, chamber: 'house'});
+    this.$store.dispatch('members/FETCH_MEMBERS');
     this.$store.dispatch('votes/FETCH_RECENT_EXPLANATIONS', {congress: 115});
   }
 };

@@ -31,11 +31,16 @@ const router = new Router({
       path: '/members',
       name: 'Members',
       component: Members,
-      redirect: '/members/list',
+      redirect: '/members/senate',
       children: [
         {
-          path: 'list',
-          name: 'List',
+          path: 'senate',
+          name: 'Senate',
+          component: List,
+        },
+        {
+          path: 'house',
+          name: 'House',
           component: List,
         },
         {

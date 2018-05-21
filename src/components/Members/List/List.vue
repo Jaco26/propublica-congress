@@ -81,9 +81,27 @@ export default {
   computed: {
     ...mapGetters({
       congressFunc: 'fillers/congressFunc',
-      membersList: 'members/list/list',
-      isLoading: 'members/list/isLoading',
+      // membersList: 'members/list/list',
+      // isLoading: 'members/list/isLoading',
+      senateMembers: 'members/senateMembers',
+      senateIsLoading: 'members/senateIsLoading',
+      houseMembers: 'members/houseMembers',
+      houseIsLoading: 'members/houseIsLoading',
     }),
+    membersList () {
+      if (this.$route.name == 'Senate') {
+        return this.senateMembers;
+      } else if (this.$route.name == 'House') {
+        return this.houseMembers;
+      }
+    },
+    isLoading () {
+      if (this.$route.name == 'Senate') {
+        return this.senateIsLoading;
+      } else if (this.$route.name == 'House') {
+        return this.houseIsLoading;
+      }
+    },
     congress () {
       if (this.chamber == 'house') {
         return this.congressFunc(102);
