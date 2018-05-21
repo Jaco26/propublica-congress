@@ -2,8 +2,7 @@
   <v-container :class="{active: open}">
       <v-layout >
         <v-flex>
-          <h2>{{role.title}} <small>{{role.state}} {{role.party}} </small> </h2>
-          {{dates}}
+          <h2>{{role.title}} <small>{{role.state}} {{role.party}} </small> </h2> {{dates}}
         </v-flex>
         <v-layout column align-end>
           <v-btn :color="open ? btnClose: btnOpen" flat icon  @click="toggle"> 
