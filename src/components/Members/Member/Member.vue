@@ -52,9 +52,7 @@ export default {
     }),
   },
   methods: {
-    show (x) {
-      console.log(this.person.roles);
-      
+    show (x) {      
       this.inBills = false;
       this.inVotes = false;
       this.inStatements = false;

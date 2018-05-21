@@ -22,7 +22,6 @@ export default {
       state.bills = payload.results[0].bills;
     },
     'SET_MEMBER_VOTES'(state, payload) {
-      console.log(payload);
       state.votes = payload.results[0].votes;
     },
     'SET_MEMBER_STATEMENTS'(state, payload) {

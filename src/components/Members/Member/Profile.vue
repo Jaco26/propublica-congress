@@ -1,7 +1,8 @@
 <template>
   <v-container grid-list-md>
     <h1>Past Roles</h1>
-    <v-container>
+    <v-progress-linear indeterminate v-if="isLoading"></v-progress-linear>
+    <v-container v-if="!isLoading">
       <v-layout column>
         <role 
           v-for="(role, i) in person.roles"
@@ -23,8 +24,11 @@ export default {
   components: {
     Role,
   },
-
-
+  // computed: {
+  //   ...mapGetters({
+  //     isLoading: 'members/specificMember/isLoading'
+  //   })
+  // }
 }
 
 </script>

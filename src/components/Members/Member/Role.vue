@@ -1,33 +1,44 @@
 <template>
-  <v-layout align-center column :class="{active: open}">
-    <!-- <div class="text-xs-center"> -->
-      <v-btn  class="text-xs-center" fab small @click="toggle"> 
-        <v-icon v-if="!open">add</v-icon> 
-        <v-icon v-if="open">remove</v-icon> 
-      </v-btn>
-    <!-- </div> -->
+  <v-container>
+    <v-layout align-center column :class="{active: open}">
+      <v-layout>
+        <v-flex>
+          <h2>{{role.title}} <small>{{role.state}} {{role.party}} </small> </h2>
+          {{dates}}
+        </v-flex>
+        <v-flex >
+          <div>
+            <v-btn class="text-sm-center" :color="open ? btnClose: btnOpen" outline fab small @click="toggle"> 
+              <v-icon  v-if="!open">add</v-icon> 
+              <v-icon v-if="open">remove</v-icon> 
+            </v-btn>
+          </div>
+        </v-flex>
+      </v-layout>
     
-    <h2>{{role.title}} <small>{{role.state}} {{role.party}} </small> </h2>
-    {{dates}}
+      
+      <!-- <transition name="fade"> -->
+        <v-flex v-show="open">
+          <small><b>Bills Sponsored:</b></small> {{role.bills_sponsored}} <br>
+          <small><b>Bills Cosponsored:</b></small> {{role.bills_cosponsored}} <br>
+          <small><b>Missed Votes Pct:</b></small> {{role.missed_votes_pct}}% <br>
+          <small><b>Votes With Party:</b></small> {{role.votes_with_party_pct}}% <br>
+          <div v-if="role.district">
+            <small><b>District:</b></small> {{role.district}}
+          </div>
 
-    <v-flex v-show="open">
-      <small><b>Bills Sponsored:</b></small> {{role.bills_sponsored}} <br>
-      <small><b>Bills Cosponsored:</b></small> {{role.bills_cosponsored}} <br>
-      <v-flex v-if="role.district">
-         <small><b>District:</b></small> {{role.district}}
-      </v-flex>
-
-     
-      <ul v-if="committees">
-        <committee 
-          v-for="(committee, i) in committees" 
-          :key="i"
-          :committee="committee" 
-        />
-      </ul>
-    </v-flex>
-  </v-layout>
-
+          <ul v-if="committees">
+            <committee 
+              v-for="(committee, i) in committees" 
+              :key="i"
+              :committee="committee" 
+            />
+          </ul>
+        </v-flex>
+      <!-- </transition> -->
+    </v-layout>
+  </v-container>
+  
 </template>
 
 <script>
@@ -41,6 +52,8 @@ export default {
   data () {
     return {
       open: false,
+      btnOpen: 'info',
+      btnClose: 'accent'
     }
   },
   computed: {
@@ -67,7 +80,14 @@ export default {
   .active {
     padding-top: 10px;
     padding-bottom: 10px;
-    /* background-color: aq*/
+  }
+
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity 0.1s ease-out;
+  } 
+
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
   }
 
 </style>
