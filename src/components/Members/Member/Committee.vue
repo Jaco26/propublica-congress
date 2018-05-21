@@ -1,6 +1,7 @@
 <template>
   <li>
     <h3>{{committee.name}} </h3>
+    
   </li>
 </template>
 

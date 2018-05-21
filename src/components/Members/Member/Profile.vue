@@ -2,13 +2,14 @@
   <v-container grid-list-md>
     <h1>Past Roles</h1>
     <v-container>
-      <ul>
+      <v-layout column>
         <role 
           v-for="(role, i) in person.roles"
           :key="i"
           :role="role" 
+           xs6
         />
-      </ul>
+      </v-layout>
     </v-container>
   </v-container>
 </template>
@@ -28,6 +29,8 @@ export default {
 
 </script>
 
-<style scoped>
-
+<style >
+  ul {
+    list-style: none;
+  }
 </style>
