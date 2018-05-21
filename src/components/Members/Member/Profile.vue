@@ -8,8 +8,8 @@
           v-for="(role, i) in person.roles"
           :key="i"
           :role="role" 
-           xs6
-        />
+          xs6
+        /> 
       </v-layout>
     </v-container>
   </v-container>
@@ -24,11 +24,6 @@ export default {
   components: {
     Role,
   },
-  // computed: {
-  //   ...mapGetters({
-  //     isLoading: 'members/specificMember/isLoading'
-  //   })
-  // }
 }
 
 </script>
@@ -37,4 +32,5 @@ export default {
   ul {
     list-style: none;
   }
+
 </style>
