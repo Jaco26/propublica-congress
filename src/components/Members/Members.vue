@@ -1,6 +1,6 @@
 <template>
  <v-container>
-    <v-layout>
+    <v-layout >
       <v-flex sm3>
           <secondary-nav :items="items"  />
       </v-flex>

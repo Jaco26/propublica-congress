@@ -37,7 +37,6 @@
                   <v-text-field v-model="filterPhrase" label="filter results"></v-text-field>
                 </v-toolbar>
               </v-layout>
-              
             </v-flex>
           </v-layout>
         </v-form>
@@ -49,23 +48,11 @@
     <v-container grid-list-sm>
       <v-layout wrap>
         <v-flex xs6 sm3 class="ma-4" v-for="(member, i) in members" :key="i">
-          <router-link :to="`/members/member/${member.id}`"><strong>{{member.first_name}} {{member.last_name}}</strong></router-link> 
+          <router-link :to="`/members/member/${member.id}`"><strong>{{member.first_name}} {{member.last_name}}</strong></router-link>   <br>
           {{member.state}}  {{member.party}}
         </v-flex>
       </v-layout>
-    </v-container>
-
-    <!-- <v-layout column>
-      <v-flex class="ma-4" v-for="(member, i) in members" :key="i">
-         <v-flex>
-          <router-link :to="`/members/member/${member.id}`"><strong>{{member.first_name}} {{member.last_name}}</strong></router-link> 
-        </v-flex>
-      </v-flex>
-      <v-progress-linear v-if="isLoading" indeterminate></v-progress-linear>
-    </v-layout> -->
-
-
-    
+    </v-container>    
   </v-container>
   
 </template>
@@ -122,6 +109,7 @@ export default {
         });
       }
     },
+
 
   },
   

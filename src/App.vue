@@ -1,9 +1,15 @@
 <template>
   <v-app id="app">
     <responsive-nav></responsive-nav>
-    <main>
-       <router-view/>
-    </main>
+    <v-container>
+      <v-layout justify-center>
+        <v-flex xs12 lg10>
+          <router-view  />
+        </v-flex>
+      </v-layout>
+    </v-container>
+
+  
   </v-app>   
 </template>
 

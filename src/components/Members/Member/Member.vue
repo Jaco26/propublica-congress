@@ -1,7 +1,7 @@
 <template>
   <v-container>
-    <v-layout>
-      <v-flex xs12 lg10>
+    <v-layout >
+      <v-flex>
         <v-toolbar>
           <v-toolbar-title class="headline"> {{person.first_name}} {{person.last_name}} </v-toolbar-title>
           <v-spacer></v-spacer>
