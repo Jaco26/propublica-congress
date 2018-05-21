@@ -8,6 +8,21 @@
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
+      <v-divider></v-divider>
+      <v-flex class="subheading" v-if="recentlyViewed">
+        Recently Viewed:
+      </v-flex>
+      <v-layout wrap>
+        <v-chip 
+          v-for="item in recentlyViewed" 
+          :key="item.path" 
+          outline 
+          label
+          color="blue darken-2"
+        >
+          <router-link :to="item.path">{{item.title}}</router-link>
+        </v-chip>
+      </v-layout>
     </v-navigation-drawer>
   </v-card>
 </template>
@@ -15,12 +30,8 @@
 <script>
 
 export default {
-  props: ['items'],
-  // data () {
-  //   return {
-  //     sideNav: false,
-  //   }
-  // }
+  props: ['items', 'recentlyViewed'],
+
 }
 
 </script>
