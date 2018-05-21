@@ -17,7 +17,9 @@ export default {
       { title: 'New Members', path: '/members/new' },
       { title: 'Members Leaving Office', path: '/members/leaving' },
     ],
-    
+    recentlyViewed: [
+
+    ],
     newMembers: [],
     memberComparison: {
       votes: {},
@@ -25,14 +27,13 @@ export default {
     },
   },
   mutations: {
-
-  },
-  actions: {
-
+    'ADD_MEMBER_TO_NAV' (state, payload) {
+      state.recentlyViewed = [...state.recentlyViewed, payload];
+    }
   },
   getters: {
-
     navItems: state => state.navItems,
+    recentlyViewed: state => state.recentlyViewed,
   },
 };
 

@@ -81,8 +81,6 @@ export default {
   computed: {
     ...mapGetters({
       congressFunc: 'fillers/congressFunc',
-      // membersList: 'members/list/list',
-      // isLoading: 'members/list/isLoading',
       senateMembers: 'members/senateMembers',
       senateIsLoading: 'members/senateIsLoading',
       houseMembers: 'members/houseMembers',
