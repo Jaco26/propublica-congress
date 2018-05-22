@@ -2,7 +2,7 @@
   <v-app id="app">
     <responsive-nav></responsive-nav>
     <v-flex mt-1 pa-1 class="title warning">
-      <strong>NOTE:</strong> This site is in development. New pages and features will be added on a regular basis and some layouts will change.  
+      <strong>NOTE:</strong> This site is in active development. New pages and features will be added on a regular basis and some layouts will change.  
     </v-flex>
     <v-container>
       <v-layout justify-center>

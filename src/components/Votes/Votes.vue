@@ -1,6 +1,5 @@
 <template>
   <v-container>
-    <work-in-progress :MTC="true" />
     <v-layout >
       <h1>The Votes Page</h1>
       
