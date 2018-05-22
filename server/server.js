@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 // const morgan = require('morgan');
-require('dotenv').config();
+// require('dotenv').config();
 
 // Route includes
 // Propublica Routes
