@@ -3,7 +3,7 @@
     <v-layout >
       <v-flex>
         <v-toolbar>
-          <v-toolbar-title class="headline"> {{person.first_name}} {{person.last_name}} </v-toolbar-title>
+          <v-toolbar-title id="legislator-name" class="headline"> {{person.first_name}} {{person.last_name}} </v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items>
             <v-btn active flat @click="show('inProfile')">Roles</v-btn>
@@ -73,6 +73,8 @@ export default {
   },
   beforeRouteUpdate (to, from, next) {
     if (to.params.id) {
+      console.log(to.params.id);
+      
       store.dispatch('members/specificMember/FETCH_MEMBER', to.params.id);
       next();
     } else {
