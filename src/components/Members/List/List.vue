@@ -1,45 +1,24 @@
 <template>
   <v-container>
-    <v-layout row >
-    <!-- I need a form for users to select:
-      1: congress, 2: chamber, 3: type -->
-      <v-flex class="grey lighten-4" >
-        <v-form class="">
-          <v-layout align-center justify-center>
-            <v-flex class="pl-4" xs4>
-              <v-radio-group row v-model="chamber">
-                <v-radio label="Senate" value="senate"></v-radio>
-                <v-radio label="House" value="house"></v-radio>
-                <!-- <v-radio label="Both" value="both"></v-radio> -->
-              </v-radio-group>
-            </v-flex>
-            <v-flex xs2 class="mr-3">
-              <v-select 
-                :items="congress"
-                v-model="selectedCongress"
-                :hint="`${selectedCongress.description}`"
-                persistent-hint
-                item-text="title"
-                label="Congress"
-                single-line 
-              
-              ></v-select>
-            </v-flex>
-            <v-flex xs2>
-              <v-btn @click="submit">Submit</v-btn>
-            </v-flex>
-
-            <v-spacer></v-spacer>
-         
-            <v-flex v-if="membersList[0]">
-              <v-layout class="pa-1" align-center justify-center>
-                <v-toolbar flat xs8>
-                  <v-text-field v-model="filterPhrase" label="filter results"></v-text-field>
-                </v-toolbar>
-              </v-layout>
-            </v-flex>
-          </v-layout>
-        </v-form>
+    <v-layout>
+      <v-flex xs6 class="display-1" v-if="this.$route.name == 'Senate'">
+        Senate Members
+      </v-flex>
+      <v-flex xs6 class="display-1" v-if="this.$route.name == 'House'">
+        House Members
+      </v-flex>
+      <v-spacer></v-spacer>
+      <v-flex xs6 >
+        <v-toolbar floating dense>
+          <v-text-field
+            class="ma-3" 
+            append-icon="search" 
+            hide-details 
+            single-line
+            v-model="filterPhrase"
+            label="Filter by name" 
+          ></v-text-field>
+        </v-toolbar>
       </v-flex>
     </v-layout>
 
