@@ -1,8 +1,9 @@
 <template>
   <v-container>
+    <work-in-progress :MTC="true" />
     <v-layout >
       <h1>The Votes Page</h1>
-
+      
       <v-container grid-list-sm mt-5>
         <v-layout column>
           <v-flex class="grey lighten-3" xs6 sm6 md6 pa-2 mb-2 v-for="(exp, i) in recentExplanations" :key="i">
@@ -30,8 +31,12 @@
 </template>
 
 <script>
+import WorkInProgress from '@/components/WIP';
 import {mapGetters} from 'vuex';
 export default {
+  components: {
+    WorkInProgress,
+  },
   computed:{
     ...mapGetters({
       recentExplanations: 'votes/recentExplanations'

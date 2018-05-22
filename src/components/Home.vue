@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-layout>
-      <v-flex m-2 xs12 sm6>
+      <v-flex m-2 xs12 sm10>
         <article> 
           <h1 class="headline">Welcome</h1>
           <v-flex mt-2> 
@@ -40,10 +40,12 @@
                 <li>
                   You can get a list of recent bills by bill-type and chamber <router-link to="/bills/recent">here</router-link>.  
                 </li>
-                
               </ul>
-              
             </p>
+            <!-- <v-flex class="title">
+              <strong>NOTE:</strong> This site is in development. New pages, features, and layouts will be added on
+              on a regular basis.
+            </v-flex> -->
           </v-flex>
         </article>
       </v-flex>

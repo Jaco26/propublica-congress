@@ -6,6 +6,8 @@ import Home from '@/components/Home';
 import Members from '@/components/Members/Members';
 import List from '@/components/Members/List/List';
 import Member from '@/components/Members/Member/Member';
+import NewMembers from '@/components/Members/NewMembers';
+import MembersLeaving from '@/components/Members/MembersLeaving';
 
 // Votes componenets
 import Votes from '@/components/Votes/Votes';
@@ -47,6 +49,16 @@ const router = new Router({
           path: 'member/:id',
           name: 'Member',
           component: Member,
+        },
+        {
+          path: 'new',
+          name: 'NewMembers',
+          component: NewMembers,
+        },
+        {
+          path: 'leaving',
+          name: 'MembersLeaving',
+          component: MembersLeaving,
         },
       
         
