@@ -4,6 +4,9 @@ export default {
   namespaced: true,
   state: {
     recentExplanations: [],
+    navItems: [
+      { title: 'Explanations', path: '/votes/explanations' },
+    ],
   },
   mutations: {
     'SET_RECENT_EXPLANATIONS' (state, payload) {
@@ -18,6 +21,7 @@ export default {
   },
   getters: {
     recentExplanations: state => state.recentExplanations,
+    navItems: state => state.navItems,
   },
 } ;
  

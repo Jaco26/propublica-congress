@@ -11,6 +11,9 @@ import MembersLeaving from '@/components/Members/MembersLeaving';
 
 // Votes componenets
 import Votes from '@/components/Votes/Votes';
+import Explanations from '@/components/Votes/Explanations';
+import SpecificVote from '@/components/Votes/SpecificVote';
+
 // Bills components
 import Bills from '@/components/Bills/Bills';
 import Search from '@/components/Bills/Search';
@@ -19,6 +22,9 @@ import Upcoming from '@/components/Bills/Upcoming';
 // Statements components
 import Statements from '@/components/Statements/Statements';
 
+// Committees components
+import Committees from '@/components/Committees/Committees';
+import SpecificCommittee from '@/components/Committees/SpecificCommittee';
 
 Vue.use(Router);
 
@@ -60,47 +66,7 @@ const router = new Router({
           name: 'MembersLeaving',
           component: MembersLeaving,
         },
-      
-        
-        // {
-        //   component: SenateMembers,
-        //   name: 'Senate',
-        //   path: 'senate',
-        // },
-        // {
-        //   component: HouseMembers,
-        //   name: 'House',
-        //   path: 'house',
-        // },
-        // {
-        //   component: MemberDisplay,
-        //   name: 'Member',
-        //   path: 'member/:id',
-        //   children: [
-            // {
-        //       component: MemberBills,
-        //       name: 'MemberBills',
-        //       path: 'bills',
-        //     },
-        //     {
-        //       component: MemberVotes,
-        //       name: 'MemberVotes',
-        //       path: 'votes'
-        //     },
-
-        //     {
-        //       component: MemberStatements,
-        //       name: 'MemberStatements',
-        //       path: 'statements'
-        //     },
-        //   ]
-        // }
       ]
-    },
-    {
-      path: '/votes',
-      name: 'Votes',
-      component: Votes,
     },
     {
       path: '/bills',
@@ -130,6 +96,36 @@ const router = new Router({
       name: 'Statements',
       component: Statements,
     },
+    {
+      path: '/committees',
+      name: 'Committees',
+      component: Committees,
+      children: [
+        {
+          path: ':id',
+          name: 'SpecificCommittee',
+          component: SpecificCommittee,
+        },
+      ]
+    },
+    {
+      path: '/votes',
+      name: 'Votes',
+      component: Votes,
+      redirect: '/votes/explanations',
+      children: [
+        {
+          path: 'explanations',
+          name: 'Explanations',
+          component: Explanations,
+        },
+        {
+          path: 'vote/:rollCall/:session',
+          name: 'SpecificVote',
+          component: SpecificVote
+        },
+      ]
+    }
   ],
 });
 
