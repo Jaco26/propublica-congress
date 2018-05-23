@@ -34,7 +34,11 @@
 
 export default {
   props: ['items', 'recentlyViewed'],
-
+  data () {
+    return {
+      
+    }
+  }
 }
 
 </script>
