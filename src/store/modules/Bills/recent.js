@@ -1,5 +1,8 @@
 import billsService from '@/services/propublica/bills.service';
 
+
+
+
 export default { 
   namespaced: true,
   state: {

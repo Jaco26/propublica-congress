@@ -3,6 +3,13 @@ import house from './house';
 import senate from './senate';
 import specificMember from './specificMember';
 
+export const mutations =  {
+  'ADD_MEMBER_TO_NAV' (state, payload) {
+    state.recentlyViewed = [...state.recentlyViewed, payload];
+  },
+
+};
+
 export default {
   namespaced: true,
   modules: {
@@ -26,11 +33,7 @@ export default {
       bills: {},
     },
   },
-  mutations: {
-    'ADD_MEMBER_TO_NAV' (state, payload) {
-      state.recentlyViewed = [...state.recentlyViewed, payload];
-    }
-  },
+  mutations,
   getters: {
     navItems: state => state.navItems,
     recentlyViewed: state => state.recentlyViewed,
