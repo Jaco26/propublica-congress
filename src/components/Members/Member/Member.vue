@@ -6,14 +6,16 @@
           <v-toolbar-title id="legislator-name" class="headline"> {{person.first_name}} {{person.last_name}} </v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items>
-            <v-btn active flat @click="show('inProfile')">Roles</v-btn>
-            <v-btn flat @click="show('inVotes')">Votes</v-btn>
-            <v-btn flat @click="show('inBills')">Bills</v-btn>
-            <v-btn flat @click="show('inStatements')">Statements</v-btn>
+            <v-tabs color="transparent" v-model="active" slider-color="purple">
+              <v-tab active flat @click="show('inProfile')">Past Roles</v-tab>
+              <v-tab flat @click="show('inVotes')">Votes</v-tab>
+              <v-tab flat @click="show('inBills')">Bills</v-tab>
+              <v-tab flat @click="show('inStatements')">Statements</v-tab>
+            </v-tabs>
           </v-toolbar-items>
         </v-toolbar>
-
-        <profile :person="person" :isLoading="isLoading" v-if="inProfile" />
+        <router-view></router-view>
+        <past-roles :person="person" :isLoading="isLoading" v-if="inProfile" />
         <votes :votes="votes" v-if="inVotes" />
         <bills :bills="bills" v-if="inBills" />
         <statements :statements="statements" v-if="inStatements" />
@@ -28,16 +30,17 @@ import store from '@/store/store';
 import Votes from './Votes';
 import Bills from './Bills';
 import Statements from './Statements';
-import Profile from './Profile';
+import PastRoles from './PastRoles';
 export default {
   components: {
     Votes,
     Bills,
     Statements,
-    Profile,
+    PastRoles,
   },
   data () {
     return {
+      active: null,
       chamber: '',
       inProfile: true,
       inBills: false,
@@ -64,7 +67,7 @@ export default {
     }
   },
   beforeRouteEnter (to, from, next) {
-    if(to.params.id) {
+    if(to.params.id) {     
       store.dispatch('members/specificMember/FETCH_MEMBER', to.params.id);
       next();
     } else {

@@ -24,6 +24,12 @@ export default {
   components: {
     Role,
   },
+  // computed: {
+  //   ...mapGetters({
+  //     person: 'members/specificMember/member',
+  //     isLoading: 'members/specificMember/isLoading'
+  //   }),
+  // }
 }
 
 </script>
