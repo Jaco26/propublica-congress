@@ -7,14 +7,13 @@
           <v-spacer></v-spacer>
           <v-toolbar-items>
             <v-tabs color="transparent" v-model="active" slider-color="purple">
-              <v-tab active flat @click="show('inProfile')">Past Roles</v-tab>
+              <v-tab flat @click="show('inProfile')">Past Roles</v-tab>
               <v-tab flat @click="show('inVotes')">Votes</v-tab>
               <v-tab flat @click="show('inBills')">Bills</v-tab>
               <v-tab flat @click="show('inStatements')">Statements</v-tab>
             </v-tabs>
           </v-toolbar-items>
         </v-toolbar>
-        <router-view></router-view>
         <past-roles :person="person" :isLoading="isLoading" v-if="inProfile" />
         <votes :votes="votes" v-if="inVotes" />
         <bills :bills="bills" v-if="inBills" />

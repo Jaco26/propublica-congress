@@ -6,12 +6,6 @@ import Home from '@/components/Home';
 import Members from '@/components/Members/Members';
 import List from '@/components/Members/List/List';
 import Member from '@/components/Members/Member/Member';
-// Member components
-import MemberRoles from '@/components/Members/Member/PastRoles'
-import MemberBills from '@/components/Members/Member/Bills';
-import MemberVotes from '@/components/Members/Member/Votes';
-import MemberStatements from '@/components/Members/Member/Statements';
-
 import NewMembers from '@/components/Members/NewMembers';
 import MembersLeaving from '@/components/Members/MembersLeaving';
 

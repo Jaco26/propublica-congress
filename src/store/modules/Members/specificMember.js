@@ -17,11 +17,6 @@ export default {
       this.dispatch('members/specificMember/FETCH_MEMBER_BILLS', member_id);
       this.dispatch('members/specificMember/FETCH_MEMBER_VOTES', member_id);
       this.dispatch('members/specificMember/FETCH_MEMBER_STATEMENTS', member_id);
-      // let newNavMember = {
-      //   title: `${state.profile.first_name} ${state.profile.last_name}`,
-      //   path: `/members/member/${member_id}`,
-      // };
-      // this.commit('members/ADD_MEMBER_TO_NAV', newNavMember, { root: true });
     },
     'SET_MEMBER_BILLS'(state, payload) {
       state.bills = payload.results[0].bills;
@@ -40,7 +35,7 @@ export default {
     }
   },
   actions: {
-    async 'FETCH_MEMBER'({ commit, state, rootGetters }, member_id) {
+    async 'FETCH_MEMBER'({ commit,  state, rootGetters }, member_id) {
       commit('IS_LOADING');
       commit('SET_SPECIFIC_MEMBER', await memberService.getSpecificMember(member_id));
       commit('IS_DONE_LOADING');
@@ -51,9 +46,7 @@ export default {
       const paths = rootGetters['members/recentlyViewed'].map(item => item.path);
       if (paths.indexOf(newNavMember.path) == -1) {
         commit('members/ADD_MEMBER_TO_NAV', newNavMember, { root: true });
-      }
-      console.log(rootGetters['members/recentlyViewed']);
-      
+      }      
     },
     async 'FETCH_MEMBER_BILLS'({ commit }, member_id) {
       commit('SET_MEMBER_BILLS', await memberService.getBillsCosponsoredBySpecificMember(member_id));
