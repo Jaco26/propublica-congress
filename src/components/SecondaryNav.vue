@@ -8,9 +8,6 @@
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
-      <div id="test-target">
-        Hello
-      </div>
       <v-divider></v-divider>
       <v-flex class="subheading" v-if="recentlyViewed">
         Recently Viewed:
