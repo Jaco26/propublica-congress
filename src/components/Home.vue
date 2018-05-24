@@ -6,12 +6,12 @@
           <h1 class="headline">Welcome</h1>
           <v-flex mt-2> 
             <p> 
-              <i>KnowThyCongress</i> is a way for you to interact with up to date historical data about the United States Congress.
-              The data comes from Prorpublica's Congress API. Only a few pieces of functionality have been built out so far. Here is a summary
+              <i>KnowThyCongress</i> is a way for you to interact with up-to-date historical data about the United States Congress.
+              The data comes from Propublica's Congress API. Only a few pieces of functionality have been built out so far. Here is a summary
               of what is currently available: 
               <ul id="features-list">
                 <li>
-                  You can get a list of legislators organized by congress and 
+                  You can get a list of legislators organized by Congress and 
                   chamber <router-link to="/members/list">here</router-link>.
                   <ul>
                     <li>
@@ -20,10 +20,9 @@
                     </li>
                     <li>
                       Each legislator's "details" page includes: a collapsible menu <br> 
-                      summarizing all roles they have occupied during their time in <br>
-                      congress, a button to toggle a list of recent bills they have <br>
-                      cosponsored and a button to toggle a list of recent votes they <br>
-                      have taken.
+                      summarizing all roles they have held during their time in <br>
+                      Congress; a button to toggle a list of recent bills they have <br>
+                      cosponsored; and a button to toggle a list of recent votes.
                     </li>
                   </ul>
                 </li>
@@ -42,10 +41,6 @@
                 </li>
               </ul>
             </p>
-            <!-- <v-flex class="title">
-              <strong>NOTE:</strong> This site is in development. New pages, features, and layouts will be added on
-              on a regular basis.
-            </v-flex> -->
           </v-flex>
         </article>
       </v-flex>
