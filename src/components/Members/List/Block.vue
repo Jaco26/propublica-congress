@@ -1,8 +1,8 @@
 <template>
-  <v-container>
+  <v-container v-if="members[0]">
     <v-layout column>
       <v-layout>
-        <v-flex v-if="members[0]" class="headline">
+        <v-flex class="headline">
           {{letter}}
         </v-flex>
       </v-layout>
