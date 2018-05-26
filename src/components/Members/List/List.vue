@@ -1,12 +1,12 @@
 <template>
   <v-container>
     <v-layout>
-      <v-flex xs6 class="display-1" v-if="this.$route.name == 'Senate'">
+      <!-- <v-flex xs6 class="display-1" v-if="this.$route.name == 'Senate'">
         Senate Members
       </v-flex>
       <v-flex xs6 class="display-1" v-if="this.$route.name == 'House'">
         House Members
-      </v-flex>
+      </v-flex> -->
       <v-spacer></v-spacer>
       <v-flex xs6 >
         <v-toolbar floating dense>
@@ -24,26 +24,29 @@
 
     <v-progress-linear v-if="isLoading" indeterminate></v-progress-linear>
 
-    <v-container grid-list-sm>
-      <v-layout wrap>
-        <v-flex xs6 sm3 class="ma-4" v-for="(member, i) in members" :key="i">
-          <router-link :to="`/members/member/${member.id}`"><strong>{{member.first_name}} {{member.last_name}}</strong></router-link>   <br>
-          {{member.state}}  {{member.party}}
-        </v-flex>
-      </v-layout>
-    </v-container>    
+      <block 
+        v-for="letter in letters" 
+        :key="letter" 
+        :letter="letter"
+        :members="alphabeticalMembers(letter)" 
+      />
+
   </v-container>
-  
 </template>
 
 <script>
 import {mapGetters} from 'vuex';
+import Block from './Block'
 export default {
+  components: {
+    Block,
+  },
   data () {
     return {
       chamber: '',
       selectedCongress: {title: '', description: ''},
       filterPhrase: '',
+      letters: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     }
   },
   methods: {
@@ -55,6 +58,9 @@ export default {
         this.$store.dispatch('members/list/FETCH_CONGRESS_MEMBERS', this.searchParams);
       }
     },
+    alphabeticalMembers (letter) {      
+      return this.membersList.filter(member => member.last_name.toUpperCase().startsWith(letter));
+    }
 
   },
   computed: {
@@ -104,6 +110,8 @@ export default {
         });
       }
     },
+    
+
 
 
   },
