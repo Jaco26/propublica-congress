@@ -1,12 +1,12 @@
 <template>
   <v-container>
     <v-layout>
-      <!-- <v-flex xs6 class="display-1" v-if="this.$route.name == 'Senate'">
+      <v-flex xs6 class="display-1" v-if="this.$route.name == 'Senate'">
         Senate Members
       </v-flex>
       <v-flex xs6 class="display-1" v-if="this.$route.name == 'House'">
         House Members
-      </v-flex> -->
+      </v-flex>
       <v-spacer></v-spacer>
       <v-flex xs6 >
         <v-toolbar floating dense>
@@ -28,7 +28,7 @@
         v-for="letter in letters" 
         :key="letter" 
         :letter="letter"
-        :members="alphabeticalMembers(letter)" 
+        :membersList="members"
       />
 
   </v-container>
@@ -38,6 +38,7 @@
 import {mapGetters} from 'vuex';
 import Block from './Block'
 export default {
+  name: 'List',
   components: {
     Block,
   },

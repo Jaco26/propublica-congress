@@ -2,7 +2,7 @@
   <v-container>
     <v-layout column>
       <v-layout>
-        <v-flex class="headline">
+        <v-flex v-if="members[0]" class="headline">
           {{letter}}
         </v-flex>
       </v-layout>
@@ -19,10 +19,10 @@
 
 <script>
 export default {
-  props: ['letter', 'members'],
-  data () {
-    return {
-      bar: 'baz'
+  props: ['letter', 'membersList'],
+  computed: {
+    members () {
+      return this.membersList.filter(member => member.last_name.toUpperCase().startsWith(this.letter));
     }
   }
 }

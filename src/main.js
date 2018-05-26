@@ -20,6 +20,7 @@ Vue.use(Vuetify, {
     success: "#4caf50"
   }
 });
+
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
