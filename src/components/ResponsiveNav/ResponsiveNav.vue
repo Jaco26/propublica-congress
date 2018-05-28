@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <div id="responsive-nav">
     <v-navigation-drawer temporary absolute v-model="sideNav">
       <v-list class="p1-1">
         <v-list-tile 
         v-for="item in menuItems" 
         :key="item.title"
         router
-        :to="item.link">
+        :to="item.path">
           <v-list-tile-content>
             <v-btn flat >
               {{item.title}}
@@ -28,9 +28,10 @@
         <v-btn flat v-for="item in menuItems" 
         :key="item.title"
         router
-        :to="item.link">
+        :to="item.path">
           {{item.title}} 
         </v-btn>
+        
       </v-toolbar-items>
 
     </v-toolbar>
@@ -45,11 +46,11 @@ export default {
     return {
       sideNav: false,
       menuItems: [
-        {title: 'Home', link: '/'},
-        {title: 'Members', link: '/members'},
-        {title: 'Votes', link: '/votes'},
-        {title: 'Bills', link: '/bills' },
-        {title: 'Statements', link: '/statements'},
+        {title: 'Home', path: '/'},
+        {title: 'Members', path: '/members'},
+        {title: 'Votes', path: '/votes'},
+        {title: 'Bills', path: '/bills' },
+        {title: 'Statements', path: '/statements'},
       ],
         tab: null,
       helperMenu: {
@@ -90,9 +91,10 @@ export default {
       }
   }
 }
-</script
+</script>
 
 <style>
+
 
 </style>
 

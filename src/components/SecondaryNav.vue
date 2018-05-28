@@ -1,6 +1,6 @@
 <template>
-   <v-card class="pa-3" prominent>
-    <v-navigation-drawer stateless permanent floating value="true">
+  <v-card class="pa-3 elevation-6" id="secondary-nav" prominent >
+    <v-navigation-drawer  stateless permanent floating value="true">
       <v-list dense class="pt-3">
         <v-list-tile v-for="item in items" :key="item.title" router :to="item.path">
           <v-list-tile-content>
@@ -41,5 +41,11 @@ export default {
 </script>
 
 <style>
+
+#secondary-nav {
+  position: sticky;
+  top: 40px;
+  transform: translateX(-45px)
+}
 
 </style>

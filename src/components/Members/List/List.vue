@@ -8,8 +8,8 @@
         House Members
       </v-flex>
       <v-spacer></v-spacer>
-      <v-flex xs6 >
-        <v-toolbar floating dense>
+      <v-flex xs6 id="filter-names">
+        <v-toolbar  floating dense>
           <v-text-field
             class="ma-3" 
             append-icon="search" 
@@ -121,5 +121,10 @@ export default {
 </script>
 
 <style>
+
+#filter-names {
+  position: sticky;
+  top: 10px;
+}
 
 </style>
