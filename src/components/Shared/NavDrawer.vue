@@ -1,5 +1,12 @@
 <template>
-  <v-navigation-drawer  clipped app v-model="drawer" fixed >
+  <v-navigation-drawer 
+    clipped 
+    app 
+    v-model="drawer" 
+    fixed 
+    mobile-break-point="1000"
+    disable-resize-watcher
+  >
     <v-list dense>
       <v-list-group 
         sub-group
