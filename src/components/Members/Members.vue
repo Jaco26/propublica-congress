@@ -1,9 +1,7 @@
 <template>
  <v-container>
     <v-layout >
-      <v-flex sm3>
-          <secondary-nav :items="items" :recentlyViewed="recentlyViewed"  />
-      </v-flex>
+      
       <v-flex xs12 sm9>
         <router-view></router-view>
       </v-flex>
@@ -15,10 +13,8 @@
 
 <script>
 import {mapGetters} from 'vuex';
-import SecondaryNav from '@/components/SecondaryNav';
 export default {
   components: {
-    SecondaryNav,
   },
   computed: {
     ...mapGetters({

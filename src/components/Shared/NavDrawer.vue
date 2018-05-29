@@ -1,0 +1,88 @@
+<template>
+  <v-navigation-drawer  clipped app v-model="drawer" fixed >
+    <v-list dense>
+      <v-list-group 
+        sub-group
+        no-action
+        v-for="item in items"
+        :key="item.title"
+        v-model="item.active"
+      >
+        <v-list-tile slot="activator">
+          <v-list-tile-content>
+            <v-list-tile-title class="title">
+              {{item.title}}
+            </v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile 
+          v-for="child in item.children" 
+          :key="child.title"
+          router
+          :to="child.path"
+        >
+          <v-list-tile-content>
+            <v-list-tile-title class="subheading">{{child.title}}</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </v-list-group>
+    </v-list>
+  </v-navigation-drawer>
+</template>
+
+<script>
+
+export default {
+   data: () => ({
+      drawer: null,
+
+      items: [
+        { 
+          active: false,
+          title: 'Members', 
+          children: [
+            { title: 'Senate', path: '/members/senate' },
+            { title: 'House', path: '/members/house' },
+            { title: 'New Members', path: '/members/new' },
+            { title: 'Members Leaving Office', path: '/members/leaving' },
+          ]
+        },
+        {
+          active: false,
+          title: 'Votes',
+          children: [
+            { title: 'Recent Explanations', path: '/votes/explanations' },
+          ]
+        },
+        {
+          active: false,
+          title: 'Bills',
+          children: [
+            { title: 'Search Bills', path: '/bills/search' },
+            { title: 'Recent Bills', path: '/bills/recent' },
+            { title: 'Upcoming Bills', path: '/bills/upcoming' },
+          ]
+        },
+        {
+          active: false,
+          title: 'Statements', 
+          children: [
+
+          ]
+        },
+        {
+          active: false,
+          title: 'Committees',
+          children: [
+
+          ]
+        }
+      ],
+      
+    }),
+}
+</script>
+
+<style>
+
+</style>
