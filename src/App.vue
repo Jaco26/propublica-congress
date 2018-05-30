@@ -10,7 +10,6 @@
           <router-view ></router-view>
         </v-flex>
       </v-layout>
-      
     </v-container>
   </v-app>   
 </template>

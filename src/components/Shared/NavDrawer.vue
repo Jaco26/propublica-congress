@@ -27,11 +27,21 @@
       class="elevation-3"
       id="navigation-drawer"
     >
+
       <v-list dense>
+        <v-list-tile router :to="home.path">
+          <v-list-tile-content>
+            <v-list-tile-title class="title">
+              {{home.title}}
+            </v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+
+       
         <v-list-group 
           sub-group
           no-action
-          v-for="item in items"
+          v-for="item in proPubItems"
           :key="item.title"
           v-model="item.active"
         >
@@ -66,7 +76,8 @@
 export default {
   data: () => ({
       drawer: null,
-      items: [
+      home: { title: 'Home', path: '/' },
+      proPubItems: [
         { 
           active: false,
           title: 'Members', 
@@ -107,8 +118,7 @@ export default {
 
           ]
         }
-      ],
-      
+      ]
     }),
 }
 </script>
