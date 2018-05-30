@@ -93,7 +93,7 @@ export default {
       letters: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
       scrollOptions: {
         duration: 300,
-        offset: 0,
+        offset: -80,
         easing: 'easeInOutCubic',
       },
       offsetTop: 0,
