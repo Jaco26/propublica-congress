@@ -1,14 +1,11 @@
 <template>
- <v-container>
-    <v-layout >
-      
-      <v-flex xs12 >
+ <!-- <v-container> -->
+    <!-- <v-layout > -->
+      <!-- <v-flex xs12 > -->
         <router-view></router-view>
-      </v-flex>
-    </v-layout>
-      <!-- <v-btn router :to="'/members/senate'">Senate</v-btn>
-      <v-btn router :to="'/members/house'">House</v-btn> -->
-  </v-container>
+      <!-- </v-flex> -->
+    <!-- </v-layout> -->
+  <!-- </v-container> -->
 </template>
 
 <script>

@@ -175,10 +175,6 @@ export default {
 
 <style>
 
-#scroll-target {
-  background-color: aquamarine
-}
-
 #filter-names {
   position: sticky;
   top: 10px;
