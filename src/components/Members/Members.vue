@@ -2,7 +2,7 @@
  <v-container>
     <v-layout >
       
-      <v-flex xs12 sm9>
+      <v-flex xs12 >
         <router-view></router-view>
       </v-flex>
     </v-layout>

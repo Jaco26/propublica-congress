@@ -2,6 +2,7 @@
   <v-container 
     id="scroll-target"
     class="scroll-y"  
+    fluid
   >
 
     <v-layout 
@@ -173,6 +174,10 @@ export default {
 </script>
 
 <style>
+
+#scroll-target {
+  background-color: aquamarine
+}
 
 #filter-names {
   position: sticky;

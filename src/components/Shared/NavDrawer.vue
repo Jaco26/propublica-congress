@@ -23,7 +23,7 @@
       app 
       v-model="drawer" 
       fixed 
-      :mobile-break-point="982"
+      :mobile-break-point="960"
       class="elevation-3"
       id="navigation-drawer"
     >
