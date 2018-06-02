@@ -2,7 +2,6 @@
   <div
     id="scroll-target"
     class="scroll-y"  
-    
   >
     <v-layout 
       column 
@@ -10,7 +9,7 @@
       align-center
       justify-center
     >
-      <v-layout>
+      <v-layout class="mb-2">
         <v-flex xs12 class="display-1" v-if="this.$route.name == 'Senate'">
           Senate Members
         </v-flex>

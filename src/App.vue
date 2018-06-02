@@ -6,7 +6,7 @@
         <strong>NOTE:</strong> This site is in active development. New pages and features will be added on a regular basis and some layouts will change.  
       </v-flex>
       <v-container fluid>
-        <v-layout justify-center>
+        <v-layout justify-center> 
           <v-flex>
             <router-view></router-view>
           </v-flex>
