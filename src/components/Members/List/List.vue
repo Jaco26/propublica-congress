@@ -1,10 +1,9 @@
 <template> 
-  <v-container 
+  <div
     id="scroll-target"
     class="scroll-y"  
-    fluid
+    
   >
-
     <v-layout 
       column 
       v-scroll="onScroll"
@@ -12,16 +11,15 @@
       justify-center
     >
       <v-layout>
-        <v-flex xs6 class="display-1" v-if="this.$route.name == 'Senate'">
+        <v-flex xs12 class="display-1" v-if="this.$route.name == 'Senate'">
           Senate Members
         </v-flex>
-        <v-flex xs6 class="display-1" v-if="this.$route.name == 'House'">
+        <v-flex xs12 class="display-1" v-if="this.$route.name == 'House'">
           House Members
         </v-flex>
-
-        <v-spacer></v-spacer>
-
-        <v-flex xs6 id="filter-names">
+      </v-layout>
+      <v-layout>
+        <v-flex xs12 id="filter-names">
           <v-toolbar  floating dense>
             <v-text-field
               class="ma-3" 
@@ -74,8 +72,7 @@
       />
        
     </v-layout>
-
-  </v-container>  
+  </div>  
 </template>
 
 <script>
@@ -94,7 +91,7 @@ export default {
       letters: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
       scrollOptions: {
         duration: 300,
-        offset: -80,
+        offset: -70,
         easing: 'easeInOutCubic',
       },
       offsetTop: 0,

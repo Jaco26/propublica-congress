@@ -1,7 +1,7 @@
 <template>
-  <v-container :class="{active: open}">
-      <v-layout >
-        <v-flex>
+  <v-flex xs12 :class="{active: open}">
+      <v-layout>
+        <v-flex xs12>
           <h2>{{role.title}} <small>{{role.state}} {{role.party}} </small> </h2> {{dates}}
         </v-flex>
         <v-layout column align-end>
@@ -31,7 +31,7 @@
         </v-flex>
       </v-layout>
       <v-divider></v-divider>
-  </v-container>
+  </v-flex>
 </template>
 
 <script>

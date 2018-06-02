@@ -1,23 +1,38 @@
 <template>
   <v-container>
     <v-layout >
-      <v-flex>
+      <v-flex xs12>
         <v-toolbar>
           <v-toolbar-title id="legislator-name" class="headline"> {{person.first_name}} {{person.last_name}} </v-toolbar-title>
           <v-spacer></v-spacer>
-          <v-toolbar-items>
+          <!-- If the screen is larger than xs (v-if) -->
+          <v-toolbar-items v-if="$vuetify.breakpoint.name != 'xs'">
             <v-tabs color="transparent" v-model="active" slider-color="purple">
-              <v-tab flat @click="show('inProfile')">Past Roles</v-tab>
-              <v-tab flat @click="show('inVotes')">Votes</v-tab>
-              <v-tab flat @click="show('inBills')">Bills</v-tab>
-              <v-tab flat @click="show('inStatements')">Statements</v-tab>
+              <v-tab v-for="tab in tabs" :key="tab.title" @click="show(tab.action)">
+                {{tab.title}}
+              </v-tab>
             </v-tabs>
           </v-toolbar-items>
+          <!-- If the screen is xs (v-if) -->
+          <v-menu v-else>
+            <v-btn icon slot="activator">
+              <v-icon >more_vert</v-icon>
+            </v-btn>
+            <v-list>
+              <v-list-tile v-for="tab in tabs" :key="tab.title" @click="show(tab.action)">
+                <v-list-tile-title >
+                  {{tab.title}}
+                </v-list-tile-title>
+              </v-list-tile> 
+            </v-list>
+          </v-menu>
         </v-toolbar>
+       
         <past-roles :person="person" :isLoading="isLoading" v-if="inProfile" />
         <votes :votes="votes" v-if="inVotes" />
         <bills :bills="bills" v-if="inBills" />
         <statements :statements="statements" v-if="inStatements" />
+        
       </v-flex>
     </v-layout>
   </v-container>
@@ -39,6 +54,12 @@ export default {
   },
   data () {
     return {
+      tabs: [
+        { title: 'Past Roles', action: 'inProfile' },
+        { title: 'Votes', action: 'inVotes' },
+        { title: 'Bills', action: 'inBills' },
+        { title: 'Statements', action: 'inStatements' },
+      ],
       active: null,
       chamber: '',
       inProfile: true,
