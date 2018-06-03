@@ -1,6 +1,5 @@
 <template>
-  <!-- <v-container > -->
-    <!-- <v-divider></v-divider> -->
+
     <v-flex>
       <v-layout >
         <v-flex xs10 sm6 lg6>
@@ -19,7 +18,6 @@
         <v-spacer></v-spacer>
       </v-layout>
     </v-flex>
-  <!-- </v-container> -->
 </template>
 
 <script>
