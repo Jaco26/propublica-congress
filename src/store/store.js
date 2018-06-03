@@ -11,6 +11,7 @@ import members from './modules/Members/members';
 import votes from './modules/votes';
 import bills from './modules/Bills/bills';
 import statements from './modules/statements';
+import committees from './modules/Committees/committees';
 
 import fillers from './modules/Fillers/congressChamber';
 
@@ -25,6 +26,7 @@ const store = new Vuex.Store({
     votes,
     bills,
     statements,
+    committees,
     fillers,
   },
 });
