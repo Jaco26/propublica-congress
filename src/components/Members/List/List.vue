@@ -1,4 +1,5 @@
 <template> 
+
   <div
     id="scroll-target"
     class="scroll-y"  
@@ -72,6 +73,7 @@
        
     </v-layout>
   </div>  
+
 </template>
 
 <script>
@@ -105,9 +107,9 @@ export default {
         this.$store.dispatch('members/list/FETCH_CONGRESS_MEMBERS', this.searchParams);
       }
     },
-    alphabeticalMembers (letter) {      
-      return this.membersList.filter(member => member.last_name.toUpperCase().startsWith(letter));
-    },
+    // alphabeticalMembers (letter) {      
+    //   return this.membersList.filter(member => member.last_name.toUpperCase().startsWith(letter));
+    // },
     onScroll (event) {
       this.offsetTop = window.pageYOffset || document.documentElement.scrollTop;      
     }

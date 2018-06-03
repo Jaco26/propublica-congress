@@ -1,7 +1,7 @@
 <template>
-  <v-container >
+  <!-- <v-container > -->
     <!-- <v-divider></v-divider> -->
-    <v-flex offset-xs1>
+    <v-flex>
       <v-layout >
         <v-flex xs10 sm6 lg6>
           <router-link :to="`/committees/${committee.code}`"><strong>{{committee.name}} </strong> </router-link> <br>
@@ -19,7 +19,7 @@
         <v-spacer></v-spacer>
       </v-layout>
     </v-flex>
-  </v-container>
+  <!-- </v-container> -->
 </template>
 
 <script>

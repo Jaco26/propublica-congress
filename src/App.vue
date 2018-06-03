@@ -36,5 +36,4 @@ export default {
     color: #135458
   }
 
- 
 </style>
