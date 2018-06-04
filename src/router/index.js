@@ -2,23 +2,20 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
 import Home from '@/components/Home';
-// Members components
-import Members from '@/components/Members/Members';
-import List from '@/components/Members/List/List';
-import Member from '@/components/Members/Member/Member';
-import NewMembers from '@/components/Members/NewMembers';
-import MembersLeaving from '@/components/Members/MembersLeaving';
+
+import membersRoutes from '@/router/propublica/members.routes';
+import billsRoutes from '@/router/propublica/bills.routes';
 
 // Votes componenets
 import Votes from '@/components/Votes/Votes';
 import Explanations from '@/components/Votes/Explanations';
 import SpecificVote from '@/components/Votes/SpecificVote';
 
-// Bills components
-import Bills from '@/components/Bills/Bills';
-import Search from '@/components/Bills/Search';
-import Recent from '@/components/Bills/Recent';
-import Upcoming from '@/components/Bills/Upcoming';
+// // Bills components
+// import Bills from '@/components/Bills/Bills';
+// import Search from '@/components/Bills/Search';
+// import Recent from '@/components/Bills/Recent';
+// import Upcoming from '@/components/Bills/Upcoming';
 // Statements components
 import Statements from '@/components/Statements/Statements';
 
@@ -35,62 +32,8 @@ const router = new Router({
       name: 'Home',
       component: Home,
     },
-    {
-      path: '/members',
-      name: 'Members',
-      component: Members,
-      redirect: '/members/senate',
-      children: [
-        {
-          path: 'senate',
-          name: 'Senate',
-          component: List,
-        },
-        {
-          path: 'house',
-          name: 'House',
-          component: List,
-        },
-        {
-          path: 'member/:id',
-          name: 'Member',
-          component: Member,
-        },
-        {
-          path: 'new',
-          name: 'NewMembers',
-          component: NewMembers,
-        },
-        {
-          path: 'leaving',
-          name: 'MembersLeaving',
-          component: MembersLeaving,
-        },
-      ]
-    },
-    {
-      path: '/bills',
-      redirect: '/bills/search',
-      name: 'Bills',
-      component: Bills,
-      children: [
-        {
-          component: Recent,
-          name: 'Recent',
-          path: 'recent',
-        }, 
-        {
-          component: Upcoming,
-          name: 'Upcomeing',
-          path: 'upcoming',
-        },
-        {
-          component: Search,
-          name: 'Search',
-          path: 'search',
-        }
-      ]
-    },
+    membersRoutes,
+    billsRoutes,
     {
       path: '/statements',
       name: 'Statements',

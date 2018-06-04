@@ -124,16 +124,16 @@ export default {
       houseIsLoading: 'members/houseIsLoading',
     }),
     membersList () {
-      if (this.$route.name == 'Senate') {
+      if (this.$route.name == 'senate') {
         return this.senateMembers;
-      } else if (this.$route.name == 'House') {
+      } else if (this.$route.name == 'house') {
         return this.houseMembers;
       }
     },
     isLoading () {
-      if (this.$route.name == 'Senate') {
+      if (this.$route.name == 'senate') {
         return this.senateIsLoading;
-      } else if (this.$route.name == 'House') {
+      } else if (this.$route.name == 'house') {
         return this.houseIsLoading;
       }
     },
