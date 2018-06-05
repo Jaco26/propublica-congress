@@ -46,7 +46,7 @@ const router = new Router({
       children: [
         {
           path: ':id',
-          name: 'SpecificCommittee',
+          name: 'specificCommittee',
           component: SpecificCommittee,
         },
       ]

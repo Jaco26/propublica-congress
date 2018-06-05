@@ -11,10 +11,10 @@
       justify-center
     >
       <v-layout class="mb-2">
-        <v-flex xs12 class="display-1" v-if="this.$route.name == 'Senate'">
+        <v-flex xs12 class="display-1" v-if="this.$route.name == 'senate'">
           Senate Members
         </v-flex>
-        <v-flex xs12 class="display-1" v-if="this.$route.name == 'House'">
+        <v-flex xs12 class="display-1" v-if="this.$route.name == 'house'">
           House Members
         </v-flex>
       </v-layout>

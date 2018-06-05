@@ -97,7 +97,6 @@ export default {
   beforeRouteUpdate (to, from, next) {
     if (to.params.id) {
       console.log(to.params.id);
-      
       store.dispatch('members/specificMember/FETCH_MEMBER', to.params.id);
       next();
     } else {

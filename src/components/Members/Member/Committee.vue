@@ -3,7 +3,8 @@
     <v-flex>
       <v-layout >
         <v-flex xs10 sm6 lg6>
-          <router-link :to="`/committees/${committee.code}`"><strong>{{committee.name}} </strong> </router-link> <br>
+          <!-- <router-link :to="`/committees/${committee.code}`"><strong>{{committee.name}} </strong> </router-link> <br> -->
+          <router-link :to="{name: 'specificCommittee', params: {id: committee.code}}"><strong>{{committee.name}} </strong> </router-link> <br>
           {{dates}} 
         </v-flex>
       </v-layout>
@@ -42,7 +43,8 @@ export default {
     toggle () {
       this.open = !this.open;
     },
-  }
+  },
+
 }
 </script>
 

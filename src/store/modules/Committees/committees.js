@@ -3,7 +3,10 @@ import committeesService from '@/services/propublica/committees.service';
 
 const state = {
   committeesList: [],
-  specificCommittee: {},
+  specificCommittee: {
+    main: {},
+    hearings: [],
+  },
 };
 
 const mutations = {
@@ -12,7 +15,7 @@ const mutations = {
   },
   [types.SET_SPECIFIC_COMMITTEE] (state, payload) {
     console.log(payload);
-    state.specificCommittee = payload.results[0]
+    state.specificCommittee.main = payload.results[0];
   }
 };
 
@@ -27,12 +30,12 @@ const actions = {
 
 const getters = {
   [types.COMMITTEES]: state => state.committeesList,
-  [types.SPECIFIC_COMMITTEE]: state => state.specificCommittee,
+  [types.SPECIFIC_COMMITTEE]: state => state.specificCommittee.main,
+  [types.SPECIFIC_COMMMITTEE_HEARINGS]: state => state.specificCommittee.hearings,
 };
 
 
 export default {
-  // namespaced: true,
   state,
   mutations,
   actions,

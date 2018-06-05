@@ -1,11 +1,11 @@
 <template>
-  <v-container>
-    <v-layout>
-      <v-flex>
+  <!-- <v-container> -->
+    <!-- <v-layout> -->
+      <!-- <v-flex> -->
         <router-view> </router-view>
-      </v-flex>
-    </v-layout>
-  </v-container>
+      <!-- </v-flex> -->
+    <!-- </v-layout> -->
+  <!-- </v-container> -->
   
 </template>
 
