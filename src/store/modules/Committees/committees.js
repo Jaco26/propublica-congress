@@ -11,6 +11,7 @@ const state = {
     loading: false,
     hearings: {
       list: [],
+      offset: 0,
       loading: false,
     },
   },
@@ -23,33 +24,52 @@ const mutations = {
   [types.SET_SPECIFIC_COMMITTEE] (state, payload) {
     state.specificCommittee.main = payload.results[0];
   },
-  [types.IS_LOADING] (state, {prop, is}) {
-    state[prop].loading = is;
+  [types.SET_SPECIFIC_COMMITTEE_HEARINGS] (state, payload) {
+    state.specificCommittee.hearings.list = payload.results[0].hearings;
+  },
+
+  [types.IS_LOADING](state, { propsPath, is}) {
+    let mockState = state;
+    let props = propsPath.split('.');
+    let reducedMockState = props.reduce( (a, b) => {
+      mockState = mockState[b];
+      return mockState;
+    }, mockState)
+    reducedMockState.loading = is;
   }
 };
+
 
 const actions = {
-  [types.FETCH_COMMITTEES]: async ({commit}, payload) => {
-    commit(types.SET_COMMITTEES, await committeesService.getCommitteeList(payload))
+  async [types.FETCH_COMMITTEES] ({commit}, payload) {
+    commit(types.SET_COMMITTEES, await committeesService.getCommitteeList(payload));
   },
   async [types.FETCH_SPECIFIC_COMMITTEE] ({commit}, payload) {
-    commit(types.IS_LOADING, {prop: 'specificCommittee', is: true});
+    commit(types.IS_LOADING, { propsPath: 'specificCommittee', is: true});
     commit(types.SET_SPECIFIC_COMMITTEE, await committeesService.getSpecificCommittee(payload));
-    commit(types.IS_LOADING, { prop: 'specificCommittee', is: false });
+    commit(types.IS_LOADING, { propsPath: 'specificCommittee', is: false });
+  },
+  async [types.FETCH_SPECIFIC_COMMITTEE_HEARINGS] ({commit}, payload) {
+    commit(types.IS_LOADING, { propsPath: 'specificCommittee.hearings', is: true });
+    commit(types.SET_SPECIFIC_COMMITTEE_HEARINGS, await committeesService.getSpecificCommitteeHearings(payload));
+    commit(types.IS_LOADING, { propsPath: 'specificCommittee.hearings', is: false });
   }
 };
 
+
 const getters = {
-  [types.COMMITTEES]: state => state.committees.list,
-  [types.COMS_LOADING]: state => state.committees.loading,
-  [types.SPECIFIC_COMMITTEE]: state => state.specificCommittee.main,
-  [types.SPEC_COM_LOADING]: state => state.specificCommittee.loading,
-  [types.SPECIFIC_COMMMITTEE_HEARINGS]: state => state.specificCommittee.hearings.list,
-  [types.SPEC_COM_HEARINGS_LOADING]: state => state.specificCommittee.hearings.loading,
+  [types.SORTED_SPEC_COM_MEMBERS]: state => {
+    if(state.specificCommittee.main.current_members) {
+      return state.specificCommittee.main.current_members.slice().sort((a, b) => {
+        return a.party < b.party ? -1 : 1;
+      });
+    }
+  },
 };
 
 
 export default {
+  namespaced: true,
   state,
   mutations,
   actions,

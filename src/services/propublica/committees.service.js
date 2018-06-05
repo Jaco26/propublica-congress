@@ -10,5 +10,11 @@ export default {
     return axios.get(`/api/congress/committees/${congress}/${chamber}/${committeeId}`)
       .then(response => response.data)
       .catch(err => console.log(err));
+  },
+  getSpecificCommitteeHearings: ({congress, chamber, committeeId}) => {
+    return axios.get(`/api/congress/committees/hearings/${congress}/${chamber}/${committeeId}`)
+      .then(response => response.data)
+      .catch(err => console.log(err));
   }
 }
+

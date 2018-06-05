@@ -2,27 +2,39 @@
   <div>
     <work-in-progress :WIP="false" />
 
-    <v-layout>
-      <v-flex v-if="!committeeLoading">
+    <div v-if="!committeeLoading">
+      <v-layout>
         <h1>{{committeeName}}</h1>
-        <v-divider></v-divider>
-        <h2>Current Members</h2>
-        <v-flex v-for="member in committee.current_members" :key="member.name">
-          {{member.name}}
+      </v-layout>
+      <v-divider></v-divider>
+      <v-layout>
+        <v-flex xs6>
+          <h2>Current Members</h2>
+          <!-- <v-flex v-for="member in committee.current_members" :key="member.name"> -->
+          <v-flex v-for="member in membersByParty" :key="member.name">
+            {{member.name}} {{member.party}}
+          </v-flex>
+          <v-divider></v-divider>
+          <h2 v-if="committee.subcommittees[0]">Subcommittees</h2>
+          <h3 v-else class="title">No Subcommittees</h3>
+          <v-flex v-for="subcmty in committee.subcommittees" :key="subcmty.id">
+            {{subcmty.name}}
+          </v-flex>
         </v-flex>
-        <v-divider></v-divider>
-        <h2 v-if="committee.subcommittees">Subcommittees</h2>
-        <v-flex v-for="subcmty in committee.subcommittees" :key="subcmty.id">
-          {{subcmty.name}}
+        <v-flex xs6>
+          <div v-if="!hearingsLoading">
+            <h2>Hearings</h2>
+            <v-flex v-for="(hearing, i) in hearings" :key="i">
+              {{hearing.date}} {{hearing.time}}
+              {{hearing.description}}
+              <v-divider></v-divider>
+            </v-flex>
+          </div>
         </v-flex>
-        <v-divider></v-divider>
-
-      </v-flex>
-    </v-layout>
-    
-   
-
-   
+      </v-layout>
+       
+        
+    </div>
   </div>
 </template>
 
@@ -30,39 +42,47 @@
 import WorkInProgress from '@/components/WIP';
 import * as types from '@/store/modules/Committees/types';
 import store from '@/store/store';
-import {mapGetters, mapActions} from 'vuex';
+import {mapGetters, mapActions, mapState} from 'vuex';
 export default {
   components: {
     WorkInProgress
   },
   data () {
     return {
-      chamber: ''
+      chamber: '',
+      members: [],
     }
   },
   methods: {
     setData (chamber) {
       this.chamber = chamber
-    }
+    },
   },
   computed: {
-    ...mapGetters({
-      committee: types.SPECIFIC_COMMITTEE,
-      committeeLoading: types.SPEC_COM_LOADING,
+    ...mapState('committees', {
+      committee: state => state.specificCommittee.main,
+      committeeLoading: state => state.specificCommittee.loading,
+      hearings: state => state.specificCommittee.hearings.list,
+      hearingsLoading: state => state.specificCommittee.hearings.loading,
+    }),
+    ...mapGetters('committees', {
+      membersByParty: types.SORTED_SPEC_COM_MEMBERS,
     }),
     committeeName () {
-      return this.chamber == 'Senate' ? `Senate ${this.committee.name}` : `House ${this.committee.name}`
-    }
+      return this.chamber == 'Senate' ? `Senate ${this.committee.name}` : `House ${this.committee.name}`;
+    },
   },
   beforeRouteEnter (to, from, next) {
     let chamber;
     to.params.id.startsWith('S') ? chamber = 'Senate' : chamber = 'House';
-    store.dispatch(types.FETCH_SPECIFIC_COMMITTEE, {
+    let payload = {
       congress: 115,
       chamber: chamber.toLowerCase(),
       committeeId: to.params.id
-    });
-    next(vm => vm.setData(chamber))
+    }
+    store.dispatch('committees/' + types.FETCH_SPECIFIC_COMMITTEE, payload );
+    store.dispatch('committees/' + types.FETCH_SPECIFIC_COMMITTEE_HEARINGS, payload );
+    next(vm => vm.setData(chamber));
   }
  
 }
