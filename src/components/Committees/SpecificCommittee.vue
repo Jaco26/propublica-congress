@@ -50,7 +50,6 @@ export default {
   data () {
     return {
       chamber: '',
-      members: [],
     }
   },
   methods: {
@@ -69,12 +68,24 @@ export default {
       membersByParty: types.SORTED_SPEC_COM_MEMBERS,
     }),
     committeeName () {
-      return this.chamber == 'Senate' ? `Senate ${this.committee.name}` : `House ${this.committee.name}`;
+      if (this.chamber == 'Senate') {
+        return `Senate ${this.committee.name}`;
+      } else if (this.chamber == 'House') {
+        return `House ${this.committee.name}`;
+      } else {
+        return this.committee.name;
+      }
     },
   },
   beforeRouteEnter (to, from, next) {
     let chamber;
-    to.params.id.startsWith('S') ? chamber = 'Senate' : chamber = 'House';
+    if (to.params.id.startsWith('S')) {
+      chamber = 'Senate';
+    } else if (to.params.id.startsWith('H')) {
+      chamber = 'House';
+    } else {
+      chamber = 'Joint'
+    }
     let payload = {
       congress: 115,
       chamber: chamber.toLowerCase(),

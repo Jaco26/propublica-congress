@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
-const Propublica = require('../../modules/Propublica');
+const PropublicaAPI = require('../../modules/propub-api');
 
 // GET LIST OF RECENT PERSONAL EXPLANATIONS FOR MISSED OR MISTAKEN VOTES
 router.get('/explanations/:congress', (req, res) => {
   let congress = req.params.congress;
-  Propublica().get(`/${congress}/explanations/votes.json`)
+  PropublicaAPI.get(`/${congress}/explanations/votes.json`)
     .then(response => res.send(response.data))
     .catch(err => {
       console.log(err);

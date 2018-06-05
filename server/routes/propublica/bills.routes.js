@@ -1,15 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
-const Propublica = require('../../modules/Propublica');
+// const Propublica = require('../../modules/Propublica');
+const PropublicaAPI = require('../../modules/propub-api');
 
 // RETURN LIST OF BILLS MATCHING SEARCH PHRASE
 router.get(`/subjects/bills/search`, (req, res) => {
-  let phrase = req.query.searchPhrase,
-      offset = req.query.offset,
-      sort = req.query.sortBy,
-      dir = req.query.direction,
-      url;
+  let {phrase, offset, sort, dir} = req.query;
+  let url;
   if(phrase && sort && dir) {
     url = `/bills/search.json?query=${phrase}&sort=${sort}&dir=${dir}&offset=${offset}`;
   } else if (phrase && sort) {
@@ -19,18 +17,16 @@ router.get(`/subjects/bills/search`, (req, res) => {
   } else {
     url = `/bills/search.json?query=${phrase}&offset=${offset}`;
   }
-  Propublica().get(url)
+  PropublicaAPI.get(url)
     .then(response => res.send(response.data))
     .catch(err => console.log(err));
 });
 
 // RETURN LIST OF RECENT BILLS
 router.get(`/recent/:type/:congress/:chamber`, (req, res) => {
-  let type = req.params.type,
-      congress = req.params.congress,
-      chamber = req.params.chamber,
+  let { type, congress, chamber } = req.params,
       offset = req.query.offset;
-  Propublica().get(`/${congress}/${chamber}/bills/${type}.json?offset=${offset}`)
+  PropublicaAPI.get(`/${congress}/${chamber}/bills/${type}.json?offset=${offset}`)
     .then(response => res.send(response.data))
     .catch(err => {
       console.log(err);

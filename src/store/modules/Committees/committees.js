@@ -22,6 +22,8 @@ const mutations = {
     state.committeesList = payload.results[0].committees;
   },
   [types.SET_SPECIFIC_COMMITTEE] (state, payload) {
+    console.log(payload);
+    
     state.specificCommittee.main = payload.results[0];
   },
   [types.SET_SPECIFIC_COMMITTEE_HEARINGS] (state, payload) {
