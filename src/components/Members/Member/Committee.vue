@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import * as types from '@/store/modules/Committees/types';
 export default {
   props: ['committee'],
   data () {
@@ -44,6 +45,7 @@ export default {
       this.open = !this.open;
     },
   },
+ 
 
 }
 </script>

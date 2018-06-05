@@ -1,18 +1,25 @@
 <template>
   <div>
-    <!-- <work-in-progress :WIP="true" /> -->
-    <h1>{{cmty.name}}</h1>
-    <hr>
-     <h2>Current Members</h2>
-      <v-flex v-for="member in cmty.current_members" :key="member.name">
-        {{member.name}}
+    <work-in-progress :WIP="false" />
+
+    <v-layout>
+      <v-flex v-if="!committeeLoading">
+        <h1>{{committeeName}}</h1>
+        <v-divider></v-divider>
+        <h2>Current Members</h2>
+        <v-flex v-for="member in committee.current_members" :key="member.name">
+          {{member.name}}
+        </v-flex>
+        <v-divider></v-divider>
+        <h2 v-if="committee.subcommittees">Subcommittees</h2>
+        <v-flex v-for="subcmty in committee.subcommittees" :key="subcmty.id">
+          {{subcmty.name}}
+        </v-flex>
+        <v-divider></v-divider>
+
       </v-flex>
-      <hr>
-    <h2 v-if="cmty.subcommittees">Subcommittees</h2>
-    <v-flex v-for="subcmty in cmty.subcommittees" :key="subcmty.id">
-      {{subcmty.name}}
-    </v-flex>
-    <hr>
+    </v-layout>
+    
    
 
    
@@ -28,17 +35,36 @@ export default {
   components: {
     WorkInProgress
   },
+  data () {
+    return {
+      chamber: ''
+    }
+  },
+  methods: {
+    setData (chamber) {
+      this.chamber = chamber
+    }
+  },
   computed: {
     ...mapGetters({
-      cmty: types.SPECIFIC_COMMITTEE,
-    })
+      committee: types.SPECIFIC_COMMITTEE,
+      committeeLoading: types.SPEC_COM_LOADING,
+    }),
+    committeeName () {
+      return this.chamber == 'Senate' ? `Senate ${this.committee.name}` : `House ${this.committee.name}`
+    }
   },
   beforeRouteEnter (to, from, next) {
     let chamber;
-    to.params.id.startsWith('S') ? chamber = 'senate' : chamber = 'house';
-    store.dispatch(types.FETCH_SPECIFIC_COMMITTEE, {congress: 115, chamber, committeeId: to.params.id});
-    next();
+    to.params.id.startsWith('S') ? chamber = 'Senate' : chamber = 'House';
+    store.dispatch(types.FETCH_SPECIFIC_COMMITTEE, {
+      congress: 115,
+      chamber: chamber.toLowerCase(),
+      committeeId: to.params.id
+    });
+    next(vm => vm.setData(chamber))
   }
+ 
 }
 </script>
 

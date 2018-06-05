@@ -1,12 +1,5 @@
 <template>
-  <!-- <v-container> -->
-    <!-- <v-layout> -->
-      <!-- <v-flex> -->
-        <router-view> </router-view>
-      <!-- </v-flex> -->
-    <!-- </v-layout> -->
-  <!-- </v-container> -->
-  
+  <router-view> </router-view>
 </template>
 
 <script>
