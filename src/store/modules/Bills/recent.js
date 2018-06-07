@@ -1,8 +1,5 @@
 import billsService from '@/services/propublica/bills.service';
 
-
-
-
 export default { 
   namespaced: true,
   state: {
@@ -20,6 +17,8 @@ export default {
   },
   mutations: {
     'SET_RECENT' (state, payload) {
+      console.log(payload);
+      
       if(payload.results[0].offset == 0) {
         state.bills.list = payload.results[0].bills;
       } else {

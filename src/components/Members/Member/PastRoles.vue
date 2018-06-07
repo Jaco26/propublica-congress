@@ -1,7 +1,7 @@
 <template>
   <v-container grid-list-md v-if="!loading">
     <h1>Past Roles</h1>
-    <v-progress-linear indeterminate v-if="isLoading"></v-progress-linear>
+    <v-progress-linear indeterminate v-if="loading"></v-progress-linear>
       <v-layout  column>
           <role 
             v-for="(role, i) in person.roles"

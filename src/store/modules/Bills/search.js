@@ -40,17 +40,21 @@ export default {
     async 'FETCH_FIRST_PAGE'({ commit, state }) {      
       commit('IS_LOADING');
       commit('SET_SEARCH_OFFSET', true);
-      const searchPhrase = state.newSearchPhrase;
-      const offset = state.searchOffset;
-      commit('SET_FIRST_PAGE', await billsService.searchBills(searchPhrase, offset));
+      const searchParams = {
+        phrase: state.newSearchPhrase,
+        offset: state.searchOffset
+      }
+      commit('SET_FIRST_PAGE', await billsService.searchBills(searchParams));
       commit('IS_DONE_LOADING');
     },
     async 'FETCH_NEXT_PAGE' ({commit, state}) {
       commit('IS_LOADING');
-      commit('SET_SEARCH_OFFSET');
-      const searchPhrase = state.bills.searchPhrase;
-      const offset = state.searchOffset;
-      commit('SET_NEXT_PAGE', await billsService.searchBills(searchPhrase, offset))
+      commit('SET_SEARCH_OFFSET'); 
+      const searchParams = {
+        phrase: state.newSearchPhrase,
+        offset: state.searchOffset
+      }
+      commit('SET_NEXT_PAGE', await billsService.searchBills(searchParams))
       commit('IS_DONE_LOADING');
     }
   },

@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 export default {
-  searchBills: (searchPhrase, offset) => {
-    return axios.get(`/api/congress/bills/subjects/bills/search?searchPhrase=${searchPhrase}&offset=${offset}`)
+  searchBills: ({phrase, offset}) => {
+    return axios.get(`/api/congress/bills/subjects/bills/search?searchPhrase=${phrase}&offset=${offset}`)
       .then(response => response.data)
       .catch(err => console.log(err));
   },

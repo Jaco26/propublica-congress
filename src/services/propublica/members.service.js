@@ -9,7 +9,7 @@ export default {
   getSpecificMember: (memberId) => {
     return axios.get(`/api/congress/members/${memberId}`)
       .then(response => response.data)
-      .catch(err => conosle.log(err));
+      .catch(err => console.log(err));
   },
   getBillsCosponsoredBySpecificMember: (memberId) => {
     const type = 'cosponsored'

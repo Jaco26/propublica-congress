@@ -63,7 +63,7 @@ export default {
         commit('members/ADD_MEMBER_TO_NAV', newNavMember, { root: true });
       }      
     },
-    async [types.FETCH_BILLS]({ commit }, member_id) {
+    async [types.FETCH_BILLS] ({ commit }, member_id) {
       commit(types.SET_BILLS, await memberService.getBillsCosponsoredBySpecificMember(member_id));
     },
     async [types.FETCH_VOTES] ({ commit }, member_id) {
