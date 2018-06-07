@@ -6,7 +6,7 @@
   >
     <v-layout 
       column 
-      v-scroll="onScroll"
+      v-scroll="onScroll" 
       align-center
       justify-center
     >
@@ -42,6 +42,7 @@
             :key="letter" 
             style="display: inline;"
             class="subheading"
+            
           >
             <a @click="$vuetify.goTo(`#legislator-block-${letter}`, scrollOptions)">
               {{letter}}
@@ -69,6 +70,7 @@
         :key="letter" 
         :letter="letter"
         :membersList="members"
+        :letterHasMembers="letterHasMembers"
       />
        
     </v-layout>
@@ -99,19 +101,11 @@ export default {
     }
   },
   methods: {
-    submit () {
-      let {congress, chamber} = this.searchParams;
-      if(!congress || !chamber){
-        alert('NO!')
-      } else {
-        this.$store.dispatch('members/list/FETCH_CONGRESS_MEMBERS', this.searchParams);
-      }
-    },
-    // alphabeticalMembers (letter) {      
-    //   return this.membersList.filter(member => member.last_name.toUpperCase().startsWith(letter));
-    // },
     onScroll (event) {
-      this.offsetTop = window.pageYOffset || document.documentElement.scrollTop;      
+      this.offsetTop = window.pageYOffset || document.documentElement.scrollTop;    
+    },
+    letterHasMembers (letter) {
+      return this.membersList.filter(member => member.last_name.toUpperCase().startsWith(letter));
     }
 
   },
@@ -162,6 +156,8 @@ export default {
         });
       }
     },
+   
+    
     
 
 
@@ -182,6 +178,19 @@ export default {
   position: fixed;
   bottom: 15px;
   right: 15px;
+}
+
+/* .nav-letter:hover {
+  font-weight: 600;
+  color: blueviolet;
+} */
+
+.has-members {
+  font-size: 18px;
+}
+
+.no-members {
+  opacity: 40;
 }
 
 .return-to-top-enter-active, .return-to-top-leave-active {

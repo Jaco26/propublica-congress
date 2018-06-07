@@ -108,7 +108,7 @@ export default {
           active: true,
           children: [
             { 
-              active: false,
+              active: true,
               title: 'Members', 
               children: [
                 { title: 'Senate', path: '/members/senate' },
@@ -118,14 +118,14 @@ export default {
               ]
             },
             {
-              active: false,
+              active: true,
               title: 'Votes',
               children: [
                 { title: 'Recent Explanations', path: '/votes/explanations' },
               ]
             },
             {
-              active: false,
+              active: true,
               title: 'Bills',
               children: [
                 { title: 'Search Bills', path: '/bills/search' },
@@ -134,14 +134,14 @@ export default {
               ]
             },
             {
-              active: false,
+              active: true,
               title: 'Statements', 
               children: [
 
               ]
             },
             {
-              active: false,
+              active: true,
               title: 'Committees',
               children: [
 

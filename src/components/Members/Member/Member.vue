@@ -3,7 +3,7 @@
     <v-layout >
       <v-flex xs12>
         <v-toolbar>
-          <v-toolbar-title id="legislator-name" class="headline"> {{person.first_name}} {{person.last_name}} </v-toolbar-title>
+          <v-toolbar-title v-if="!loading" class="headline"> {{person.first_name}} {{person.last_name}} </v-toolbar-title>
           <v-spacer></v-spacer>
           <!-- If the screen is larger than xs (v-if) -->
           <v-toolbar-items v-if="$vuetify.breakpoint.name != 'xs'">
@@ -28,7 +28,7 @@
           </v-menu>
         </v-toolbar>
        
-        <past-roles :person="person" :isLoading="isLoading" v-if="inProfile" />
+        <past-roles :person="person" :loading="loading" v-if="inProfile" />
         <votes :votes="votes" v-if="inVotes" />
         <bills :bills="bills" v-if="inBills" />
         <statements :statements="statements" v-if="inStatements" />
@@ -39,12 +39,15 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex';
+import {mapState, mapActions} from 'vuex';
+import * as types from '@/store/modules/Members/specificMember.types';
 import store from '@/store/store';
 import Votes from './Votes';
 import Bills from './Bills';
 import Statements from './Statements';
 import PastRoles from './PastRoles';
+
+
 export default {
   components: {
     Votes,
@@ -69,15 +72,18 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({
-      person: 'members/specificMember/member',
-      bills: 'members/specificMember/bills',
-      votes: 'members/specificMember/votes',
-      statements: 'members/specificMember/statements',
-      isLoading: 'members/specificMember/isLoading',
-    }),
+    ...mapState('members/specificMember', {
+      person: state => state.profile,
+      bills: state => state.bills,
+      votes: state => state.votes,
+      statements: state => state.statements,
+      loading: state => state.loading,
+    })
   },
   methods: {
+    ...mapActions('members/specificMember', {
+      fetchMember: types.FETCH_MEMBER,
+    }),
     show (x) {      
       this.inBills = false;
       this.inVotes = false;
@@ -87,21 +93,17 @@ export default {
     }
   },
   beforeRouteEnter (to, from, next) {
-    if(to.params.id) {     
-      store.dispatch('members/specificMember/FETCH_MEMBER', to.params.id);
-      next();
-    } else {
-      next();
-    }
+    // if(to.params.id) {     
+      next(vm => {
+        vm.fetchMember(to.params.id);
+      });
+    // } else {
+    //   next();
+    // }
   },
   beforeRouteUpdate (to, from, next) {
-    if (to.params.id) {
-      console.log(to.params.id);
-      store.dispatch('members/specificMember/FETCH_MEMBER', to.params.id);
-      next();
-    } else {
-      next();
-    }
+    this.fetchMember(to.params.id)
+    next();
   },
 
 }

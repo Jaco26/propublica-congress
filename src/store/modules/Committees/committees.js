@@ -19,7 +19,7 @@ const state = {
 
 const mutations = {
   [types.SET_COMMITTEES] (state, payload) {
-    state.committeesList = payload.results[0].committees;
+    state.committees.list = payload.results[0].committees;
   },
   [types.SET_SPECIFIC_COMMITTEE] (state, payload) {
     console.log(payload);
@@ -30,14 +30,18 @@ const mutations = {
     state.specificCommittee.hearings.list = payload.results[0].hearings;
   },
 
-  [types.IS_LOADING](state, { propsPath, is}) {
-    let mockState = state;
-    let props = propsPath.split('.');
-    let reducedMockState = props.reduce( (a, b) => {
-      mockState = mockState[b];
-      return mockState;
-    }, mockState)
-    reducedMockState.loading = is;
+  [types.IS_LOADING] (state, { propsPath, is}) {
+    if (propsPath == '') {
+      state.loading = is;
+    } else {
+      let mockState = state;
+      let props = propsPath.split('.');
+      let reducedMockState = props.reduce( (a, b) => {
+        mockState = mockState[b];
+        return mockState;
+      }, mockState)
+      reducedMockState.loading = is;
+    }
   }
 };
 

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
-const Propublica = require('../../modules/Propublica');
+const PropublicaAPI = require('../../modules/propub-api');
 
 module.exports = router;

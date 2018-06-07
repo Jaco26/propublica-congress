@@ -22,7 +22,7 @@
             <small><b>District:</b></small> {{role.district}}
           </div>
           <br>
-          <v-flex v-if="committees">
+          <v-flex v-if="committees[0]">
             <h2>Committees</h2>
           <ul>
             <committee 
@@ -58,8 +58,7 @@ export default {
     dates () {
       return `${new Date(this.role.start_date).toDateString()}
        - ${new Date(this.role.end_date).toDateString()} `
-    }
-
+    },
   },
   methods: {
     toggle () {
