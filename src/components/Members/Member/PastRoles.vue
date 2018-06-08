@@ -1,7 +1,10 @@
 <template>
-  <v-container grid-list-md v-if="!personLoading">
+  <div>
+    <v-layout v-if="personLoading" >
+      <v-progress-linear indeterminate color="primary"></v-progress-linear>
+    </v-layout>
+    <v-container grid-list-md v-if="!personLoading">
     <h1>Past Roles</h1>
-    <v-progress-linear indeterminate v-if="personLoading"></v-progress-linear>
       <v-layout  column>
           <role 
             v-for="(role, i) in person.roles"
@@ -9,7 +12,10 @@
             :role="role" 
           /> 
       </v-layout>
-  </v-container>
+    </v-container>
+  </div>
+
+  
 </template>
 
 <script>

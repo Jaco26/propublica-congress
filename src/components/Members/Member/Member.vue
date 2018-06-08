@@ -3,7 +3,9 @@
     <v-layout >
       <v-flex xs12>
         <v-toolbar>
-          <v-toolbar-title class="headline"> {{person.first_name}} {{person.last_name}} </v-toolbar-title>
+          <v-toolbar-title v-if="!personLoading" class="headline"> 
+            {{person.first_name}} {{person.last_name}}  
+          </v-toolbar-title>
           <v-spacer></v-spacer>
           <!-- If the screen is larger than xs (v-if) -->
           <v-toolbar-items v-if="$vuetify.breakpoint.name != 'xs'">
@@ -19,8 +21,8 @@
               <v-icon >more_vert</v-icon>
             </v-btn>
             <v-list>
-              <v-list-tile  v-for="tab in tabs" v-if="!tab.loading" :key="tab.title" @click="show(tab.action)">
-                <v-list-tile-title >
+              <v-list-tile  v-for="tab in tabs" :key="tab.title" @click="show(tab.action)">
+                <v-list-tile-title  v-if="!tab.loading">
                   {{tab.title}}
                 </v-list-tile-title>
               </v-list-tile> 
@@ -82,7 +84,17 @@ export default {
       statements: state => state.statements.list,
       statementsLoading: state => state.statements.loading,
       
-    })
+    }),
+    party () {
+      if (this.person.party == 'D') {
+        return 'Democrat'
+      } else if (this.person.party == 'R') {
+        return 'Republican';
+      } else if (this.person.party == 'I') {
+        return 'Independent';
+      }
+    }
+    
   },
   methods: {
     ...mapActions('members/specificMember', {
