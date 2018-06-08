@@ -1,5 +1,5 @@
 <template>
-   <v-container grid-list-md>
+   <v-container grid-list-md v-if="!votesLoading">
     <h1>Recent Votes</h1>
     <v-container grid-list-sm mt-5>
       <v-layout column>
@@ -52,7 +52,7 @@
 <script>
 import {mapGetters} from 'vuex';
 export default {
-  props: ['votes'],
+  props: ['votes', 'votesLoading'],
   // computed: {
   //   ...mapGetters({
   //     votes: 'specificMemberVotes',

@@ -1,5 +1,5 @@
 <template>
-  <v-container grid-list-md>
+  <v-container grid-list-md v-if="!billsLoading">
     <h1>Recent Cosponsored Bills</h1>
     <v-container grid-list-sm mt-5>
         <v-layout column>
@@ -35,7 +35,7 @@
 <script>
 import {mapGetters} from 'vuex';
 export default {
-  props: ['bills'],
+  props: ['bills', 'billsLoading'],
 
 }
 </script>

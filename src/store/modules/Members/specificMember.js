@@ -3,27 +3,37 @@ import memberService from '@/services/propublica/members.service';
 
 export default {
   namespaced: true,
-  state: {
-    loading: false,
-    profile: {},
-    votes: [],
-    bills: [],
-    statements: [],
+  state: { 
+    profile: {
+      main: {},
+      loading: false,
+    },
+    votes: {
+      list: [],
+      loading: false,
+    },
+    bills: {
+      list: [],
+      loading: false,
+    },
+    statements: {
+      list: [],
+      loading: false,
+    },
     qtrlyOfficeExpns: {},
   },
   mutations: {
     [types.SET_MEMBER] (state, payload) {
-      state.profile = payload.results[0];
-      
+      state.profile.main = payload.results[0];
     },
     [types.SET_BILLS] (state, payload) {
-      state.bills = payload.results[0].bills;
+      state.bills.list = payload.results[0].bills;
     },
     [types.SET_VOTES] (state, payload) {
-      state.votes = payload.results[0].votes;
+      state.votes.list = payload.results[0].votes;
     },
     [types.SET_STATEMENTS] (state, payload) {
-      state.statements = payload.results;
+      state.statements.list = payload.results;
     },
 
     [types.IS_LOADING](state, { propsPath, is }) {
@@ -45,15 +55,12 @@ export default {
   },
   actions: {
     async [types.FETCH_MEMBER] ({ commit, dispatch,  state, rootGetters }, member_id) {
-      commit(types.IS_LOADING, {propsPath: '', is: true});
+      commit(types.IS_LOADING, {propsPath: 'profile', is: true});
       commit(types.SET_MEMBER, await memberService.getSpecificMember(member_id));
-      commit(types.IS_LOADING, { propsPath: '', is: false });
-      // const { member_id } = state.profile;
+      commit(types.IS_LOADING, { propsPath: 'profile', is: false });
       dispatch(types.FETCH_BILLS, member_id);
       dispatch(types.FETCH_VOTES, member_id);
       dispatch(types.FETCH_STATEMENTS, member_id);
-      
-
       let newNavMember = {
         title: `${state.profile.first_name} ${state.profile.last_name}`,
         path: `/members/member/${member_id}`,
@@ -64,20 +71,19 @@ export default {
       }      
     },
     async [types.FETCH_BILLS] ({ commit }, member_id) {
+      commit(types.IS_LOADING, { propsPath: 'bills', is: true });
       commit(types.SET_BILLS, await memberService.getBillsCosponsoredBySpecificMember(member_id));
+      commit(types.IS_LOADING, { propsPath: 'bills', is: false });
     },
     async [types.FETCH_VOTES] ({ commit }, member_id) {
+      commit(types.IS_LOADING, { propsPath: 'votes', is: true });
       commit(types.SET_VOTES, await memberService.getSpecificMembersVotePositions(member_id));
+      commit(types.IS_LOADING, { propsPath: 'votes', is: false });
     },
     async [types.FETCH_STATEMENTS] ({ commit }, member_id) {
+      commit(types.IS_LOADING, { propsPath: 'statements', is: true });
       commit(types.SET_STATEMENTS, await memberService.getStatementsBySpecificMember(member_id));
+      commit(types.IS_LOADING, { propsPath: 'statements', is: false });
     }
-  },
-  getters: {
-    member: state => state.profile,
-    bills: state => state.bills,
-    votes: state => state.votes,
-    statements: state => state.statements,
-    isLoading: state => state.isLoading,
   },
 };

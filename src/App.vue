@@ -32,6 +32,10 @@ export default {
 
 <style>
 
+  h1, h2, h3 {
+    font-weight: normal !important;
+  }
+
   .date {
     color: #135458
   }

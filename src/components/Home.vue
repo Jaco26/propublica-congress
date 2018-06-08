@@ -1,15 +1,20 @@
 <template>
   <div>
-    <h1 class="headline">Welcome</h1>
-      <v-flex>
-        We have a problem. Most of what happens in the United States Congress gets little to no coverage
-        by popular news media. 
-        <br>
-        <br>
-        <strong>KnowThyCongress</strong>, powered by from the <a href="https://projects.propublica.org/api-docs/congress-api/" target="_blank">Propublica Congress API</a>, 
-        gives you access to current and historical data about the goings on at The Capital. This project is far from finished
-        but here a few sections that are useable as of now.
-      </v-flex>
+    <v-jumbotron height="300"  color="grey lighten-2">
+      <v-container>
+        <v-layout wrap>
+          <v-flex>
+            <h1 class="display-2">Welcome</h1>
+          </v-flex>
+          <v-flex class="my-4 title ">
+            <i>KnowThyCongress</i>, powered by from the <a href="https://projects.propublica.org/api-docs/congress-api/" target="_blank">Propublica Congress API</a>, 
+            gives you access to current and historical data about the goings on at The Capital. This project is far from finished
+            but here a few sections that are useable as of now.
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-jumbotron>
+    
 
       <v-container fluid grid-list-md>
         <v-layout wrap>
@@ -20,21 +25,21 @@
             xs12
             sm6
           >
-            <v-card color="grey lighten-4">
+            <v-card color="grey lighten-3">
               <v-card-title class="title">
                 {{card.title}}
               </v-card-title>
               <v-card-text class="subheading">
                 {{card.text}}
               </v-card-text>
-              <v-card-actions>
-                  <v-btn
-                    v-for="action in card.actions" :key="action.path"
-                    flat color="purple darken-4"  :to="action.path"
-                  >
-                    {{action.title}}
-                  </v-btn>
-              </v-card-actions>
+              <v-card-actions fill-height>
+                <v-btn
+                  v-for="action in card.actions" :key="action.path"
+                  flat color="purple darken-4"  :to="action.path"
+                >
+                  {{action.title}}
+                </v-btn>
+              </v-card-actions>          
             </v-card>
           </v-flex>
         </v-layout>

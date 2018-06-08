@@ -1,7 +1,7 @@
 <template>
-  <v-container grid-list-md v-if="!loading">
+  <v-container grid-list-md v-if="!personLoading">
     <h1>Past Roles</h1>
-    <v-progress-linear indeterminate v-if="loading"></v-progress-linear>
+    <v-progress-linear indeterminate v-if="personLoading"></v-progress-linear>
       <v-layout  column>
           <role 
             v-for="(role, i) in person.roles"
@@ -15,7 +15,7 @@
 <script>
 import Role from './Role';
 export default {
-  props: ['person', 'loading'],
+  props: ['person', 'personLoading'],
   components: {
     Role,
   },

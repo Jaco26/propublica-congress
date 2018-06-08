@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div v-if="!statementsLoading">
     <work-in-progress :WIP="false" />
-  <v-flex v-for="statement in statements" :key="statement.url">
-    <a :href="statement.url" target="_blank">{{statement.title}}</a>
-  </v-flex> 
+    <v-flex v-for="statement in statements" :key="statement.url">
+      <a :href="statement.url" target="_blank">{{statement.title}}</a>
+    </v-flex> 
   </div>
     
 </template>
@@ -15,7 +15,8 @@ export default {
     statements: {
       type: Array,
       required: true
-    }
+    },
+    statementsLoading: Boolean,
   },
   components: {
     WorkInProgress
