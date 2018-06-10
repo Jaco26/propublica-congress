@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <div>
     <v-layout justify-center>
       <v-flex xs12 sm10>
          <v-layout justify-center>
@@ -74,7 +74,7 @@
       <v-progress-linear v-if="isLoading" indeterminate></v-progress-linear>
       <v-btn block v-if="recentBills[0]" @click="getNextPage">Get More</v-btn>
 
-  </v-container>
+  </div>
   
 </template>
 
