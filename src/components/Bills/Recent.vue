@@ -1,49 +1,48 @@
 <template>
   <v-container>
-    <v-layout row >
-    <!-- I need a form for users to select:
-      1: congress, 2: chamber, 3: type -->
-      <v-flex class="grey lighten-4" >
-        <v-form class="pa--">
-          <v-layout>
-            <v-flex class="px-4">
-              <v-radio-group v-model="chamber" class=" ">
-                <v-radio label="Senate" value="senate"></v-radio>
-                <v-radio label="House" value="house"></v-radio>
-                <v-radio label="Both" value="both"></v-radio>
-              </v-radio-group>
-            </v-flex>
-            <v-flex class="px-2" xs4>
-              <v-select 
-                :items="billTypes"
-                v-model="selectedType"
-                :hint="`${selectedType.description}`"
-                persistent-hint
-                item-text="title"
-                label="Bill type"
-                single-line 
-              ></v-select>
-            </v-flex>
-
-            <v-flex class="px-2" xs4>
-              <v-select 
-                :items="congress"
-                v-model="selectedCongress"
-                :hint="`${selectedCongress.description}`"
-                persistent-hint
-                item-text="title"
-                label="Congress"
-                single-line 
-              ></v-select>
-            </v-flex>
+    <v-layout justify-center>
+      <v-flex xs12 sm10>
+         <v-layout justify-center>
+              <v-toolbar-title class="headline">Search Recent Bills</v-toolbar-title>
+            </v-layout>
+        <form @submit.prevent="submit" class="mt-3">
+          <v-toolbar prominent id="tool-tool">
+            <v-select
+              class="ma-2"
+              :items="chambers"
+              v-model="selectedChamber"
+              item-text="title"
+              label="Chamber"
+              single-line
+              hide-details
+            ></v-select>
+            <v-select
+              class="ma-2"
+              :items="billTypes"
+              v-model="selectedType"
+              item-text="title"
+              label="Bill type"
+              single-line
+              hide-details
+            ></v-select>
+            <v-select 
+              class="ma-2"
+              :items="congress"
+              v-model="selectedCongress"
+              item-text="title"
+              label="Congress"
+              single-line
+              hide-details=""
+            ></v-select>
             <v-btn @click="submit">Submit</v-btn>
-          </v-layout>
-        </v-form>
+            
+          </v-toolbar>
+        </form>
       </v-flex>
     </v-layout>
 
 
-    <v-container grid-list-sm mt-5>
+    <v-container grid-list-sm mt-4>
         <v-layout column>
           <v-flex class="grey lighten-3" xs6 sm6 md6 pa-2 mb-2 v-for="(bill, i) in recentBills" :key="i">
             <v-layout>
@@ -84,8 +83,9 @@ import {mapGetters} from 'vuex';
 export default {
   data () {
     return {
+      fab: false,
       message: '',
-      chamber: '',
+      selectedChamber: {title: '', description: ''},
       selectedType: {title: '', description: ''},
       selectedCongress: {title: '', description: ''},
     }
@@ -94,15 +94,18 @@ export default {
     searchParams () {
       return {
         congress: this.selectedCongress.title,
-        chamber: this.chamber,
+        chamber: this.selectedChamber.title.toLowerCase(),
         type: this.selectedType.title,
       }      
     },
-    ...mapGetters({
-      recentBills: 'bills/recent/bills',
-      congressFunc: 'fillers/congressFunc',
-      billTypes: 'fillers/billTypes',
-      isLoading: 'bills/recent/isLoading'
+    ...mapGetters('bills/recent', {
+      recentBills: 'bills',
+      isLoading: 'isLoading'
+    }),
+    ...mapGetters('fillers', {
+      congressFunc: 'congressFunc',
+      billTypes: 'billTypes',
+      chambers: 'chambers'
     }),
     congress () {
       return this.congressFunc(105);
@@ -127,6 +130,16 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
+.chamber-not-selected {
+  background-color: rgb(190, 111, 111) !important;
+  color: white;
+}
+
+.chamber-selected {
+  background-color: rgb(106, 196, 106) !important;
+  color: black;
+}
 
 </style>

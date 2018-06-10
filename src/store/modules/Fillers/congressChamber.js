@@ -26,10 +26,16 @@ export default {
       { title: 'enacted', description: 'Get bills ordered by the date they were enacted' },
       { title: 'vetoed', description: 'Get bills ordered by date they were vetoed' },
     ],
+    chambers: [
+      { title: 'Senate', description: 'Search for results from The Senate' },
+      { title: 'House', description: 'Search for results from The House' },
+      { title: 'Both', description: 'Search for results from both chambers' },
+    ]
   },
   getters: {
     explanationCategories: state => state.explanationCategories,
     billTypes: state => state.billTypes,
+    chambers: state => state.chambers,
     congressFunc: () => (earliestCongress) => {
       let currentCongress = 115
       let year1 = 2017;
