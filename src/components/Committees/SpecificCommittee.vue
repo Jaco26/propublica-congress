@@ -10,10 +10,23 @@
       <v-layout>
         <v-flex xs6>
           <h2>Current Members</h2>
-          <!-- <v-flex v-for="member in committee.current_members" :key="member.name"> -->
-          <v-flex v-for="member in membersByParty" :key="member.name">
-            {{member.name}} {{member.party}}
-          </v-flex>
+          <v-container 
+            v-for="party in membersByParty" 
+            v-if="party.members[0]" 
+            :key="party.title" 
+            fluid 
+            grid-list-md
+          >
+            <v-layout>
+              {{party.title}} {{party.members.length}}
+            </v-layout>
+            <committee-member 
+              v-for="member in party.members"
+              :key="member.url"  
+              :member="member"
+            />
+          </v-container>
+         
           <v-divider></v-divider>
           <h2 v-if="committee.subcommittees[0]">Subcommittees</h2>
           <h3 v-else class="title">No Subcommittees</h3>
@@ -40,12 +53,14 @@
 
 <script>
 import WorkInProgress from '@/components/WIP';
+import CommitteeMember from '@/components/Committees/CommitteeMember'
 import * as types from '@/store/modules/Committees/types';
 import store from '@/store/store';
 import {mapGetters, mapActions, mapState} from 'vuex';
 export default {
   components: {
-    WorkInProgress
+    WorkInProgress,
+    CommitteeMember,
   },
   data () {
     return {
@@ -76,6 +91,7 @@ export default {
         return this.committee.name;
       }
     },
+   
   },
   beforeRouteEnter (to, from, next) {
     let chamber;
@@ -91,8 +107,8 @@ export default {
       chamber: chamber.toLowerCase(),
       committeeId: to.params.id
     }
-    store.dispatch('committees/' + types.FETCH_SPECIFIC_COMMITTEE, payload );
-    store.dispatch('committees/' + types.FETCH_SPECIFIC_COMMITTEE_HEARINGS, payload );
+    store.dispatch(`committees/${types.FETCH_SPECIFIC_COMMITTEE}`, payload );
+    store.dispatch(`committees/${types.FETCH_SPECIFIC_COMMITTEE_HEARINGS}`, payload );
     next(vm => vm.setData(chamber));
   }
  

@@ -21,9 +21,7 @@ const mutations = {
   [types.SET_COMMITTEES] (state, payload) {
     state.committees.list = payload.results[0].committees;
   },
-  [types.SET_SPECIFIC_COMMITTEE] (state, payload) {
-    console.log(payload);
-    
+  [types.SET_SPECIFIC_COMMITTEE] (state, payload) {    
     state.specificCommittee.main = payload.results[0];
   },
   [types.SET_SPECIFIC_COMMITTEE_HEARINGS] (state, payload) {
@@ -64,11 +62,25 @@ const actions = {
 
 
 const getters = {
-  [types.SORTED_SPEC_COM_MEMBERS]: state => {
-    if(state.specificCommittee.main.current_members) {
-      return state.specificCommittee.main.current_members.slice().sort((a, b) => {
-        return a.party < b.party ? -1 : 1;
-      });
+  [types.SORTED_SPEC_COM_MEMBERS]: (state) => {
+    if (state.specificCommittee.main.current_members) {      
+      return state.specificCommittee.main.current_members.reduce( (a, b) => {
+        switch(b.party){
+          case 'R':
+            a.r.members.push(b);
+            return a;
+          case 'D':
+            a.d.members.push(b);
+            return a;
+          case 'I':
+            a.i.members.push(b);
+            return a;
+        }
+      }, {
+        r: {title: 'Republicans', members: []}, 
+        d: {title: 'Democrats', members: []}, 
+        i: {title: 'Independents', members: []}
+      });      
     }
   },
 };
