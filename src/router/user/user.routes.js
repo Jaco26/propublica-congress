@@ -1,5 +1,5 @@
 import User from '@/components/User/User'
-import Home from '@/components/Home'
+import Home from '@/components/User/Home'
 import Comment from '@/components/User/Comment'
 
 export default {

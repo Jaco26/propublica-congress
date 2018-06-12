@@ -4,7 +4,7 @@ import * as types from './vote-types';
 export default {
   namespaced: true,
   state: {
-    errorMessage: 'Oops! There has been a little mix-up between Propublica\'s server and mine. Unfortunately, we cannot fetch the requested resource at the momenet',
+    errorMessage: 'Oops! Unfortunately, we cannot fetch the requested resource at the moment.',
     recentVotes: {
       house: {
         list: [],
@@ -75,9 +75,7 @@ export default {
     }
   },
   actions: {
-    async [types.FETCH_REC_EXPLAN] ({commit}, payload) {
-      console.log('Hello');
-      
+    async [types.FETCH_REC_EXPLAN] ({commit}, payload) {      
       commit(types.IS_LOADING, {propsPath: 'recentExplanations', is: true});
       commit(types.SET_REC_EXPLAN, await votesService.getRecentPersonalVotesExplanations(payload));
       commit(types.IS_LOADING, { propsPath: 'recentExplanations', is: false });
