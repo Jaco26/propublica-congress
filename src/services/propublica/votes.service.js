@@ -1,13 +1,13 @@
 import axios from 'axios';
 
 export default {
-  getRecentVotes: (chamber) => {
+  getRecentVotes: ({chamber}) => {
     return axios.get(`/api/congress/votes/${chamber}`)
       .then(response => response.data)
       .catch(err => console.log(err));
   },
-  getSpecificRollCallVote: (congress, chamber, sessionNumber, rollCallNumber) => {
-    return axios.get(`/api/congress/votes/${congress}/${chamber}/${sessionNumber}/${rollCallNumber}`)
+  getSpecificVote: ({ congress, chamber, rollCall, sessionNumber }) => {
+    return axios.get(`/api/congress/votes/specific/${rollCall}/${sessionNumber}/${congress}/${chamber}`)
       .then(response => response.data)
       .catch(err => console.log(err));
   },
@@ -68,10 +68,7 @@ export default {
       .then(response => response.data)
       .catch(err => console.log(err));
   },
-  getSpecificVote: ({congress, chamber, rollCall, sessionNumber}) => {
-    return axios.get(`/api/congress/votes/specific/${rollCall}/${sessionNumber}/${congress}/${chamber}`)
-      .then(response => response.data)
-      .catch(err => console.log(err));
-  }
+  
+
 
 }

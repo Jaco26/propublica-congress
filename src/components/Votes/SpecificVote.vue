@@ -1,23 +1,23 @@
 <template>
-<div>
-  <work-in-progress :WIP="false" />
-  
-</div>
- 
-
+  <div v-if="vote.congress">
+    <work-in-progress :WIP="false" />
+    {{vote.congress}} {{vote.chamber}}
+  </div>
 </template>
 
 <script>
 import WorkInProgress from '@/components/WIP';
 import {mapState, mapActions} from 'vuex'
 import {FETCH_SPEC_RC_VOTE} from '@/store/modules/Votes/vote-types';
+import store from '@/store/store'
 export default {
   components: {
     WorkInProgress
   },
   computed: {
     ...mapState('votes', {
-      vote: 'specificRollcallVote',
+      vote: state => state.specificRollcallVote.vote,
+      vacantSeats: state => state.specificRollcallVote.vacant_seats
     }),
   },
   methods: {
