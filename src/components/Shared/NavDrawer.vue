@@ -13,6 +13,11 @@
         <router-link to="/" tag="span" style="cursor: pointer;">KnowThyCongress</router-link> 
       </v-toolbar-title>
       <v-spacer></v-spacer>
+      <v-toolbar-items>
+        <v-btn depressed color="transparent" v-for="link in links" :key="link.title" :to="link.path">
+          {{link.title}}
+        </v-btn>
+      </v-toolbar-items>
     </v-toolbar>
 
     <v-navigation-drawer
@@ -20,8 +25,8 @@
       app 
       v-model="drawer" 
       fixed 
+      width="280"
       :mobile-break-point="960"
-      class="elevation-3"
       id="navigation-drawer"
     >
       <v-list dense>  
@@ -98,6 +103,9 @@ export default {
   data: () => ({
       drawer: null,
       home: { title: 'Home', path: '/' },
+      links: [
+        { title: 'Leave A Comment', path: '/comment' }
+      ],
       navDrawerItems: [
         {
           title: 'Home', 

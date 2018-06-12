@@ -23,6 +23,15 @@ export default {
   components: {
     'app-responsive-nav': NavDrawer,
   },
+  data () {
+    return {
+      links: [
+        { title: 'Home', path: '/'},
+        { title: 'Leave A Comment', path: '/comment' }
+      ],
+      
+    }
+  },
   created(){
     this.$store.dispatch('members/FETCH_MEMBERS');
     // this.$store.dispatch('votes/FETCH_RECENT_EXPLANATIONS', {congress: 115});

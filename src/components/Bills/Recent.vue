@@ -3,7 +3,7 @@
     <v-layout justify-center>
       <v-flex xs12 sm10>
          <v-layout justify-center>
-              <v-toolbar-title class="headline">Search Recent Bills</v-toolbar-title>
+              <v-toolbar-title class="headline">Find Recent Bills</v-toolbar-title>
             </v-layout>
         <form @submit.prevent="submit" class="mt-3">
           <v-toolbar prominent id="tool-tool">

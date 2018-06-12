@@ -42,7 +42,6 @@
             :key="letter" 
             style="display: inline;"
             class="subheading"
-            
           >
             <a @click="$vuetify.goTo(`#legislator-block-${letter}`, scrollOptions)">
               {{letter}}
@@ -60,9 +59,12 @@
         id="back-to-top" 
         @click="$vuetify.goTo('#responsive-nav', scrollOptions)"
         color="accent"
+        fab    
       >
-        Back to Top
-      </v-btn>
+        <div class="text-xs-center">
+          <v-icon>expand_less</v-icon>
+        </div>
+      </v-btn>  
     </transition>
 
       <block 
@@ -177,7 +179,7 @@ export default {
 #back-to-top {
   position: fixed;
   bottom: 15px;
-  right: 15px;
+  right: 10px;
 }
 
 /* .nav-letter:hover {
