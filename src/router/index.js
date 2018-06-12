@@ -59,12 +59,12 @@ const router = new Router({
       children: [
         {
           path: 'explanations',
-          name: 'Explanations',
+          name: 'explanations',
           component: Explanations,
         },
         {
-          path: 'vote/:rollCall/:session',
-          name: 'SpecificVote',
+          path: 'vote/:rollCall/:sessionNumber/:chamber/:congress',
+          name: 'specificVote',
           component: SpecificVote
         },
       ]

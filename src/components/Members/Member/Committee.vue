@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import * as types from '@/store/modules/Committees/types';
+import * as types from '@/store/modules/Committees/committee-types';
 export default {
   props: ['committee'],
   data () {

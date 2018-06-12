@@ -25,7 +25,7 @@ export default {
   },
   created(){
     this.$store.dispatch('members/FETCH_MEMBERS');
-    this.$store.dispatch('votes/FETCH_RECENT_EXPLANATIONS', {congress: 115});
+    // this.$store.dispatch('votes/FETCH_RECENT_EXPLANATIONS', {congress: 115});
   }
 };
 </script>

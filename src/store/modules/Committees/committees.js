@@ -1,4 +1,4 @@
-import * as types from './types';
+import * as types from './committee-types';
 import committeesService from '@/services/propublica/committees.service';
 
 const state = {

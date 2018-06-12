@@ -67,6 +67,11 @@ export default {
     return axios.get(`/api/congress/votes/${category}/explanations/${congress}`)
       .then(response => response.data)
       .catch(err => console.log(err));
+  },
+  getSpecificVote: ({congress, chamber, rollCall, sessionNumber}) => {
+    return axios.get(`/api/congress/votes/specific/${rollCall}/${sessionNumber}/${congress}/${chamber}`)
+      .then(response => response.data)
+      .catch(err => console.log(err));
   }
 
 }

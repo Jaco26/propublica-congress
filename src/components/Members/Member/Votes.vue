@@ -10,7 +10,10 @@
           <v-flex class="grey lighten-3" xs6 sm6 md6 pa-2 mb-2 v-for="(vote, i) in votes" :key="i" v-if="vote.description">
             <v-layout>
               <v-flex  class="text-xs-left">
-                <strong>Vote: <router-link :to="`/votes/vote/${vote.roll_call}/${vote.session}`">{{vote.description}}</router-link> </strong>
+                <strong>Vote: <router-link 
+                  :to="{name: 'specificVote', params: {rollCall: vote.roll_call, sessionNumber: vote.session, chamber: vote.chamber, congress: vote.congress}}"
+                >{{vote.description}}</router-link> </strong>
+                <!-- <strong>Vote: <router-link :to="`/votes/vote/${vote.roll_call}/${vote.session}`">{{vote.description}}</router-link> </strong> -->
               </v-flex>
               <v-flex offset-xs1 class="text-xs-right date"> 
                 Date: {{vote.date}}

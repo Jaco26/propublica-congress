@@ -54,7 +54,7 @@
 <script>
 import WorkInProgress from '@/components/WIP';
 import CommitteeMember from '@/components/Committees/CommitteeMember'
-import * as types from '@/store/modules/Committees/types';
+import * as types from '@/store/modules/Committees/committee-types';
 import store from '@/store/store';
 import {mapGetters, mapActions, mapState} from 'vuex';
 export default {
