@@ -10,7 +10,8 @@ const {
   billsRouter, 
   votesRouter,
   statementsRouter,
-  committeesRouter  
+  committeesRouter,
+  otherEndpointsRouter,  
 } = require('./routes/propublica');
 
 // My database routes
@@ -31,6 +32,7 @@ app.use('/api/congress/bills', billsRouter);
 app.use('/api/congress/votes', votesRouter);
 app.use('/api/congress/statements', statementsRouter);
 app.use('/api/congress/committees', committeesRouter);
+app.use('/api/congress/other', otherEndpointsRouter);
 app.use('/api/database', myDatabaseRouter);
 
 const port = process.env.PORT || 8081

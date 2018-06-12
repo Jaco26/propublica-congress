@@ -4,4 +4,5 @@ module.exports = {
   votesRouter: require('./votes.routes'),
   statementsRouter: require('./statements.routes'),
   committeesRouter: require('./committees.routes'),
+  otherEndpointsRouter: require('./other.routes'),
 }
