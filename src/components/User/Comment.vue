@@ -2,17 +2,19 @@
   <div>
     <blockquote class="blockquote">
       Please send feedback on what you like or dislike about <i>KnowThyCongress</i>.
-      I will work to address any concerns. I'd love to hear any ideas about what could make
+      I will work to address any concerns and I'd love to hear any ideas about what could make
       this site better!
     </blockquote>
     <v-form @submit.prevent="submitComment">
       <v-text-field 
+        class="grey lighten-3"
         v-model="email"
         :rules="emailRules"
         label="Email"
         required  
       ></v-text-field>
       <v-text-field
+        class="grey lighten-3 my-2"
         multi-line
         v-model="message"
       ></v-text-field>
