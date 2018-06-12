@@ -57,8 +57,7 @@ export default {
    * the 20 most recent results in the specified Congress, and supports paginated 
    * requests using an offset query string parameter based on multiples of 20.
    */
-  getRecentPersonalVotesExplanations: (congress) => {
-    congress = '115';
+  getRecentPersonalVotesExplanations: ({congress}) => {    
     return axios.get(`/api/congress/votes/explanations/${congress}`)
       .then(response => response.data)
       .catch(err => console.log(err));

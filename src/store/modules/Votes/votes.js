@@ -4,40 +4,59 @@ import * as types from './vote-types';
 export default {
   namespaced: true,
   state: {
+    errorMessage: 'Oops! There has been a little mix-up between Propublica\'s server and mine. Unfortunately, we cannot fetch the requested resource at the momenet',
     recentVotes: {
       house: {
         list: [],
+        errorMessage: '',
         loading: false,
       },
       senate: {
         list: [],
+        errorMessage: '',
         loading: false,
       },
       both: {
         list: [],
+        errorMessage: '',
         loading: false,
       }
     },
     recentExplanations: {
       list: [],
+      errorMessage: '',
       loading: false,
     },
     specificRollcallVote: {
       vote: {},
       vacantSeats: [],
+      errorMessage: '',
       loading: false,
     },
     
   },
   mutations: {
     [types.SET_REC_EXPLAN] (state, payload) {
-      state.recentExplanations.list = [...state.recentExplanations, ...payload.results];      
+      if (payload.status == 'ERROR') {
+        state.recentExplanations.errorMessage = state.errorMessage;
+        return;
+      }
+      state.recentExplanations.list = [...state.recentExplanations.list, ...payload.results];      
     },
     [types.SET_SPEC_RC_VOTE] (state, payload) {
+      if (payload.status == 'ERROR') {
+        state.specificRollcallVote.errorMessage = state.errorMessage;
+        return;
+      }
       state.specificRollcallVote.vote = payload.results.votes.vote;
       state.specificRollcallVote.vacantSeats = payload.results.votes.vacant_seats;      
     },
+    
     [types.SET_RECENT_VOTES] (state, payload) {
+      if (payload.status == 'ERROR') {
+        state[payload.results.chamber.toLowerCase()].errorMessage = state.errorMessage;
+        return;
+      }
       state.recentVotes[payload.results.chamber.toLowerCase()].list = payload.results.votes;
     },
 
@@ -56,9 +75,11 @@ export default {
     }
   },
   actions: {
-    async [types.FETCH_REC_EXPLAN] ({commit}, congress) {
+    async [types.FETCH_REC_EXPLAN] ({commit}, payload) {
+      console.log('Hello');
+      
       commit(types.IS_LOADING, {propsPath: 'recentExplanations', is: true});
-      commit(types.SET_REC_EXPLAN, await votesService.getRecentPersonalVotesExplanations(congress));
+      commit(types.SET_REC_EXPLAN, await votesService.getRecentPersonalVotesExplanations(payload));
       commit(types.IS_LOADING, { propsPath: 'recentExplanations', is: false });
     },
     async [types.FETCH_SPEC_RC_VOTE] ({commit}, payload) {
@@ -69,7 +90,7 @@ export default {
     async [types.FETCH_RECENT_VOTES] ({commit}, payload) {
       commit(types.IS_LOADING, { propsPath: `recentVotes.${payload.chamber}`, is: true });
       commit(types.SET_RECENT_VOTES, await votesService.getRecentVotes(payload));
-      commit(types.IS_LOADING, { propsPath: `recentVotes.${payload.chamber}`, is: true });
+      commit(types.IS_LOADING, { propsPath: `recentVotes.${payload.chamber}`, is: false });
     }
 
   },

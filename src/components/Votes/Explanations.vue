@@ -1,6 +1,7 @@
 <template>
   <v-container>
-    <v-layout >
+    <error-alert v-if="errorMessage && !loading" :errorMessage="errorMessage" ></error-alert>
+    <v-layout v-if="!errorMessage && !loading">
       <v-container grid-list-sm >
         <v-layout>
           <v-flex class="subheading">
@@ -35,17 +36,31 @@
 
 <script>
 import WorkInProgress from '@/components/WIP';
-import {mapGetters} from 'vuex';
+import ErrorAlert from '@/components/Shared/ErrorAlert'
+import {mapState, mapActions} from 'vuex';
+import {FETCH_REC_EXPLAN} from '@/store/modules/Votes/vote-types'
 export default {
   components: {
     WorkInProgress,
+    ErrorAlert,
   },
   computed:{
-    ...mapGetters({
-      recentExplanations: 'votes/recentExplanations'
+    ...mapState('votes', {
+      recentExplanations: state => state.recentExplanations.list,
+      errorMessage: state => state.recentExplanations.errorMessage,
+      loading: state => state.recentExplanations.loading,
     }),
-
   },
+  methods: {
+    ...mapActions('votes', {
+      fetchRecentExplanations: FETCH_REC_EXPLAN,
+    }),
+  },
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      vm.fetchRecentExplanations({congress: '115'});
+    });
+  }
 }
 </script>
 
