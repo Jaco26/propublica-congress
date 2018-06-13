@@ -6,7 +6,7 @@ const PropublicaAPI = require('../../modules/propub-api');
 // GET LIST OF RECENT PERSONAL EXPLANATIONS FOR MISSED OR MISTAKEN VOTES
 router.get('/explanations/:congress', (req, res) => {
   const {congress} = req.params;  
-  PropublicaAPI.get(`/${congress}/explanations/votes.json`)
+  PropublicaAPI.get(`/${congress}/explanations.json`)
     .then(response => res.send(response.data))
     .catch(err => {
       console.log(err);

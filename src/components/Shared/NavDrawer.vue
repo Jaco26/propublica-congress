@@ -13,9 +13,11 @@
         <router-link to="/" tag="span" style="cursor: pointer;">KnowThyCongress</router-link> 
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-toolbar-items>
-        <v-btn depressed color="transparent" v-for="link in links" :key="link.title" :to="link.path">
-          {{link.title}}
+      <v-toolbar-items >
+        <v-btn depressed fab color="transparent" v-for="link in links" :key="link.title" :to="link.path">
+          <div class="text-xs-center">
+            <v-icon>{{link.icon}}</v-icon>
+          </div>
         </v-btn>
       </v-toolbar-items>
     </v-toolbar>
@@ -104,7 +106,7 @@ export default {
       drawer: null,
       home: { title: 'Home', path: '/' },
       links: [
-        { title: 'Leave A Comment', path: '/comment' }
+        { title: 'Leave A Comment', path: '/comment', icon: 'help' }
       ],
       navDrawerItems: [
         {

@@ -38,6 +38,7 @@
 </template>
 
 <script>
+
 import Committee from './Committee';
 export default {
   props: ['role'],
