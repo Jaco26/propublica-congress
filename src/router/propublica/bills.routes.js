@@ -1,5 +1,5 @@
 import Bills from '@/components/Bills/Bills';
-import Search from '@/components/Bills/Search';
+import Keyword from '@/components/Bills/Keyword';
 import Recent from '@/components/Bills/Recent';
 import Upcoming from '@/components/Bills/Upcoming';
 
@@ -20,7 +20,7 @@ export default {
       path: 'upcoming',
     },
     {
-      component: Search,
+      component: Keyword,
       name: 'searchBills',
       path: 'search',
     }

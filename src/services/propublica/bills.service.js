@@ -11,6 +11,12 @@ export default {
       .then(response => response.data)
       .catch(err => console.log(err));
   },
+  getSpecificBill: ({billId, congress}) => {
+    return axios.get(`/api/congress/bills/specific/${billId}/${congress}`)
+      .then(response => response.data)
+      .catch(err => console.log(err));
+  }
+
 
 
 }

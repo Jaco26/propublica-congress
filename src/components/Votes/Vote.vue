@@ -9,6 +9,10 @@
         <v-card-text v-if="open || loadOpen">
           <v-layout>
             <v-flex xs12 >
+              <div v-if="vote.bill.bill_id">
+                <small><b>Bill:</b></small> <router-link :to="{name: 'specificBill', params: {id: vote.bill.bill_id}}">{{vote.bill.bill_id}}</router-link>  <br>
+              </div> 
+              <small><b>Date:</b></small> {{vote.date}} <br>
               <small><b>Question:</b></small> {{vote.question}} <br>
               <small><b>Result:</b></small> {{vote.result}}
             </v-flex>

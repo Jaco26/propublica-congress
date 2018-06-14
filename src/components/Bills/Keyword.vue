@@ -57,21 +57,24 @@
 
 <script>
 
-import {mapGetters} from 'vuex';
+import {mapState} from 'vuex';
 
 export default {
   computed: {
-    ...mapGetters({
-      results: 'bills/search/results',
-      resultsSearchPhrase: 'bills/search/resultsSearchPhrase',
-      isLoading: 'bills/search/isLoading',
+    ...mapState('bills/keyword', {
+      results: state => state.bills.list,
+      resultsSearchPhrase: state => state.bills.searchPhrase,
+      isLoading: state => state.bills.isLoading
+      // results: 'bills/search/results',
+      // resultsSearchPhrase: 'bills/search/resultsSearchPhrase',
+      // isLoading: 'bills/search/isLoading',
     }),
     newSearchPhrase: {
       get () {            
-        return this.$store.getters['bills/search/newSearchPhrase'];
+        return this.$store.getters['bills/keyword/newSearchPhrase'];
       },
       set (value) {
-        this.$store.commit('bills/search/SET_NEW_SEARCH_PHRASE', value);        
+        this.$store.commit('bills/keyword/SET_NEW_SEARCH_PHRASE', value);        
       },
     }
 
@@ -81,11 +84,11 @@ export default {
       if (!this.newSearchPhrase) {
         alert('You have to search for something');
       } else {
-        this.$store.dispatch('bills/search/FETCH_FIRST_PAGE');
+        this.$store.dispatch('bills/keyword/FETCH_FIRST_PAGE');
       }
     },
     getMore () {
-      this.$store.dispatch('bills/search/FETCH_NEXT_PAGE');
+      this.$store.dispatch('bills/keyword/FETCH_NEXT_PAGE');
     }
 
   },

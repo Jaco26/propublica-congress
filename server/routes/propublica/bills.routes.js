@@ -16,12 +16,13 @@ router.get(`/subjects/bills/search`, (req, res) => {
     url = `/bills/search.json?query=${searchPhrase}&dir=${dir}&offset=${offset}`;
   } else {
     url = `/bills/search.json?query=${searchPhrase}&offset=${offset}`;
-  }
-  console.log(url);
-  
+  }  
   PropublicaAPI.get(url)
     .then(response => res.send(response.data))
-    .catch(err => console.log(err));
+    .catch(err => {
+      console.log(err);
+      res.sendStatus(500);
+    });
 });
 
 // RETURN LIST OF RECENT BILLS
@@ -32,6 +33,25 @@ router.get(`/recent/:type/:congress/:chamber`, (req, res) => {
       
   PropublicaAPI.get(`/${congress}/${chamber}/bills/${type}.json?offset=${offset}`)
     .then(response => res.send(response.data))
+    .catch(err => {
+      console.log(err);
+      res.sendStatus(500);
+    });
+});
+
+/**
+ * Use this request type to get details about a particular bill, including actions taken 
+ * and votes. The attributes house_passage_vote and senate_passage_vote are populated 
+ * (with the date of passage) only upon successful passage of the bill. Bills before the 
+ * 113th Congress (prior to 2013) have fewer attribute values than those from the 113th 
+ * Congress onward, because the more recent bill data comes from the bulk data provided by 
+ * the Government Publishing Office. Details for the older bills came from scraping Thomas.gov, 
+ * the former congressional site of the Library of Congress.
+ */
+router.get('/specific/:billId/:congress', (req, res) => {
+  let { billId, congress } = req.body;
+  PropublicaAPI.get(`/${congress}/bills/${billId}.json`)
+    .then(response => res.send(respones.data))
     .catch(err => {
       console.log(err);
       res.sendStatus(500);
