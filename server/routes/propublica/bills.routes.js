@@ -48,10 +48,10 @@ router.get(`/recent/:type/:congress/:chamber`, (req, res) => {
  * the Government Publishing Office. Details for the older bills came from scraping Thomas.gov, 
  * the former congressional site of the Library of Congress.
  */
-router.get('/specific/:billId/:congress', (req, res) => {
-  let { billId, congress } = req.body;
+router.get('/specific/:billId', (req, res) => {
+  let [billId, congress] = req.params.billId.split('-');  
   PropublicaAPI.get(`/${congress}/bills/${billId}.json`)
-    .then(response => res.send(respones.data))
+    .then(response => res.send(response.data))
     .catch(err => {
       console.log(err);
       res.sendStatus(500);

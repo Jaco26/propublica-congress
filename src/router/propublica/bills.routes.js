@@ -1,7 +1,8 @@
-import Bills from '@/components/Bills/Bills';
-import Keyword from '@/components/Bills/Keyword';
-import Recent from '@/components/Bills/Recent';
-import Upcoming from '@/components/Bills/Upcoming';
+import Bills from '@/components/Bills/Bills'
+import Keyword from '@/components/Bills/Keyword'
+import Recent from '@/components/Bills/Recent'
+import Upcoming from '@/components/Bills/Upcoming'
+import Bill from '@/components/Bills/Bill'
 
 export default {
   path: '/bills',
@@ -23,6 +24,11 @@ export default {
       component: Keyword,
       name: 'searchBills',
       path: 'search',
+    },
+    {
+      component: Bill,
+      name: 'specificBill',
+      path: ':billId'
     }
   ]
 }

@@ -10,7 +10,7 @@
           <v-layout>
             <v-flex xs12 >
               <div v-if="vote.bill.bill_id">
-                <small><b>Bill:</b></small> <router-link :to="{name: 'specificBill', params: {id: vote.bill.bill_id}}">{{vote.bill.bill_id}}</router-link>  <br>
+                <small><b>Bill:</b></small> <router-link :to="{name: 'specificBill', params: {billId: vote.bill.bill_id}}">{{vote.bill.bill_id}}</router-link>  <br>
               </div> 
               <small><b>Date:</b></small> {{vote.date}} <br>
               <small><b>Question:</b></small> {{vote.question}} <br>
@@ -63,6 +63,9 @@ export default {
     openThis () {
       this.open = !this.open;
       this.$emit('openThis', this.index)
+    },
+    billRoute () {
+
     }
   }
   

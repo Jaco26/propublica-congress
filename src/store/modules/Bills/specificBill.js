@@ -11,6 +11,8 @@ export const state = {
 
 export const mutations = {
   [types.SET_SPEC_BILL] (state, payload) {
+    console.log(payload);
+    
     state.bill.main = payload.results[0];
   },
 
