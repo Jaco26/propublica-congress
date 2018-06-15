@@ -33,13 +33,16 @@
 
       <!-- Actions Data Iterator -->
       <v-container v-if="bill.actions" fluid grid-list-md>
-        <h1>Actions</h1>
+        <v-flex class="text-xs-center">
+          <h1>Actions</h1>
+        </v-flex>
         <v-data-iterator 
           :items="bill.actions" 
           :rows-per-page-items="actionsPerPage" 
           :pagination.sync="actions.pagination" 
           content-tag="v-layout"
           row wrap
+          class="ma-2 pa-1 grey lighten-4"
         >
           <v-flex
             slot="item"
@@ -49,11 +52,11 @@
             lg3
             d-flex
           >
-            <v-card flat color="grey lighten-4">
+            <v-card flat height="170">
               <v-card-text>
                 <v-layout>
                   <v-flex> 
-                    <b>{{new Date(props.item.datetime).toLocaleDateString()}}</b> 
+                    <b>{{new Date(props.item.datetime).toLocaleDateString()}} </b> 
                   </v-flex>
                   <v-spacer></v-spacer> 
                   <v-spacer></v-spacer> 
@@ -63,8 +66,32 @@
                     <small><b> {{props.item.chamber}} {{props.item.action_type}}</b></small> 
                   </v-flex>
                 </v-layout>
-                 <v-divider></v-divider>
-                {{props.item.description}}
+                <v-divider></v-divider>
+                <v-tooltip v-if=" props.item.description.length > 120" max-width="400" top :nudge-top="300">
+                  <span slot="activator"> {{ props.item.description.slice(0, 120)+'...' }} </span>
+                  <span> {{props.item.description}} </span>
+                </v-tooltip>
+                <v-flex v-else>
+                  {{props.item.description}}
+                </v-flex>
+                
+
+                <!-- <v-container fluid class="text-xs-center">
+                  <v-layout flex wrap row justify-space-between>
+                    <v-flex xs12>
+                      <v-btn @click.native="show = !show">toggle</v-btn>
+                    </v-flex>
+                    <v-flex xs12 class="mt-5">
+                      <v-tooltip v-model="show" top>
+                        <v-btn slot="activator" icon>
+                          <v-icon color="grey lighten-1">shopping_cart</v-icon>
+                        </v-btn>
+                        <span>Programmatic tooltip</span>
+                      </v-tooltip>
+                    </v-flex>
+                  </v-layout>
+                </v-container> -->
+                
               </v-card-text>
             </v-card>
           </v-flex>
@@ -82,6 +109,7 @@
             :pagination.sync="votes.pagination" 
             content-tag="v-layout"
             row wrap
+            class="ma-2 pa-1 grey lighten-4"
           >
             <v-flex
               slot="item"
@@ -91,11 +119,11 @@
               lg3
               d-flex
             >
-              <v-card flat color="grey lighten-4">
+              <v-card flat>
                 <v-card-text>
                   <v-layout>
                     <v-flex> 
-                     <b>{{new Date(props.item.date).toLocaleDateString()}}</b>
+                     <b>{{new Date(props.item.date).toLocaleDateString()}}  </b>
                     </v-flex>
                     <v-spacer></v-spacer>
                     <v-spacer></v-spacer> 
@@ -131,7 +159,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-import { FETCH_SPEC_BILL } from '@/store/modules/bills/bill-types'
+import { FETCH_SPEC_BILL } from '@/store/modules/Bills/bill-types'
 export default {
   data () {
     return {
@@ -158,7 +186,8 @@ export default {
     },
     actionsPerPage () {
       return this.bill.actions.length < 6 ? [6] : [6, 12];
-    }
+    },
+    
   },
   methods: {
     ...mapActions('bills/specificBill', {
@@ -167,6 +196,20 @@ export default {
     showMoreOrLess (item, amount) {            
       this[item].displayLimit += amount;
     },
+    showTooltip(index){
+      console.log(index);
+      console.log(this.actionsModels[index]);
+      
+      this.actionsModels[index].tooltip = !this.actionsModels[index].tooltip;
+      console.log(this.actionsModels[index]);
+    },
+    // used as model for actions tooltip
+    actionsModels () {
+      return this.bill.actions.map(el => {
+        return {tooltip: false};
+      });
+    }
+
 
   },
   beforeRouteEnter (to, from, next) {
