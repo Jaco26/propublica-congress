@@ -28,7 +28,7 @@
       </p>
       <p v-if="bill.summary_short"> 
         <b>Summary:</b> {{showLongSummary ? bill.summary : bill.summary_short}} <br>
-        <v-btn v-if="bill.summary" @click="showLongSummary = !showLongSummary">{{showLongSummary ? 'Less' : 'More'}}</v-btn>
+        <v-btn v-if="bill.summary> 0" @click="showLongSummary = !showLongSummary">{{showLongSummary ? 'Less' : 'More'}}</v-btn>
       </p>
 
       <!-- Actions Data Iterator -->
@@ -51,12 +51,17 @@
           >
             <v-card flat color="grey lighten-4">
               <v-card-text>
-                 <v-layout>
+                <v-layout>
                   <v-flex> 
-                    {{new Date(props.item.datetime).toLocaleDateString()}}
+                    <b>{{new Date(props.item.datetime).toLocaleDateString()}}</b> 
                   </v-flex>
-                  <v-flex class="text-xs-end"> {{props.item.chamber}} {{props.item.action_type}}</v-flex>
-                  <v-flex>  </v-flex>
+                  <v-spacer></v-spacer> 
+                  <v-spacer></v-spacer> 
+                  <v-spacer></v-spacer> 
+                  <v-spacer></v-spacer>
+                  <v-flex>
+                    <small><b> {{props.item.chamber}} {{props.item.action_type}}</b></small> 
+                  </v-flex>
                 </v-layout>
                  <v-divider></v-divider>
                 {{props.item.description}}
@@ -66,25 +71,60 @@
         </v-data-iterator>
       </v-container>
 
-      <!-- Votes Pagination -->
-      <div v-if="bill.votes">
-        <h1>Votes</h1>
-        <ol>
-          <li v-for="(vote, i) in bill.votes" v-if="i < votes.displayLimit" :key="vote.roll_call" class="mt-2">
-            <small><b>Chamber:</b></small> {{vote.chamber}} <br>
-            <small><b>Date:</b></small> {{vote.date}} <br>
-            <small><b>Question:</b></small> {{vote.question}} <br>
-            <small><b>Result:</b></small> {{vote.result}} <br>
-            <small><b>Total Yes:</b></small> {{vote.total_yes}} <br>
-            <small><b>Total No:</b></small> {{vote.total_no}} <br>
-            <small><b>Not Voting:</b></small> {{vote.total_not_voting}} <br>
-          </li>
-        </ol>
-        <v-btn v-if="votes.displayLimit < bill.votes.length" @click="showMoreOrLess('votes', 5)">Show More</v-btn>
-        <v-btn v-if="votes.displayLimit > 5" @click="showMoreOrLess('votes', -5)">Show Less</v-btn>
-        <span>Showing {{votesShowing}} of {{bill.votes.length}} past votes. </span>
-      </div>
-
+      <v-container v-if="bill.votes" fluid grid-list-md>
+          <v-flex class="text-xs-center">
+            <h1>Votes</h1>
+          </v-flex>
+          <v-divider></v-divider>
+          <v-data-iterator 
+            :items="bill.votes" 
+            :rows-per-page-items="votesPerPage" 
+            :pagination.sync="votes.pagination" 
+            content-tag="v-layout"
+            row wrap
+          >
+            <v-flex
+              slot="item"
+              slot-scope="props"
+              xs12
+              sm6
+              lg3
+              d-flex
+            >
+              <v-card flat color="grey lighten-4">
+                <v-card-text>
+                  <v-layout>
+                    <v-flex> 
+                     <b>{{new Date(props.item.date).toLocaleDateString()}}</b>
+                    </v-flex>
+                    <v-spacer></v-spacer>
+                    <v-spacer></v-spacer> 
+                    <v-spacer></v-spacer> 
+                    <v-spacer></v-spacer> 
+                    <v-spacer></v-spacer>
+                    <v-flex>
+                      <small><b>{{props.item.chamber}}</b></small>
+                    </v-flex>
+                  </v-layout>
+                  <v-divider></v-divider>
+                  <v-layout>
+                    <v-flex>
+                      <small><b>Result:</b></small> {{props.item.result}} 
+                      <small><b>Total Yes:</b></small> {{props.item.total_yes}} 
+                      <small><b>Total No:</b></small> {{props.item.total_no}} 
+                      <small><b>Not Voting:</b></small> {{props.item.total_not_voting}}
+                    </v-flex>
+                  </v-layout>
+                  <v-layout>
+                    <v-flex > 
+                      <small><b>Question:</b></small> {{props.item.question}} <br>
+                    </v-flex>
+                  </v-layout>
+                </v-card-text>
+              </v-card>
+            </v-flex>
+          </v-data-iterator>
+      </v-container>
     </v-card>
   </v-layout>
 </template>
@@ -97,8 +137,9 @@ export default {
     return {
       showLongSummary: false,
       votes: {
-        displayLimit: 5,
-        pagination: 5,
+        pagination: {
+          rowsPerPage: 6
+        },
       },
       actions: {
         pagination: {
@@ -112,11 +153,6 @@ export default {
       bill: state => state.bill.main,
       loading: state => state.bill.main,
     }),
-    votesShowing () {
-      return this.bill.votes.length < this.votes.displayLimit
-        ? this.bill.votes.length
-        : this.votes.displayLimit
-    },
     votesPerPage () {
       return this.bill.votes.length < 6 ? [6] : [6, 12];
     },
