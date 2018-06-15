@@ -2,14 +2,14 @@ import billsService from '@/services/propublica/bills.service'
 import * as types from './bill-types'
 import {isLoading} from '@/store/isLoading'
 
-export const state = {
+const state = {
   bill: {
     main: {},
     loading: false
   }
 };
 
-export const mutations = {
+const mutations = {
   [types.SET_SPEC_BILL] (state, payload) {
     console.log(payload);
     
@@ -22,7 +22,7 @@ export const mutations = {
   },
 };
 
-export const actions = {
+const actions = {
   async [types.FETCH_SPEC_BILL] ({commit}, payload) {
     commit(types.IS_LOADING, { propsPath: 'bill', is: true });
     commit(types.SET_SPEC_BILL, await billsService.getSpecificBill(payload))

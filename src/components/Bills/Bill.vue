@@ -31,8 +31,8 @@
     </p>
     <div v-if="bill.actions">
       <h1>Actions</h1>
-      <ul>
-        <li v-for="(action, i) in bill.actions" v-if="i < actionsLimit" :key="i" class="mt-2">
+      <ol>
+        <li v-for="(action, i) in bill.actions" v-if="i < actions.displayLimit" :key="i" class="mt-2">
           <span>
             <small><b>Chamber:</b></small> {{action.chamber}} <br>
             <small><b>Action Type:</b></small> {{action.action_type}} <br>
@@ -40,14 +40,15 @@
             <small><b>Description</b></small> {{action.description}}
           </span>
         </li>
-      </ul>
-      <v-btn v-if="actionsLimit < bill.actions.length" @click="actionsLimit += 5">Show More</v-btn>
-      <v-btn v-if="actionsLimit > 5" @click="actionsLimit -= 5">Show Less</v-btn>
+      </ol>
+      <v-btn v-if="actions.displayLimit < bill.actions.length" @click="showMoreOrLess('actions', 5)">Show More</v-btn>
+      <v-btn v-if="actions.displayLimit > 5" @click="showMoreOrLess('actions', -5)">Show Less</v-btn>
+      <span>Showing {{actionsShowing}} of {{bill.actions.length}} past actions. </span>
     </div>
     <div v-if="bill.votes">
       <h1>Votes</h1>
-      <ul>
-        <li v-for="(vote, i) in bill.votes" v-if="i < votesLimit" :key="vote.roll_call" class="mt-2">
+      <ol>
+        <li v-for="(vote, i) in bill.votes" v-if="i < votes.displayLimit" :key="vote.roll_call" class="mt-2">
           <small><b>Chamber:</b></small> {{vote.chamber}} <br>
           <small><b>Date:</b></small> {{vote.date}} <br>
           <small><b>Question:</b></small> {{vote.question}} <br>
@@ -56,10 +57,10 @@
           <small><b>Total No:</b></small> {{vote.total_no}} <br>
           <small><b>Not Voting:</b></small> {{vote.total_not_voting}} <br>
         </li>
-      </ul>
-      <v-btn v-if="votesLimit < bill.votes.length" @click="showMoreOrLess('votesLimit', bill.votes, 5)">Show More</v-btn>
-      <v-btn v-if="votesLimit > 5" @click="showMoreOrLess('votesLimit', bill.votes, -5)">Show Less</v-btn>
-      <span>Showing {{votesLimit}} of {{bill.votes.length}} </span>
+      </ol>
+      <v-btn v-if="votes.displayLimit < bill.votes.length" @click="showMoreOrLess('votes', 5)">Show More</v-btn>
+      <v-btn v-if="votes.displayLimit > 5" @click="showMoreOrLess('votes', -5)">Show Less</v-btn>
+      <span>Showing {{votesShowing}} of {{bill.votes.length}} past votes. </span>
     </div>
     
 
@@ -73,8 +74,12 @@ export default {
   data () {
     return {
       showLongSummary: false,
-      votesLimit: 5,
-      actionsLimit: 5,
+      votes: {
+        displayLimit: 5,
+      },
+      actions: {
+        displayLimit: 5,
+      }
     }
   },
   computed: {
@@ -82,25 +87,25 @@ export default {
       bill: state => state.bill.main,
       loading: state => state.bill.main,
     }),
+    votesShowing () {
+      return this.bill.votes.length < this.votes.displayLimit
+        ? this.bill.votes.length
+        : this.votes.displayLimit
+    },
+    actionsShowing () {
+      return this.bill.actions.length < this.actions.displayLimit
+        ? this.bill.actions.length
+        : this.actions.displayLimit
+    }
   },
   methods: {
     ...mapActions('bills/specificBill', {
       fetchBill: FETCH_SPEC_BILL,
     }),
-    showMoreOrLess (item, source, amount) {     
-      console.log(amount);
-       
-      if (source.length - this[item] < 5 && amount + 1 > 0) {
-        amount = source.length - this[item]
-        this[item] += amount;
-      } else {
-        console.log(amount);
-        
-        this[item] += amount
-      }
-      console.log(this[item]);
-      
-    }
+    showMoreOrLess (item, amount) {            
+      this[item].displayLimit += amount;
+    },
+
   },
   beforeRouteEnter (to, from, next) {
     let { billId } = to.params;
