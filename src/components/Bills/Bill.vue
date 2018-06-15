@@ -1,35 +1,63 @@
 <template>
   <v-layout justify-center>
-    <v-card>
-      <p v-if="bill.short_title"> <b>Short Title:</b> {{bill.short_title}} </p>
-      <p v-else-if="bill.title"> <b>Title:</b> {{bill.title}} </p>
-      <p> <b>Sponsor:</b> {{bill.sponsor_title}} {{bill.sponsor}} {{bill.sponsor_party}} {{bill.sponsor_state}} </p>
-      <p> <b>Introduced on:</b> {{bill.introduced_date}} </p>
-      <p> <b>Active:</b> {{bill.active}}  </p>
-      <p> <b>Last Vote:</b> {{bill.last_vote ? bill.last_vote : 'none'}} </p> 
-      
-      <p v-if="bill.house_passage"> <b>Passed the House:</b> {{bill.house_passage}} </p>
-      <p v-if="bill.senate_passage"> <b>Passed the Senate:</b> {{bill.senate_passage}} </p>  
-      <p v-if="bill.enacted"> <b>Enacted</b> {{bill.enacted}}</p>
-      <p v-if="bill.vetoed"> <b>Vetoed</b> {{bill.vetoed}}</p>
-    
-      <p v-if="bill.cosponsors"> <b>Cosponsors:</b> 
-        <span> <b>Total:</b> {{bill.cosponsors}}  </span>
-        <span> <b>Democrat:</b> {{bill.cosponsors_by_party.D ? bill.cosponsors_by_party.D : 0}}  </span>
-        <span> <b>Republican:</b> {{bill.cosponsors_by_party.R ? bill.cosponsors_by_party.R : 0}}  </span>
-        <span> <b>Independent:</b> {{bill.cosponsors_by_party.I ? bill.cosponsors_by_party.I : 0}}  </span>
-      </p>
-      <p v-if="bill.withdrawn_cosponsors > 0"> <b>Withdrawn Cosponsors</b> {{bill.withdrawn_cosponsors}} </p>
-      <p v-if="bill.primary_subject"> <b>Primary Subject:</b> {{bill.primary_subject}} </p>
-      <p v-if="bill.committees"> <b>Committees:</b> {{bill.committees}} </p>
-      <p v-if="bill.latest_major_action"> 
-        <b>Latest Major Action:</b> {{bill.latest_major_action}} <br>
-        <span v-if="bill.latest_major_action_date"> <small><b>Date:</b></small> {{bill.latest_major_action_date}} </span>
-      </p>
-      <p v-if="bill.summary_short"> 
-        <b>Summary:</b> {{showLongSummary ? bill.summary : bill.summary_short}} <br>
-        <v-btn v-if="bill.summary> 0" @click="showLongSummary = !showLongSummary">{{showLongSummary ? 'Less' : 'More'}}</v-btn>
-      </p>
+    <v-card class="pa-2">
+      <v-card-title>
+        <div v-if="bill.short_title" class="title text-xs-center"> {{bill.short_title}} </div>
+        <div v-else-if="bill.title" class="title text-xs-center"> <b>Title:</b> {{bill.title}}</div>
+      </v-card-title>
+      <v-divider></v-divider>
+      <v-card-text>
+        <v-layout class="my-1">
+          <v-flex>
+            <ul>
+              <li><b>Sponsor:</b> {{bill.sponsor_title}} {{bill.sponsor}} {{bill.sponsor_party}} {{bill.sponsor_state}}</li>
+              <li><b>Introduced:</b> {{new Date(bill.introduced_date).toLocaleDateString()}}</li>
+              <li><b>Active:</b> {{bill.active}}</li>
+              <li><b>Last Vote:</b> {{bill.last_vote ? new Date(bill.last_vote).toLocaleDateString() : 'none'}}</li>
+            </ul>
+          </v-flex>
+          <v-flex>
+            <ul>
+              <li v-if="bill.house_passage"> <b>Passed the House:</b> {{new Date(bill.house_passage).toLocaleDateString()}} </li>
+              <li v-if="bill.senate_passage"> <b>Passed the Senate:</b> {{new Date(bill.senate_passage).toLocaleDateString()}} </li>  
+              <li v-if="bill.enacted"> <b>Enacted</b> {{new Date(bill.enacted).toLocaleDateString()}}</li>
+              <li v-if="bill.vetoed"> <b>Vetoed</b> {{new Date(bill.vetoed).toLocaleDateString()}}</li>
+            </ul>
+          </v-flex>
+        </v-layout>
+        <v-divider></v-divider>
+        <v-layout class="my-1">
+          <v-flex>
+            <div v-if="bill.cosponsors">
+              <b>Cosponsors:</b> 
+              <ul style="display: inline;"> 
+                <li> <b>Total:</b> {{bill.cosponsors}}  </li>
+                <li> <b>Democrat:</b> {{bill.cosponsors_by_party.D ? bill.cosponsors_by_party.D : 0}}  </li>
+                <li> <b>Republican:</b> {{bill.cosponsors_by_party.R ? bill.cosponsors_by_party.R : 0}}  </li>
+                <li> <b>Independent:</b> {{bill.cosponsors_by_party.I ? bill.cosponsors_by_party.I : 0}}  </li>
+              </ul>
+            </div>
+          </v-flex>
+        </v-layout>
+        <v-layout>
+          <v-flex>
+            <ul>
+              <li v-if="bill.withdrawn_cosponsors > 0"> <b>Withdrawn Cosponsors</b> {{bill.withdrawn_cosponsors}} </li>
+              <li v-if="bill.primary_subject"> <b>Primary Subject:</b> {{bill.primary_subject}} </li>
+              <li v-if="bill.committees"> <b>Committees:</b> {{bill.committees}} </li>
+              <li v-if="bill.latest_major_action"> 
+                <b>Latest Major Action:</b> {{bill.latest_major_action}} <br>
+                <span v-if="bill.latest_major_action_date"> <b>Date:</b> {{new Date(bill.latest_major_action_date).toLocaleDateString()}} </span>
+              </li>
+            </ul>
+            <v-divider></v-divider>
+            <p v-if="bill.summary_short" class="my-1"> 
+              <b>Summary:</b> {{showLongSummary ? bill.summary : bill.summary_short}} <br>
+              <v-btn flat block v-if="bill.summary" @click="showLongSummary = !showLongSummary">{{showLongSummary ? 'Less' : 'More'}}</v-btn>
+            </p>
+          </v-flex>
+        </v-layout>
+      </v-card-text>
 
       <!-- Actions Data Iterator -->
       <v-container v-if="bill.actions" fluid grid-list-md>
@@ -52,57 +80,35 @@
             lg3
             d-flex
           >
-            <v-card flat height="170">
+            <v-card flat height="150">
               <v-card-text>
-                <v-layout>
-                  <v-flex> 
+                <v-layout class="px-1">
+                  <div> 
                     <b>{{new Date(props.item.datetime).toLocaleDateString()}} </b> 
-                  </v-flex>
-                  <v-spacer></v-spacer> 
-                  <v-spacer></v-spacer> 
-                  <v-spacer></v-spacer> 
-                  <v-spacer></v-spacer>
-                  <v-flex>
-                    <small><b> {{props.item.chamber}} {{props.item.action_type}}</b></small> 
-                  </v-flex>
+                  </div>        
+                  <v-spacer></v-spacer>         
+                  <div>
+                    <small><b> {{props.item.chamber}} {{props.item.action_type}}</b></small>
+                  </div>
                 </v-layout>
                 <v-divider></v-divider>
-                <v-tooltip v-if=" props.item.description.length > 120" max-width="400" top :nudge-top="300">
-                  <span slot="activator"> {{ props.item.description.slice(0, 120)+'...' }} </span>
+                <v-tooltip v-if=" props.item.description.length > 120" max-width="400" top>
+                  <span slot="activator"> {{ props.item.description.slice(0, 120)}}... </span>
                   <span> {{props.item.description}} </span>
                 </v-tooltip>
                 <v-flex v-else>
                   {{props.item.description}}
                 </v-flex>
-                
-
-                <!-- <v-container fluid class="text-xs-center">
-                  <v-layout flex wrap row justify-space-between>
-                    <v-flex xs12>
-                      <v-btn @click.native="show = !show">toggle</v-btn>
-                    </v-flex>
-                    <v-flex xs12 class="mt-5">
-                      <v-tooltip v-model="show" top>
-                        <v-btn slot="activator" icon>
-                          <v-icon color="grey lighten-1">shopping_cart</v-icon>
-                        </v-btn>
-                        <span>Programmatic tooltip</span>
-                      </v-tooltip>
-                    </v-flex>
-                  </v-layout>
-                </v-container> -->
-                
               </v-card-text>
             </v-card>
           </v-flex>
         </v-data-iterator>
       </v-container>
-
+    
       <v-container v-if="bill.votes" fluid grid-list-md>
           <v-flex class="text-xs-center">
             <h1>Votes</h1>
           </v-flex>
-          <v-divider></v-divider>
           <v-data-iterator 
             :items="bill.votes" 
             :rows-per-page-items="votesPerPage" 
@@ -121,18 +127,14 @@
             >
               <v-card flat>
                 <v-card-text>
-                  <v-layout>
-                    <v-flex> 
-                     <b>{{new Date(props.item.date).toLocaleDateString()}}  </b>
-                    </v-flex>
-                    <v-spacer></v-spacer>
-                    <v-spacer></v-spacer> 
-                    <v-spacer></v-spacer> 
-                    <v-spacer></v-spacer> 
-                    <v-spacer></v-spacer>
-                    <v-flex>
-                      <small><b>{{props.item.chamber}}</b></small>
-                    </v-flex>
+                  <v-layout class="px-1">
+                    <div> 
+                      <b>{{new Date(props.item.date).toLocaleDateString()}} </b> 
+                    </div>        
+                      <v-spacer></v-spacer>         
+                    <div>
+                      <small><b> {{props.item.chamber}} {{props.item.action_type}}</b></small>
+                    </div>
                   </v-layout>
                   <v-divider></v-divider>
                   <v-layout>
@@ -220,3 +222,12 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+
+ul {
+  list-style: none;
+}
+
+
+</style>
