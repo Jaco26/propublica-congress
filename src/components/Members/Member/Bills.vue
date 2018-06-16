@@ -28,22 +28,42 @@
                 <v-flex>
                   <small><b>Latest Major Action:</b></small> {{bill.latest_major_action}}
                 </v-flex>
-                <v-btn depressed :to="`/bills/${bill.bill_id}`">More</v-btn>
+                <!-- <v-btn depressed :to="`/bills/${bill.bill_id}`">More</v-btn> -->
+                <!-- <v-btn depressed @click.native.stop="viewBillDetails({billId: bill.bill_id})">More</v-btn> -->
               </v-layout>
               <v-divider></v-divider>
               Learn more on <a target="_blank" :href="`${bill.govtrack_url}`">Govtrack</a>
+
+              <app-bill-dialog
+                :propBill="bill"
+              ></app-bill-dialog>
+
             </v-flex>
           </v-layout>
         </v-container>
     </v-container>
+
+    
+
   </div>
   
 </template>
 
 <script>
-import {mapGetters} from 'vuex';
+import BillDialog from '@/components/Dialogs/Bill/BillDialog'
+import {mapActions, mapMutations} from 'vuex';
+import {FETCH_SPEC_BILL} from '@/store/modules/Bills/bill-types'
 export default {
+  components: {
+    appBillDialog: BillDialog,
+  },
   props: ['bills', 'billsLoading'],
+  methods: {
+    ...mapActions('bills/specificBill', {
+      fetchBill: FETCH_SPEC_BILL,
+    }),
+   
+  }
 
 }
 </script>

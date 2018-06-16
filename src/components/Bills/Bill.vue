@@ -175,6 +175,7 @@
 import { mapState, mapActions } from 'vuex'
 import { FETCH_SPEC_BILL } from '@/store/modules/Bills/bill-types'
 export default {
+ 
   data () {
     return {
       showLongSummary: false,
