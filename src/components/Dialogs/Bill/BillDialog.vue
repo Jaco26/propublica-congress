@@ -4,8 +4,7 @@
       <v-btn slot="activator" @click="!propBill ? fetchBill({billId: propBillId}) : null">Bill Details</v-btn>
       <v-card>
         <div v-if="storeBillLoading">
-          
-            <v-progress-circular indeterminate color="primary"></v-progress-circular>
+          <v-progress-circular indeterminate color="primary"></v-progress-circular>
         </div>
         <div v-else>
           <bill-title v-if="bill.short_title || bill.title" :bill="bill"></bill-title>

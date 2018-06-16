@@ -32,7 +32,6 @@ export const getters = {
   [types.ACTION_DESCRIPTION_SLICES]: (state) => {
     if (state.bill.main.actions) {      
       return state.bill.main.actions
-        .filter(action => action.description.length > 120)
         .map(action => action.description.slice(0, 120) + '...');
     } 
   },
