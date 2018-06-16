@@ -6,12 +6,10 @@
       </v-card-title>
       <v-divider></v-divider>
       <transition name="fade">
-        <v-card-text v-if="open || loadOpen">
+        <v-card-text >
           <v-layout>
             <v-flex xs12 >
-              <div v-if="vote.bill.bill_id">
-                <small><b>Bill:</b></small> <router-link :to="{name: 'specificBill', params: {billId: vote.bill.bill_id}}">{{vote.bill.bill_id}}</router-link>  <br>
-              </div> 
+              <app-bill-dialog :propBillId="vote.bill.bill_id" ></app-bill-dialog>
               <small><b>Date:</b></small> {{vote.date}} <br>
               <small><b>Question:</b></small> {{vote.question}} <br>
               <small><b>Result:</b></small> {{vote.result}}
@@ -41,10 +39,14 @@
         </v-card-text>
       </transition>
     </v-card> 
+    
   </v-flex>
 </template>
 
 <script>
+import {mapActions} from 'vuex'
+import {FETCH_SPEC_BILL} from '@/store/modules/Bills/bill-types'
+import BillDialog from '@/components/Dialogs/Bill/BillDialog'
 export default {
   props: {
     vote: {
@@ -54,6 +56,9 @@ export default {
     index: Number,
     loadOpen: Boolean
   },
+  components: {
+    appBillDialog: BillDialog
+  },
   data () {
     return {
       open: false,
@@ -62,11 +67,12 @@ export default {
   methods: {
     openThis () {
       this.open = !this.open;
-      this.$emit('openThis', this.index)
+      // this.$emit('openThis', this.index)
     },
-    billRoute () {
+    ...mapActions('bills/specificBill', {
+      fetchBill: FETCH_SPEC_BILL,
+    })
 
-    }
   }
   
 }

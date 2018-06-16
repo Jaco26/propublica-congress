@@ -10,9 +10,7 @@ const state = {
 };
 
 const mutations = {
-  [types.SET_SPEC_BILL] (state, payload) {
-    console.log(payload);
-    
+  [types.SET_SPEC_BILL] (state, payload) {    
     state.bill.main = payload.results[0];
   },
 
@@ -23,16 +21,27 @@ const mutations = {
 };
 
 const actions = {
-  async [types.FETCH_SPEC_BILL] ({commit}, payload) {
+  async [types.FETCH_SPEC_BILL] ({commit}, payload) {    
     commit(types.IS_LOADING, { propsPath: 'bill', is: true });
     commit(types.SET_SPEC_BILL, await billsService.getSpecificBill(payload))
     commit(types.IS_LOADING, { propsPath: 'bill', is: false });
   }
 };
 
+export const getters = {
+  [types.ACTION_DESCRIPTION_SLICES]: (state) => {
+    if (state.bill.main.actions) {      
+      return state.bill.main.actions
+        .filter(action => action.description.length > 120)
+        .map(action => action.description.slice(0, 120) + '...');
+    } 
+  },
+}
+
 export default {
   namespaced: true,
   state,
   mutations,
   actions,
+  getters,
 }

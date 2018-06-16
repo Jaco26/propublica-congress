@@ -1,12 +1,9 @@
 <template>
   <div>
     <h1>Recent Votes</h1>
-   
-      <chamber-recnet-votes chamber="House" :votes="houseVotes"></chamber-recnet-votes>
-      <chamber-recnet-votes chamber="Senate" :votes="senateVotes"></chamber-recnet-votes>
-      <chamber-recnet-votes chamber="Both" :votes="bothVotes"></chamber-recnet-votes>
-
-    
+    <chamber-recnet-votes chamber="House" :votes="houseVotes"></chamber-recnet-votes>
+    <chamber-recnet-votes chamber="Senate" :votes="senateVotes"></chamber-recnet-votes>
+    <chamber-recnet-votes chamber="Both" :votes="bothVotes"></chamber-recnet-votes>
   </div>
 </template>
 

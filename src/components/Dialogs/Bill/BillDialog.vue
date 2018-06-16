@@ -1,13 +1,18 @@
 <template>
   <v-layout row justify-center>
-   
-    <v-dialog v-model="dialog" width="600px">
-      <v-btn slot="activator">Bill Details</v-btn>
+    <v-dialog :fullscreen="$vuetify.breakpoint.xsOnly" v-model="dialog">
+      <v-btn slot="activator" @click="!propBill ? fetchBill({billId: propBillId}) : null">Bill Details</v-btn>
       <v-card>
-        <bill-title v-if="bill.short_title || bill.title" :bill="bill"></bill-title>
-        <bill-people :bill="bill"></bill-people>
-        <bill-actions :bill="bill"></bill-actions>
-        <bill-votes :bill="bill"></bill-votes>
+        <div v-if="storeBillLoading">
+          
+            <v-progress-circular indeterminate color="primary"></v-progress-circular>
+        </div>
+        <div v-else>
+          <bill-title v-if="bill.short_title || bill.title" :bill="bill"></bill-title>
+          <bill-people :bill="bill"></bill-people>
+          <bill-actions :actions="bill.actions"></bill-actions>
+          <bill-votes :votes="bill.votes"></bill-votes>
+        </div>
       </v-card>
     </v-dialog>
   </v-layout>
@@ -21,12 +26,16 @@ import People from './People'
 import Votes from './Votes'
 import Actions from './Actions'
 // Vuex
-import {mapState} from 'vuex'
-
+import {mapState, mapActions} from 'vuex'
+import {FETCH_SPEC_BILL} from '@/store/modules/Bills/bill-types'
 export default {
    props: {
     propBill: {
       type: Object,
+      required: false,
+    },
+    propBillId: {
+      type: String,
       required: false,
     }
   },
@@ -43,11 +52,18 @@ export default {
   },
   computed: {
     bill () {
-      return this.propBill ? this.propBill : this.storeBill;
+      return this.propBill 
+        ? this.propBill
+        : this.storeBill;
     },
     ...mapState('bills/specificBill', {
       storeBill: state => state.bill.main,
       storeBillLoading: state => state.bill.loading,
+    }),
+  },
+  methods: {
+    ...mapActions('bills/specificBill', {
+      fetchBill: FETCH_SPEC_BILL,
     }),
   }
   

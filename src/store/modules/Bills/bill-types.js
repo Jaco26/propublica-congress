@@ -14,4 +14,7 @@ export const FETCH_SPEC_BILL = 'fetchSpecificBill';
 // Getters
 export const SEARCH_RESULTS = 'bills/search/results';
 export const NEW_SEARCH_PHRASE = 'bills/search/newSearchPhrase';
-export const RECENT_TYPES = 'bills/recent/billTypes'
+export const RECENT_TYPES = 'bills/recent/billTypes';
+
+// Specific Bill Descripted shortened description text
+export const ACTION_DESCRIPTION_SLICES = 'actionDescriptionSlices';
