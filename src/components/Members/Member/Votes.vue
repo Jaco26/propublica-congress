@@ -34,7 +34,7 @@
             </v-layout>
             <v-layout column v-if="vote.bill.title">
               <v-flex xs12>
-                <small><b>Bill:</b></small> <router-link to="/bills/bill"> <strong> {{vote.bill.number}}</strong> </router-link> {{vote.bill.title}}
+                <small><b>Bill:</b></small> <router-link :to="`/bills/${vote.bill.bill_id}`"> <strong> {{vote.bill.number}}</strong> </router-link> {{vote.bill.title}}
               </v-flex>
               <v-flex xs12>
                 <small><b>Latest Action:</b></small> {{vote.bill.latest_action}}

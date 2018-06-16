@@ -21,16 +21,17 @@
               <v-divider></v-divider>
               <v-layout v-if="bill.title">
                 <v-flex v-if="bill.title">
-                  <small><b>Bill Title:</b></small> {{bill.title}}
+                  <small><b>Bill:</b></small> <router-link :to="`/bills/${bill.bill_id}`"> <strong>{{bill.bill_id}}</strong> </router-link> {{bill.short_title ? bill.short_title : bill.title}}
                 </v-flex>
               </v-layout>
               <v-layout v-if="bill.latest_major_action">
                 <v-flex>
                   <small><b>Latest Major Action:</b></small> {{bill.latest_major_action}}
                 </v-flex>
+                <v-btn depressed :to="`/bills/${bill.bill_id}`">More</v-btn>
               </v-layout>
               <v-divider></v-divider>
-            <small>Learn more on</small> <a target="_blank" :href="`${bill.govtrack_url}`">Govtrack</a>
+              Learn more on <a target="_blank" :href="`${bill.govtrack_url}`">Govtrack</a>
             </v-flex>
           </v-layout>
         </v-container>

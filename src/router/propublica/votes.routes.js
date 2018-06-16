@@ -10,11 +10,11 @@ export default {
   component: Votes,
   redirect: '/votes/recent',
   children: [
-    {
-      path: 'explanations',
-      name: 'explanations',
-      component: Explanations,
-    },
+    // {
+    //   path: 'explanations',
+    //   name: 'explanations',
+    //   component: Explanations,
+    // },
     {
       path: 'recent',
       name: 'recentVotes',

@@ -16,6 +16,7 @@
       <v-text-field
         class="grey lighten-3 my-2"
         multi-line
+        placeholder="Jot your thoughts here"
         v-model="message"
       ></v-text-field>
       <v-btn type="submit">Submit</v-btn>
@@ -42,7 +43,6 @@
       top
     > 
       Your message has been sent!
-      <v-btn dark flat @click.native="successSnackbar = false">Close</v-btn>
     </v-snackbar>
 
 

@@ -89,12 +89,12 @@ export default {
           ]
         },
         {
-          title: 'Recent Personal Explantions',
-          text: 'Get a list of recent personal explanations by legislators about missed or mistaken votes on the Congressional Record.',
+          title: 'Recent Votes',
+          text: 'Get a list of recent votes from the House, Senate or both chambers.',
           actions: [
             {
-               title: 'See Explanations',
-               path: '/votes/explanations'
+               title: 'See Votes',
+               path: '/votes/recent'
             }
            
           ]
