@@ -1,7 +1,6 @@
 <template>
   <v-layout row justify-start>
-    <v-dialog :fullscreen="$vuetify.breakpoint.xsOnly" max-width="900" v-model="dialog">
-      <v-btn depressed color="blue lighten-4" slot="activator" @click="!propBill ? fetchBill({billId: propBillId}) : null">Bill Details</v-btn>
+    <v-flex>
       <v-card>
         <div v-if="storeBillLoading">
           <v-progress-circular indeterminate color="primary"></v-progress-circular>
@@ -13,7 +12,7 @@
           <bill-votes :votes="bill.votes"></bill-votes>
         </div>
       </v-card>
-    </v-dialog>
+    </v-flex>
   </v-layout>
  
 </template>
@@ -64,6 +63,11 @@ export default {
     ...mapActions('bills/specificBill', {
       fetchBill: FETCH_SPEC_BILL,
     }),
+  },
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      vm.fetchBill(to.params)
+    })
   }
   
 }

@@ -50,7 +50,7 @@
             </v-layout>
             <v-divider></v-divider>
             <v-layout justify-start>
-              <v-flex>
+              <!-- <v-flex>
                 <app-vote-dialog 
                   :propVotePayload="{
                     rollCall: vote.roll_call,
@@ -65,7 +65,7 @@
                   v-if="vote.bill.bill_id"
                   :propBillId="vote.bill.bill_id"
                 ></app-bill-dialog>
-              </v-flex>
+              </v-flex> -->
             </v-layout>
             
 
