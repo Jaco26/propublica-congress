@@ -79,18 +79,13 @@
 
 <script>
 // Dialogs
-import VoteDialog from '@/components/Dialogs/Vote/VoteDialog'
-import BillDialog from '@/components/Dialogs/Bill/BillDialog'
+// import VoteDialog from '@/components/Dialogs/Vote/VoteDialog'
+// import BillDialog from '@/components/Dialogs/Bill/BillDialog'
 // Vuex
 import {mapGetters} from 'vuex'
 export default {
-  props: ['votes', 'votesLoading'],
-  components: {
-    appVoteDialog: VoteDialog,
-    appBillDialog: BillDialog,
-  },
+  props: ['votes', 'votesLoading', 'memberId'],
   
-
 }
 </script>
 

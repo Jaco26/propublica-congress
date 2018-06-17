@@ -14,11 +14,7 @@
 </template>
 
 <script>
-import BillDialog from '@/components/Dialogs/Bill/BillDialog'
 export default {
   props: ['bill'],
-  components: {
-    appBillDialog: BillDialog,
-  },
 }
 </script>

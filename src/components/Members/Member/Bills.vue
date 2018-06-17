@@ -21,7 +21,7 @@
               <v-divider></v-divider>
               <v-layout v-if="bill.title">
                 <v-flex v-if="bill.title">
-                  <small><b>Bill:</b></small> <router-link :to="`/members/member/${bill.bill_id}`"> <strong>{{bill.bill_id}}</strong> </router-link> {{bill.short_title ? bill.short_title : bill.title}}
+                  <small><b>Bill:</b></small> <router-link :to="`/members/member/${memberId}/${bill.bill_id}`"> <strong>{{bill.bill_id}}</strong> </router-link> {{bill.short_title ? bill.short_title : bill.title}}
                 </v-flex>
               </v-layout>
               <v-layout v-if="bill.latest_major_action">
@@ -31,16 +31,12 @@
               </v-layout>
               <v-divider></v-divider>
               Learn more on <a target="_blank" :href="`${bill.govtrack_url}`">Govtrack</a>
-  {{member}}
-              <app-bill-dialog
-                :propBill="bill"
-              ></app-bill-dialog>
-
             </v-flex>
           </v-layout>
         </v-container>
     </v-container>
 
+    
 
     <!-- <v-container grid-list-md v-if="!billsLoading">
       <v-layout wrap>
@@ -63,15 +59,14 @@
 
 import BillListItem from '@/components/ListItems/BillListItem'
 
-import BillDialog from '@/components/Dialogs/Bill/BillDialog'
+// import BillDialog from '@/components/Dialogs/Bill/BillDialog'
 import {mapActions, mapMutations} from 'vuex';
 import {FETCH_SPEC_BILL} from '@/store/modules/Bills/bill-types'
 export default {
   components: {
-    appBillDialog: BillDialog,
     appBillListItem: BillListItem,
   },
-  props: ['bills', 'billsLoading'],
+  props: ['bills', 'billsLoading', 'memberId'],
   methods: {
     ...mapActions('bills/specificBill', {
       fetchBill: FETCH_SPEC_BILL,

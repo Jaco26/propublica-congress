@@ -6,12 +6,7 @@
       </v-card-title>
       <v-card-actions>
         <v-layout>
-          <v-flex xs12 sm4>
-            <app-bill-dialog v-if="vote.bill.bill_id" :propBillId="vote.bill.bill_id" ></app-bill-dialog>
-          </v-flex>
-          <v-flex xs12 sm4>
-            <app-vote-dialog :propVote="vote" ></app-vote-dialog>
-          </v-flex>
+          
         </v-layout>
       </v-card-actions>
     </v-card> 
@@ -22,9 +17,7 @@
 <script>
 import {mapActions} from 'vuex'
 import {FETCH_SPEC_BILL} from '@/store/modules/Bills/bill-types'
-// Dialog components
-import BillDialog from '@/components/Dialogs/Bill/BillDialog'
-import VoteDialog from '@/components/Dialogs/Vote/VoteDialog'
+
 export default {
   props: {
     vote: {
@@ -33,10 +26,6 @@ export default {
     },
     index: Number,
     loadOpen: Boolean
-  },
-  components: {
-    appBillDialog: BillDialog,
-    appVoteDialog: VoteDialog,
   },
   data () {
     return {

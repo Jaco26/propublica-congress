@@ -31,9 +31,9 @@
         </v-toolbar>
        
         <past-roles v-if="inProfile" :personLoading="personLoading" :person="person" />
-        <votes v-if="inVotes" :votes="votes" :votesLoading="votesLoading" />
-        <bills v-if="inBills" :bills="bills" :billsLoading="billsLoading" />
-        <statements v-if="inStatements" :statements="statements" :statementsLoading="statementsLoading" />
+        <votes v-if="inVotes" :votes="votes" :memberId="person.member_id" :votesLoading="votesLoading" />
+        <bills v-if="inBills" :bills="bills" :memberId="person.member_id" :billsLoading="billsLoading" />
+        <statements v-if="inStatements" :memberId="person.member_id" :statements="statements" :statementsLoading="statementsLoading" />
         
       </v-flex>
     </v-layout>
@@ -118,8 +118,14 @@ export default {
     // }
   },
   beforeRouteUpdate (to, from, next) {
-    this.fetchMember(to.params.id)
+ 
+    if (to.fullPath.split('').filter(char => char == '/').length == 3) {
+      console.log('MEMBER PATH MATCH');
+      
+      this.fetchMember(to.params.id)
+    }
     next();
+    
   },
 
 }

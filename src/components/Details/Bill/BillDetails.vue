@@ -65,9 +65,17 @@ export default {
     }),
   },
   beforeRouteEnter (to, from, next) {
-    next(vm => {
+    console.log('BILL DETAILS',to);
+    
+    next(vm => {   
+      console.log('IN NEXT');
+         
       vm.fetchBill(to.params)
     })
+  },
+  beforeRouteUpdate(to, from, next) {
+    console.log('ROUTE UPDATING');
+    
   }
   
 }
