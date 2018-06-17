@@ -7,6 +7,9 @@ import MembersLeaving from '@/components/Members/MembersLeaving';
 import Member from '@/components/Members/Member/Member';
 import BillDetails from '@/components/Details/Bill/BillDetails'
 import VoteDetails from '@/components/Details/Vote/VoteDetails'
+import MemberBills from '@/components/Members/Member/Bills'
+import MemberVotes from '@/components/Members/Member/Votes'
+import MemberStatements from '@/components/Members/Member/Statements'
 
 export default {
   path: '/members',
@@ -30,6 +33,21 @@ export default {
       component: Member,
       children: [
         {
+          path: 'bills',
+          name: 'memberBills',
+          component: MemberBills,
+        },
+        {
+          path: 'votes',
+          name: 'memberVotes',
+          component: MemberVotes,
+        },
+        {
+          path: 'statements',
+          name: 'memberStatements',
+          component: MemberStatements,
+        },
+        {
           path: ':billId',
           name: 'memberBillDetails',
           component: BillDetails,
@@ -38,7 +56,7 @@ export default {
           path: ':rollCall/:sessionNumber/:congress/:chamber',
           name: 'memberVoteDetails',
           component: VoteDetails,
-        }
+        },
       ],
     },
     {
