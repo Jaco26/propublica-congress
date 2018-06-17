@@ -35,43 +35,28 @@
           </v-layout>
         </v-container>
     </v-container>
-
-    
-
-    <!-- <v-container grid-list-md v-if="!billsLoading">
-      <v-layout wrap>
-        <v-flex xs12 sm6 v-for="(bill, i) in bills" :key="i">
-          <app-bill-list-item
-            :bill="bill"
-          ></app-bill-list-item>
-        </v-flex>
-      </v-layout>
-      
-    </v-container> -->
-
-    
-
   </div>
-  
 </template>
 
 <script>
-
 import BillListItem from '@/components/ListItems/BillListItem'
-
-// import BillDialog from '@/components/Dialogs/Bill/BillDialog'
-import {mapActions, mapMutations} from 'vuex';
-import {FETCH_SPEC_BILL} from '@/store/modules/Bills/bill-types'
+import {mapState} from 'vuex';
+// import {FETCH_SPEC_BILL} from '@/store/modules/Bills/bill-types'
 export default {
   components: {
     appBillListItem: BillListItem,
   },
-  props: ['bills', 'billsLoading', 'memberId'],
-  methods: {
-    ...mapActions('bills/specificBill', {
-      fetchBill: FETCH_SPEC_BILL,
+  // // props: ['bills', 'billsLoading', 'memberId'],
+  // methods: {
+  //   // ...mapActions('bills/specificBill', {
+  //   //   fetchBill: FETCH_SPEC_BILL,
+  //   // }),
+  // }
+  computed: {
+    ...mapState('members/specificMember', {
+      bills: state => state.bills.list,
+      billsLoading: state => state.bills.loading,
     }),
-   
   }
 
 }

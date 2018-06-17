@@ -4,13 +4,17 @@
       <v-flex xs12>
         <v-toolbar>
           <v-toolbar-title v-if="!personLoading" class="headline"> 
-            {{person.first_name}} {{person.last_name}}  
+            {{member.first_name}} {{member.last_name}}  
           </v-toolbar-title>
           <v-spacer></v-spacer>
           <!-- If the screen is larger than xs (v-if) -->
           <v-toolbar-items v-if="$vuetify.breakpoint.name != 'xs'">
             <v-tabs color="transparent" v-model="active" slider-color="purple">
-              <v-tab v-if="!tab.loading" v-for="tab in tabs" :key="tab.title" @click="show(tab.action)">
+              <v-tab 
+                v-if="!tab.loading" 
+                v-for="tab in tabs" 
+                :key="tab.title" 
+                :to="tab.path">
                 {{tab.title}}
               </v-tab>
             </v-tabs>
@@ -29,11 +33,8 @@
             </v-list>
           </v-menu>
         </v-toolbar>
-       
-        <past-roles v-if="inProfile" :personLoading="personLoading" :person="person" />
-        <votes v-if="inVotes" :votes="votes" :memberId="person.member_id" :votesLoading="votesLoading" />
-        <bills v-if="inBills" :bills="bills" :memberId="person.member_id" :billsLoading="billsLoading" />
-        <statements v-if="inStatements" :memberId="person.member_id" :statements="statements" :statementsLoading="statementsLoading" />
+      
+        <router-view></router-view>
         
       </v-flex>
     </v-layout>
@@ -60,22 +61,18 @@ export default {
   data () {
     return {
       tabs: [
-        { title: 'Past Roles', action: 'inProfile', loading: this.personLoading },
-        { title: 'Votes', action: 'inVotes', loading: this.votesLoading },
-        { title: 'Bills', action: 'inBills', loading: this.billsLoading },
-        { title: 'Statements', action: 'inStatements', loading: this.statementsLoading },
+        { title: 'Past Roles', path: `/members/member/${this.$route.params.id}`, loading: this.personLoading },
+        { title: 'Votes', path: `/members/member/${this.$route.params.id}/votes`, loading: this.votesLoading },
+        { title: 'Bills', path: `/members/member/${this.$route.params.id}/bills`, loading: this.billsLoading },
+        { title: 'Statements', path: `/members/member/${this.$route.params.id}/statements`, loading: this.statementsLoading },
       ],
       active: null,
       chamber: '',
-      inProfile: true,
-      inBills: false,
-      inVotes: false,
-      inStatements: false,
     }
   },
   computed: {
     ...mapState('members/specificMember', {
-      person: state => state.profile.main,
+      member: state => state.profile.main,
       personLoading: state => state.profile.loading,
       bills: state => state.bills.list,
       billsLoading: state => state.bills.loading,
@@ -100,33 +97,20 @@ export default {
     ...mapActions('members/specificMember', {
       fetchMember: types.FETCH_MEMBER,
     }),
-    show (x) {      
-      this.inBills = false;
-      this.inVotes = false;
-      this.inStatements = false;
-      this.inProfile = false;
-      this[x] = true;
-    }
   },
-  beforeRouteEnter (to, from, next) {
-    // if(to.params.id) {     
+  beforeRouteEnter (to, from, next) {   
       next(vm => {
         vm.fetchMember(to.params.id);
       });
-    // } else {
-    //   next();
-    // }
   },
-  beforeRouteUpdate (to, from, next) {
- 
-    if (to.fullPath.split('').filter(char => char == '/').length == 3) {
-      console.log('MEMBER PATH MATCH');
-      
-      this.fetchMember(to.params.id)
-    }
-    next();
+  // beforeRouteUpdate (to, from, next) {
+  //   if (to.fullPath.split('').filter(char => char == '/').length == 3) {
+  //     console.log('MEMBER PATH MATCH');
+  //     this.fetchMember(to.params.id)
+  //   }
+  //   next();
     
-  },
+  // },
 
 }
 

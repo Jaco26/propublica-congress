@@ -33,7 +33,7 @@
             </v-layout>
             <v-layout column v-if="vote.bill.title">
               <v-flex xs12>
-                <small><b>Bill:</b></small> <router-link :to="`/bills/${vote.bill.bill_id}`"> <strong> {{vote.bill.number}}</strong> </router-link> {{vote.bill.title}}
+                <small><b>Bill:</b></small> <router-link :to="{name: 'memberBillDetails', params: {billId: vote.bill.bill_id}}"> <strong> {{vote.bill.number}}</strong> </router-link> {{vote.bill.title}}
               </v-flex>
               <v-flex xs12>
                 <small><b>Latest Action:</b></small> {{vote.bill.latest_action}}
@@ -49,26 +49,6 @@
               </v-flex>
             </v-layout>
             <v-divider></v-divider>
-            <v-layout justify-start>
-              <!-- <v-flex>
-                <app-vote-dialog 
-                  :propVotePayload="{
-                    rollCall: vote.roll_call,
-                    sessionNumber: vote.session, 
-                    chamber: vote.chamber, 
-                    congress: vote.congress
-                  }" 
-                ></app-vote-dialog>
-              </v-flex>
-              <v-flex>
-                <app-bill-dialog
-                  v-if="vote.bill.bill_id"
-                  :propBillId="vote.bill.bill_id"
-                ></app-bill-dialog>
-              </v-flex> -->
-            </v-layout>
-            
-
           </v-flex>
         </v-layout>
       </v-container>
@@ -78,14 +58,15 @@
 </template>
 
 <script>
-// Dialogs
-// import VoteDialog from '@/components/Dialogs/Vote/VoteDialog'
-// import BillDialog from '@/components/Dialogs/Bill/BillDialog'
 // Vuex
-import {mapGetters} from 'vuex'
+import {mapState} from 'vuex'
 export default {
-  props: ['votes', 'votesLoading', 'memberId'],
-  
+  computed: {
+    ...mapState('members/specificMember', {
+      votes: state => state.votes.list,
+      votesLoading: state => state.votes.loading,
+    })
+  }
 }
 </script>
 

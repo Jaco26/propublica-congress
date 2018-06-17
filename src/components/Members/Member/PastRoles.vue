@@ -5,7 +5,7 @@
     </v-layout>
     <v-container grid-list-md v-if="!personLoading">
     <h1>Past Roles</h1>
-      <v-layout  column>
+      <v-layout column>
           <role 
             v-for="(role, i) in person.roles"
             :key="i"
@@ -19,12 +19,20 @@
 </template>
 
 <script>
+// Components
 import Role from './Role';
+// Vuex
+import {mapState} from 'vuex'
 export default {
-  props: ['person', 'personLoading'],
   components: {
     Role,
   },
+  computed: {
+    ...mapState('members/specificMember', {
+      person: state => state.profile.main,
+      personLoading: state => state.profile.loading,
+    })
+  }
 
 }
 

@@ -7,6 +7,7 @@ import MembersLeaving from '@/components/Members/MembersLeaving';
 import Member from '@/components/Members/Member/Member';
 import BillDetails from '@/components/Details/Bill/BillDetails'
 import VoteDetails from '@/components/Details/Vote/VoteDetails'
+import MemberRoles from '@/components/Members/Member/PastRoles'
 import MemberBills from '@/components/Members/Member/Bills'
 import MemberVotes from '@/components/Members/Member/Votes'
 import MemberStatements from '@/components/Members/Member/Statements'
@@ -32,6 +33,11 @@ export default {
       name: 'member',
       component: Member,
       children: [
+        {
+          path: '',
+          name: 'memberRoles',
+          component: MemberRoles,
+        },
         {
           path: 'bills',
           name: 'memberBills',
