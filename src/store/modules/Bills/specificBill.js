@@ -15,13 +15,17 @@ const mutations = {
   },
 
 
-  [types.IS_LOADING] (state, payload) {
+  [types.IS_LOADING] (state, payload) {    
     isLoading(state, payload);
   },
 };
 
 const actions = {
-  async [types.FETCH_SPEC_BILL] ({commit}, payload) {    
+  async [types.FETCH_SPEC_BILL] ({commit, state}, payload) {    
+    console.log('FETCHING BILL USING,', payload);
+    if (state.bill.main.bill_id == payload.billId) {
+      return
+    }
     commit(types.IS_LOADING, { propsPath: 'bill', is: true });
     commit(types.SET_SPEC_BILL, await billsService.getSpecificBill(payload))
     commit(types.IS_LOADING, { propsPath: 'bill', is: false });

@@ -50,6 +50,8 @@ router.get(`/recent/:type/:congress/:chamber`, (req, res) => {
  */
 router.get('/specific/:billId', (req, res) => {
   let [billId, congress] = req.params.billId.split('-');  
+  console.log('************', billId, '**********', congress );
+  
   PropublicaAPI.get(`/${congress}/bills/${billId}.json`)
     .then(response => res.send(response.data))
     .catch(err => {

@@ -7,7 +7,7 @@
       <v-card-actions>
         <v-layout>
           <v-flex xs12 sm4>
-            <app-bill-dialog :propBillId="vote.bill.bill_id" ></app-bill-dialog>
+            <app-bill-dialog v-if="vote.bill.bill_id" :propBillId="vote.bill.bill_id" ></app-bill-dialog>
           </v-flex>
           <v-flex xs12 sm4>
             <app-vote-dialog :propVote="vote" ></app-vote-dialog>

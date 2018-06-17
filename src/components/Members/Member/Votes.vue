@@ -49,16 +49,26 @@
               </v-flex>
             </v-layout>
             <v-divider></v-divider>
+            <v-layout justify-start>
+              <v-flex>
+                <app-vote-dialog 
+                  :propVotePayload="{
+                    rollCall: vote.roll_call,
+                    sessionNumber: vote.session, 
+                    chamber: vote.chamber, 
+                    congress: vote.congress
+                  }" 
+                ></app-vote-dialog>
+              </v-flex>
+              <v-flex>
+                <app-bill-dialog
+                  v-if="vote.bill.bill_id"
+                  :propBillId="vote.bill.bill_id"
+                ></app-bill-dialog>
+              </v-flex>
+            </v-layout>
+            
 
-            <app-vote-dialog 
-              :propVotePayload="{
-                rollCall: vote.roll_call,
-                sessionNumber: vote.session, 
-                chamber: vote.chamber, 
-                congress: vote.congress
-              }"
-               
-            ></app-vote-dialog>
           </v-flex>
         </v-layout>
       </v-container>

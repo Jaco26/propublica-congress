@@ -1,5 +1,5 @@
 <template>
-  <v-layout justify-center>  
+  <v-layout justify-start>  
     <v-dialog :full-width="$vuetify.breakpoint.xsOnly" max-width="500" v-model="dialog">
       <v-btn depressed color="accent darken-3" slot="activator" @click="!propVote ? fetchVote(propVotePayload) : null">Vote Details</v-btn>
       <v-card>
