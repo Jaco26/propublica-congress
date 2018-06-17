@@ -32,7 +32,7 @@
             </v-layout>
             <v-divider></v-divider>
             <v-tooltip v-if="props.item.description.length > 120" max-width="400" top>
-              <span slot="activator">{{descriptionSlices[props.index]}}</span>
+              <span slot="activator">{{descriptionSlices[descriptionSlices.length - props.item.id]}}  </span>
               <span>{{props.item.description}}</span>
             </v-tooltip>
             <v-flex v-else>

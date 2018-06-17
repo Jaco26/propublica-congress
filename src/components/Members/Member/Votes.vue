@@ -13,7 +13,6 @@
                 <strong>Vote: <router-link 
                   :to="{name: 'specificVote', params: {rollCall: vote.roll_call, sessionNumber: vote.session, chamber: vote.chamber, congress: vote.congress}}"
                 >{{vote.description}}</router-link> </strong>
-                <!-- <strong>Vote: <router-link :to="`/votes/vote/${vote.roll_call}/${vote.session}`">{{vote.description}}</router-link> </strong> -->
               </v-flex>
               <v-flex offset-xs1 class="text-xs-right date"> 
                 Date: {{vote.date}}
@@ -50,6 +49,16 @@
               </v-flex>
             </v-layout>
             <v-divider></v-divider>
+
+            <app-vote-dialog 
+              :propVotePayload="{
+                rollCall: vote.roll_call,
+                sessionNumber: vote.session, 
+                chamber: vote.chamber, 
+                congress: vote.congress
+              }"
+               
+            ></app-vote-dialog>
           </v-flex>
         </v-layout>
       </v-container>
@@ -59,15 +68,18 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex';
+// Dialogs
+import VoteDialog from '@/components/Dialogs/Vote/VoteDialog'
+import BillDialog from '@/components/Dialogs/Bill/BillDialog'
+// Vuex
+import {mapGetters} from 'vuex'
 export default {
   props: ['votes', 'votesLoading'],
-  // computed: {
-  //   ...mapGetters({
-  //     votes: 'specificMemberVotes',
-  //   }),
-
-  // },
+  components: {
+    appVoteDialog: VoteDialog,
+    appBillDialog: BillDialog,
+  },
+  
 
 }
 </script>

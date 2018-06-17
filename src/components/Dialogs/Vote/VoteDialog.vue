@@ -1,19 +1,22 @@
 <template>
   <v-layout justify-center>  
-    <v-dialog :fullscreen="$vuetify.breakpoint.xsOnly" v-model="dialog">
-      <v-btn slot="activator" @click="!propVote ? fetchVote(propVotePayload) : null">Vote Details</v-btn>
+    <v-dialog :full-width="$vuetify.breakpoint.xsOnly" max-width="500" v-model="dialog">
+      <v-btn depressed color="accent darken-3" slot="activator" @click="!propVote ? fetchVote(propVotePayload) : null">Vote Details</v-btn>
+      <v-card>
+        <div v-if="storeVoteLoading">
+          <v-progress-circular indeterminate color="primary"></v-progress-circular>
+        </div>
+        <div v-else>
+          <vote-title v-if="vote.description" :vote="vote"></vote-title>
+          <v-card-text>
+            <vote-description v-if="vote" :vote="vote"></vote-description>
+            <vote-party-positions v-if="partyPositions" :partyPositions="partyPositions"></vote-party-positions>
+            <vote-individual-positions v-if="vote.positions" :individualPositions="vote.positions" ></vote-individual-positions>
+          </v-card-text>
+        </div>
+      </v-card>
     </v-dialog>
-    <v-card>
-      <div v-if="storeVoteLoading">
-        <v-progress-circular indeterminate color="primary"></v-progress-circular>
-      </div>
-      <div v-else>
-        <vote-title :vote="vote"></vote-title>
-        <vote-description :vote="vote"></vote-description>
-        <vote-party-positions :partyPositions="{republican, democrat, independent, total} = vote"></vote-party-positions>
-        <vote-individual-positions :individualPositions="vote.positions" ></vote-individual-positions>
-      </div>
-    </v-card>
+   
   </v-layout>
 </template>
 
@@ -53,6 +56,14 @@ export default {
       return this.propVote
         ? this.propVote
         : this.storeVote;
+    },
+    partyPositions() {
+      return {
+        republican: this.vote.republican,
+        democratic: this.vote.democratic,
+        independent: this.vote.independent,
+        total: this.vote.total,
+      };
     },
     ...mapState('votes', {
       storeVote: state => state.specificRollcallVote.vote,

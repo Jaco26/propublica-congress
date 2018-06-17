@@ -2,7 +2,7 @@
   <v-card-text>
     <v-layout class="my-1">
       <v-flex>
-        <ul>
+        <ul style="list-style: none;">
           <li><b>Sponsor:</b> {{bill.sponsor_title}} {{bill.sponsor || bill.sponsor_name}} {{bill.sponsor_party}} {{bill.sponsor_state}}</li>
           <li><b>Introduced:</b> {{bill.introduced_date}}</li>
           <li><b>Active:</b> {{bill.active}}</li>
@@ -10,7 +10,7 @@
         </ul>
       </v-flex>
       <v-flex>
-        <ul>
+        <ul style="list-style: none;">
           <li> 
             <b>Passed the House:</b> 
             {{bill.house_passage ? bill.house_passage : 'No'}} 
@@ -46,7 +46,7 @@
     </v-layout>
     <v-layout>
       <v-flex>
-        <ul>
+        <ul style="list-style: none;">
           <li v-if="bill.withdrawn_cosponsors > 0"> <b>Withdrawn Cosponsors</b> {{bill.withdrawn_cosponsors}} </li>
           <li v-if="bill.primary_subject"> <b>Primary Subject:</b> {{bill.primary_subject}} </li>
           <li v-if="bill.committees"> <b>Committees:</b> {{bill.committees}} </li>

@@ -4,40 +4,16 @@
       <v-card-title class="subheading">
         <strong>{{vote.description}}</strong>
       </v-card-title>
-      <v-divider></v-divider>
-      <transition name="fade">
-        <v-card-text >
-          <v-layout>
-            <v-flex xs12 >
-              <app-bill-dialog :propBillId="vote.bill.bill_id" ></app-bill-dialog>
-              <small><b>Date:</b></small> {{vote.date}} <br>
-              <small><b>Question:</b></small> {{vote.question}} <br>
-              <small><b>Result:</b></small> {{vote.result}}
-            </v-flex>
-          </v-layout>
-          <v-layout>
-            <v-flex xs12 md6>
-              <h4>Democrats</h4>
-              <small><b>Yes</b></small> {{vote.democratic.yes}} <br>
-              <small><b>No</b></small> {{vote.democratic.no}} <br>
-              <small><b>Not Voting</b></small> {{vote.democratic.not_voting}} <br>
-            </v-flex>
-             <v-flex xs12 md6>
-              <h4>Republicans</h4>
-              <small><b>Yes</b></small> {{vote.republican.yes}} <br>
-              <small><b>No</b></small> {{vote.republican.no}} <br>
-              <small><b>Not Voting</b></small> {{vote.republican.not_voting}} <br>
-            </v-flex>
-            <v-flex xs12 md6>
-              <h4>Independents</h4>
-              <small><b>Yes</b></small> {{vote.independent.yes}} <br>
-              <small><b>No</b></small> {{vote.independent.no}} <br>
-              <small><b>Not Voting</b></small> {{vote.independent.not_voting}} <br>
-            </v-flex>
-          </v-layout>
-         
-        </v-card-text>
-      </transition>
+      <v-card-actions>
+        <v-layout>
+          <v-flex xs12 sm4>
+            <app-bill-dialog :propBillId="vote.bill.bill_id" ></app-bill-dialog>
+          </v-flex>
+          <v-flex xs12 sm4>
+            <app-vote-dialog :propVote="vote" ></app-vote-dialog>
+          </v-flex>
+        </v-layout>
+      </v-card-actions>
     </v-card> 
     
   </v-flex>
@@ -46,7 +22,9 @@
 <script>
 import {mapActions} from 'vuex'
 import {FETCH_SPEC_BILL} from '@/store/modules/Bills/bill-types'
+// Dialog components
 import BillDialog from '@/components/Dialogs/Bill/BillDialog'
+import VoteDialog from '@/components/Dialogs/Vote/VoteDialog'
 export default {
   props: {
     vote: {
@@ -57,7 +35,8 @@ export default {
     loadOpen: Boolean
   },
   components: {
-    appBillDialog: BillDialog
+    appBillDialog: BillDialog,
+    appVoteDialog: VoteDialog,
   },
   data () {
     return {

@@ -1,7 +1,7 @@
 <template>
   <v-layout row justify-center>
-    <v-dialog :fullscreen="$vuetify.breakpoint.xsOnly" v-model="dialog">
-      <v-btn slot="activator" @click="!propBill ? fetchBill({billId: propBillId}) : null">Bill Details</v-btn>
+    <v-dialog :fullscreen="$vuetify.breakpoint.xsOnly" max-width="900" v-model="dialog">
+      <v-btn depressed color="accent darken-3" slot="activator" @click="!propBill ? fetchBill({billId: propBillId}) : null">Bill Details</v-btn>
       <v-card>
         <div v-if="storeBillLoading">
           <v-progress-circular indeterminate color="primary"></v-progress-circular>
