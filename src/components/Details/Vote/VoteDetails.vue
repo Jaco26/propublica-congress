@@ -2,7 +2,7 @@
   <v-layout justify-start>
     <v-flex>
       <v-card>
-        <div v-if="voteLoading">
+        <div v-if="storeVoteLoading">
           <v-progress-circular indeterminate color="primary"></v-progress-circular>
         </div>
         <div v-else>
@@ -27,6 +27,12 @@ import IndividualPositions from './IndividualPositions'
 import {mapState, mapActions} from 'vuex'
 import{FETCH_SPEC_RC_VOTE} from '@/store/modules/Votes/vote-types'
 export default {
+  props: {
+    propVote: {
+      type: Object,
+      required: false,
+    }
+  },
   components: {
     appVoteDescription: Description,
     appVoteTitle: Title,
@@ -35,9 +41,12 @@ export default {
   },
   computed: {
     ...mapState('votes', {
-      vote: state => state.specificRollcallVote.vote,
-      voteLoading: state => state.specificRollcallVote.loading,
+      storeVote: state => state.specificRollcallVote.vote,
+      storeVoteLoading: state => state.specificRollcallVote.loading,
     }),
+    vote(){
+      return this.propVote ? this.propVote : this.storeVote;
+    },
     partyPositions(){
       return {
         republican: this.vote.republican,
@@ -54,7 +63,7 @@ export default {
   },
   beforeRouteEnter (to, from, next) {
     next(vm => {
-      vm.fetchVote(to.params);
+      vm.propVote ? null : vm.fetchVote(to.params);
     });
   }
 

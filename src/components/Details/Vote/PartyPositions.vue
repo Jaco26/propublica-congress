@@ -1,6 +1,6 @@
 <template>
-  <v-layout  column class="my-1">
-    <v-layout>
+  <v-layout  class="my-1">
+    <!-- <v-layout> -->
       <v-flex v-if="partyPositions.democratic" xs12 md6>
         <h4>Democrats</h4>
         <small><b>Yes</b></small> {{partyPositions.democratic.yes}} <br>
@@ -25,17 +25,7 @@
         <small><b>No</b></small> {{partyPositions.total.no}} <br>
         <small><b>Not Voting</b></small> {{partyPositions.total.not_voting}} <br>
       </v-flex>
-    </v-layout>
-    <v-divider></v-divider>
-    <v-layout>
-      <v-flex v-if="partyPositions.total" xs12>
-        <h4>Total</h4>
-        <small><b>Yes</b></small> {{partyPositions.total.yes}} &nbsp;
-        <small><b>No</b></small> {{partyPositions.total.no}}  &nbsp;
-        <small><b>Not Voting</b></small> {{partyPositions.total.not_voting}}  &nbsp;
-      </v-flex>
-    </v-layout>
-   
+    <!-- </v-layout>  -->
   </v-layout>
 </template>
 
@@ -44,7 +34,7 @@ export default {
   props: {
     partyPositions: {
       type: Object,
-      // required: true
+      required: true
     }
   }
 }

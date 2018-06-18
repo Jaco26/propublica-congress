@@ -1,23 +1,23 @@
 <template>
-  <v-flex d-flex xs12 @click="openThis" class="vote">
+  <!-- <v-flex d-flex xs12 @click="openThis" class="vote">
     <v-card tile>
       <v-card-title class="subheading">
         <strong>{{vote.description}}</strong>
       </v-card-title>
-      <v-card-actions>
+      <v-card-actions> -->
         <v-layout>
-          
+          <app-vote-details :propVote="vote"></app-vote-details>
         </v-layout>
-      </v-card-actions>
+      <!-- </v-card-actions>
     </v-card> 
     
-  </v-flex>
+  </v-flex> -->
 </template>
 
 <script>
 import {mapActions} from 'vuex'
 import {FETCH_SPEC_BILL} from '@/store/modules/Bills/bill-types'
-
+import VoteDetails from '@/components/Details/Vote/VoteDetails'
 export default {
   props: {
     vote: {
@@ -26,6 +26,9 @@ export default {
     },
     index: Number,
     loadOpen: Boolean
+  },
+  components: {
+    appVoteDetails: VoteDetails,
   },
   data () {
     return {

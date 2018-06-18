@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const morgan = require('morgan');
-require('dotenv').config();
+// const morgan = require('morgan');
+// // require('dotenv').config();
 
 // Route includes
 
@@ -24,7 +24,7 @@ const myDatabaseRouter = require('./routes/database/database.routes')
 const app = express();
 
 // Use morgan and body-parser middleware
-app.use(morgan('combined'));
+// app.use(morgan('combined'));
 app.use(bodyParser.json());
 
 // Serve static files
