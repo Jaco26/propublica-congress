@@ -30,12 +30,11 @@ export default {
     },
     {
       path: 'member/:id',
-      name: 'member',
       component: Member,
       children: [
         {
           path: '',
-          name: 'memberRoles',
+          name: 'member',
           component: MemberRoles,
         },
         {
@@ -54,12 +53,12 @@ export default {
           component: MemberStatements,
         },
         {
-          path: ':billId',
+          path: 'bills/:billId',
           name: 'memberBillDetails',
           component: BillDetails,
         },
         {
-          path: ':rollCall/:sessionNumber/:congress/:chamber',
+          path: 'votes/:rollCall/:sessionNumber/:congress/:chamber',
           name: 'memberVoteDetails',
           component: VoteDetails,
         },

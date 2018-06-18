@@ -103,14 +103,14 @@ export default {
         vm.fetchMember(to.params.id);
       });
   },
-  // beforeRouteUpdate (to, from, next) {
-  //   if (to.fullPath.split('').filter(char => char == '/').length == 3) {
-  //     console.log('MEMBER PATH MATCH');
-  //     this.fetchMember(to.params.id)
-  //   }
-  //   next();
+  beforeRouteUpdate (to, from, next) {
+    if (to.fullPath.split('').filter(char => char == '/').length == 3) {
+      console.log('MEMBER PATH MATCH');
+      this.fetchMember(to.params.id)
+    }
+    next();
     
-  // },
+  },
 
 }
 

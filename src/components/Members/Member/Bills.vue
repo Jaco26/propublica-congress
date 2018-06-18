@@ -1,12 +1,12 @@
 <template>
   <div>
-    <v-layout v-if="billsLoading">
-      <v-progress-linear indeterminate color="primary"></v-progress-linear>
-    </v-layout>
+    <v-card>
+      <v-layout v-if="billsLoading">
+        <v-progress-linear indeterminate color="primary"></v-progress-linear>
+      </v-layout>
 
-    <v-container grid-list-md v-if="!billsLoading">
-      <h1>Recent Cosponsored Bills</h1>
-      <v-container grid-list-sm mt-5>
+      <v-container grid-list-md v-if="!billsLoading">
+        <h1>Recent Cosponsored Bills</h1>
           <v-layout column>
             <v-flex class="grey lighten-3" xs6 sm6 md6 pa-2 mb-2 v-for="(bill, i) in bills" :key="i">
               <v-layout>
@@ -21,7 +21,7 @@
               <v-divider></v-divider>
               <v-layout v-if="bill.title">
                 <v-flex v-if="bill.title">
-                  <small><b>Bill:</b></small> <router-link :to="`/members/member/${memberId}/${bill.bill_id}`"> <strong>{{bill.bill_id}}</strong> </router-link> {{bill.short_title ? bill.short_title : bill.title}}
+                  <small><b>Bill:</b></small> <router-link :to="`/members/member/${$route.params.id}/bills/${bill.bill_id}`"> <strong>{{bill.bill_id}}</strong> </router-link> {{bill.short_title ? bill.short_title : bill.title}}
                 </v-flex>
               </v-layout>
               <v-layout v-if="bill.latest_major_action">
@@ -33,25 +33,19 @@
               Learn more on <a target="_blank" :href="`${bill.govtrack_url}`">Govtrack</a>
             </v-flex>
           </v-layout>
-        </v-container>
-    </v-container>
+      </v-container>
+    </v-card>
+    
   </div>
 </template>
 
 <script>
 import BillListItem from '@/components/ListItems/BillListItem'
 import {mapState} from 'vuex';
-// import {FETCH_SPEC_BILL} from '@/store/modules/Bills/bill-types'
 export default {
   components: {
     appBillListItem: BillListItem,
   },
-  // // props: ['bills', 'billsLoading', 'memberId'],
-  // methods: {
-  //   // ...mapActions('bills/specificBill', {
-  //   //   fetchBill: FETCH_SPEC_BILL,
-  //   // }),
-  // }
   computed: {
     ...mapState('members/specificMember', {
       bills: state => state.bills.list,

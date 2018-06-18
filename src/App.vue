@@ -2,7 +2,7 @@
   <v-app id="app">
     <app-responsive-nav></app-responsive-nav>
     <v-content>
-      <v-flex pa-2 class="title warning elevation-1" id="note-banner">
+      <v-flex pa-2 class="body-2 warning elevation-1" id="note-banner">
         <strong>NOTE:</strong> This site is in active development. New pages and features will be added on a regular basis and some layouts will change.  
       </v-flex>
       <v-container fluid>
@@ -34,7 +34,6 @@ export default {
   },
   created(){
     this.$store.dispatch('members/FETCH_MEMBERS');
-    // this.$store.dispatch('votes/FETCH_RECENT_EXPLANATIONS', {congress: 115});
   }
 };
 </script>

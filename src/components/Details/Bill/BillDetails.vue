@@ -27,26 +27,11 @@ import Actions from './Actions'
 import {mapState, mapActions} from 'vuex'
 import {FETCH_SPEC_BILL} from '@/store/modules/Bills/bill-types'
 export default {
-   props: {
-    propBill: {
-      type: Object,
-      required: false,
-    },
-    propBillId: {
-      type: String,
-      required: false,
-    }
-  },
   components: {
     billTitle: Title,
     billPeople: People,
     billVotes: Votes,
     billActions: Actions,
-  },
-  data () {
-    return {
-      dialog: false,
-    }
   },
   computed: {
     bill () {

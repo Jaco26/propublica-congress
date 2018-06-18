@@ -1,17 +1,17 @@
 <template>
   <div>
-    <v-layout v-if="votesLoading" >
+    <v-card>
+      <v-layout v-if="votesLoading" >
       <v-progress-linear indeterminate color="primary"></v-progress-linear>
     </v-layout>
     <v-container grid-list-md v-if="!votesLoading">
       <h1>Recent Votes</h1>
-      <v-container grid-list-sm mt-5>
         <v-layout column>
           <v-flex class="grey lighten-3" xs6 sm6 md6 pa-2 mb-2 v-for="(vote, i) in votes" :key="i" v-if="vote.description">
             <v-layout>
               <v-flex  class="text-xs-left">
                 <strong>Vote: <router-link 
-                  :to="{name: 'specificVote', params: {rollCall: vote.roll_call, sessionNumber: vote.session, chamber: vote.chamber, congress: vote.congress}}"
+                  :to="{name: `memberVoteDetails`, params: {rollCall: vote.roll_call, sessionNumber: vote.session, chamber: vote.chamber, congress: vote.congress}}"
                 >{{vote.description}}</router-link> </strong>
               </v-flex>
               <v-flex offset-xs1 class="text-xs-right date"> 
@@ -51,8 +51,9 @@
             <v-divider></v-divider>
           </v-flex>
         </v-layout>
-      </v-container>
     </v-container>
+    </v-card>
+    
   </div>
   
 </template>
