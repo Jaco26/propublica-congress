@@ -14,9 +14,6 @@
                   :to="{name: `memberVoteDetails`, params: {rollCall: vote.roll_call, sessionNumber: vote.session, chamber: vote.chamber, congress: vote.congress}}"
                 >{{vote.description}}</router-link> </strong>
               </v-flex>
-              <v-flex offset-xs1 class="text-xs-right date"> 
-                Date: {{vote.date}}
-              </v-flex>
             </v-layout>
             <v-divider></v-divider>
             <v-layout column v-if="vote.nomination">

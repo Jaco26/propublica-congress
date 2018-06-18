@@ -6,7 +6,11 @@
           <v-progress-circular indeterminate color="primary"></v-progress-circular>
         </div>
         <div v-else>
-          Hi
+          <app-vote-title :vote="vote"></app-vote-title>
+          <v-card-text>
+            <app-vote-description :vote="vote" ></app-vote-description>
+            <app-vote-party-positions :partyPositions="partyPositions" ></app-vote-party-positions>
+          </v-card-text>
         </div>
       </v-card>
     </v-flex>
@@ -34,6 +38,14 @@ export default {
       vote: state => state.specificRollcallVote.vote,
       voteLoading: state => state.specificRollcallVote.loading,
     }),
+    partyPositions(){
+      return {
+        republican: this.vote.republican,
+        democratic: this.vote.democratic,
+        independent: this.vote.independent,
+        total: this.vote.total,
+      }
+    }
   },
   methods: {
     ...mapActions('votes', {

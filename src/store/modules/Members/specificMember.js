@@ -55,6 +55,9 @@ export default {
   },
   actions: {
     async [types.FETCH_MEMBER] ({ commit, dispatch,  state, rootGetters }, member_id) {
+      if(member_id == state.profile.main.member_id) {
+        return
+      }
       commit(types.IS_LOADING, {propsPath: 'profile', is: true});
       commit(types.SET_MEMBER, await memberService.getSpecificMember(member_id));
       commit(types.IS_LOADING, { propsPath: 'profile', is: false });
