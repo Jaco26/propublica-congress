@@ -1,4 +1,5 @@
 import Bills from '@/components/Bills/Bills'
+import SearchBills from '@/components/Bills/SearchBills'
 import Keyword from '@/components/Bills/Keyword'
 import Recent from '@/components/Bills/Recent'
 import Upcoming from '@/components/Bills/Upcoming'
@@ -7,7 +8,7 @@ import Bill from '@/components/Bills/Bill'
 export default {
   path: '/bills',
   redirect: '/bills/search',
-  name: 'bills',
+  // name: 'bills',
   component: Bills,
   children: [
     {
@@ -29,6 +30,11 @@ export default {
       component: Bill,
       name: 'specificBill',
       path: ':billId'
+    },
+    {
+      component: SearchBills,
+      name: 'searchBills2',
+      path: ''
     }
   ]
 }
