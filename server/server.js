@@ -37,7 +37,9 @@ app.use('/api/congress/votes', votesRouter);
 app.use('/api/congress/statements', statementsRouter);
 app.use('/api/congress/committees', committeesRouter);
 app.use('/api/congress/other', otherEndpointsRouter);
+// Route to my postgres database
 app.use('/api/database', myDatabaseRouter);
+// Route for user comments to be sent to me (The naming is bad, I know)
 app.use('/api/user', userRouter);
 
 const port = process.env.PORT || 8081

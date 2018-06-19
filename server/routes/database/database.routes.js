@@ -1,31 +1,46 @@
 const express = require('express');
 const router = express.Router();
-const axios = require('axios');
 const pool = require('../../modules/pool');
-// const database = require('../../services/database/database.service');
 
-router.post('/members', async (req, res) => {
-  let { id, chamber, first_name, last_name, in_office, party } = req.body;
-  console.log('CHAMMMMMMBER', chamber);
+router.get('/bill-subjects/keyword', (req, res) => {
+  console.log(req.query);
   
-  const sqlText = `INSERT INTO bookmarks (member_id, chamber, first_name, last_name, in_office, current_party)
-  VALUES($1, $2, $3, $4, $5, $6);`;
-  pool.query(sqlText, [id, chamber, first_name, last_name, in_office, party])
-    .then(response => res.sendStatus(200))
-    .catch(err => {
-      console.log(err);
-      res.sendStatus(500);
-    });
+  const { query, offset} = req.query;
+  // For multiple words not inside double quotes:
+  // Search for match to any
+  if (query.split(' ').length > 1 && !query.startsWith('"')) {
+    let searchWords = query.split(' ').reduce( (a, b, index) => {
+      if (index == 0) {
+        a = `$${index+1}`;
+        return a;
+      } 
+      a += ` OR name ILIKE $${index+1}`;
+      return a;
+    }, '');
+    const sqlText = `SELECT * FROM bill_subjects WHERE name ILIKE ${searchWords}`;
+    res.send({sqlText})
+  // For single keyword queries or ones bound inside double quotes
+  } else {
+    console.log(query.replace(/"/g, ''));
+    
+    const sqlText = `SELECT * FROM bill_subjects WHERE name ILIKE $1 OFFSET $2;`;
+    pool.query(sqlText, [`%${query}%`, offset])
+      .then(response => {
+        res.send(response.rows)
+      })
+      .catch(err => {
+        throw err;
+      });
+  }
+  
 });
 
-router.get('/members', async (req, res) => {
-  const sqlText = `SELECT * FROM bookmarks ORDER BY id;`;
-  pool.query(sqlText, [])
-    .then(response => res.send(response.rows))
-    .catch(err => {
-      console.log(err);      
-      res.sendStatus(500);
-    });
+router.get('/bill-subjects/:letter', (req, res) => {
+
+});
+
+router.get('/bill-subjects/:popularity/:offset', (req, res) => {
+
 });
 
 module.exports = router;
