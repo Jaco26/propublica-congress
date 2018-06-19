@@ -1,12 +1,16 @@
 <template>
   <div>
     <h1>Search Bills</h1>
-    <select v-model="selectedSearchType" style="background-color: blue; color: white;">
+    <select v-model="selectedSearchType" value="" style="background-color: beige; color: #112211;">
       <option v-for="type in searchTypes" :key="type" :value="type"> {{type}} </option>
     </select>
+    <br>
+    <br>
+    <hr>
+
     <div v-if="selectedSearchType == 'keyword'">
       Search By Keyword
-      <select name="" id=""></select>
+      <bill-keyword-search @searchFor="fetchSearch"></bill-keyword-search>
     </div>
     <div v-if="selectedSearchType == 'recent'">
       Search By Recent
@@ -22,19 +26,20 @@
 </template>
 
 <script>
-import {FETCH_RECENT} from '@/store/modules/Bills/Search/search.bill.types'
+// Components
+import Keyword from './Keyword'
+// Vuex
+import {FETCH_RECENT, FETCH_SEARCH} from '@/store/modules/Bills/Search/search.bill.types'
 import {mapState, mapActions} from 'vuex'
 export default {
+  components: {
+    billKeywordSearch: Keyword,
+  },
   data () {
     return {
       searchTypes: ['keyword', 'recent', 'subject', 'upcoming'],
       selectedSearchType: '',
       searchParams: {
-        keyword: {
-          query: '', // keyword or phrase
-          sort: '', // "_score" or "date" (default is "date")
-          dir: '', // "asc" or "desc" (default is "desc")
-        },
         recent: {
           congress: '', // 105-115
           chamber: '', // "house", "senate" or "both"
@@ -48,17 +53,9 @@ export default {
         },
       },
       selectOptions: {
-        keyword: {
-          sort: [
-            {title: 'Score', value: '_score'},
-            {title: 'Date', value: 'date'}
-          ],
-          dir: [
-            {title: 'Descending', value: 'desc'},
-            {title: 'Ascending', value: 'asc'},
-          ]
-        },
+       
         recent: {
+          congress: this.congressFunc(105),
           chamber: [
             {title: 'House', value: 'house'},
             {title: 'Senate', value: 'senate'},
@@ -79,19 +76,34 @@ export default {
             {title: 'Senate', value: 'senate'},
           ]
         }
-      } 
-         
-       
+      }  
     };
   },
-  computed: {
-    ...mapState('bills', {
-      searchTypes: state => state.searchBills.searchTypes,
+  methods: {
+    ...mapActions('bills', {
+      fetchRecentBills: FETCH_RECENT,
+      fetchSearch: FETCH_SEARCH,
     }),
+    seeThis (event) {
+      console.log(event);
+    },
+    congressFunc (earliestCongress) {
+      let currentCongress = 115
+      let year1 = 2017;
+      let year2 = 2018;
+      let resultArray = [];
+      for (let i = currentCongress; i >= earliestCongress; i--) {
+        let congressObj = {
+          title: i.toString(),
+          description: `In session from ${year1}-${year2}`
+        };
+        resultArray.push(congressObj);
+        year1 -= 2;
+        year2 -= 2;
+      }
+      return resultArray;
+    },
   },
-  mounted () {
-    console.log(this.searchTypes);
-    
-  }
+  
 }
 </script>

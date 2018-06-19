@@ -1,5 +1,5 @@
 import Bills from '@/components/Bills/Bills'
-import SearchBills from '@/components/Bills/SearchBills'
+import SearchBills from '@/components/Bills/Search/SearchBills'
 import Keyword from '@/components/Bills/Keyword'
 import Recent from '@/components/Bills/Recent'
 import Upcoming from '@/components/Bills/Upcoming'

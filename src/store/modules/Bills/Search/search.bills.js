@@ -15,12 +15,7 @@ export const state = {
 };
 
 export const mutations = {
-  [types.SET_SELECTED_SEARCH_TYPE] (state, payload) {
-    state.selectedSearchType = payload;
-  },
-  [types.SET_SEARCH_PARAMS] (state, payload) {
-    state[state.selectedSearchType]
-  },
+
 
   [types.IS_LOADING] (state, payload) {
     isLoading(state, payload)
@@ -29,7 +24,13 @@ export const mutations = {
 
 export const actions = {
   async [types.FETCH_RECENT] ({commit}, payload) {
-    commit(types.SET_PREV_SEARCH, payload);
+    console.log(payload);
+    
+    // commit(types.SET_PREV_SEARCH, payload);
+    
+  },
+  async [types.FETCH_SEARCH] ({commit}, payload) {
+    console.log(payload);
     
   }
 };
