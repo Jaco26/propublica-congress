@@ -24,15 +24,24 @@ export const mutations = {
 
 export const actions = {
   async [types.FETCH_RECENT] ({commit}, payload) {
-    console.log(payload);
+    console.log('Search recent bills', payload);
     
     // commit(types.SET_PREV_SEARCH, payload);
     
   },
   async [types.FETCH_SEARCH] ({commit}, payload) {
-    console.log(payload);
+    console.log('Search by keyword',payload);
+    
+  },
+  async [types.FETCH_UPCOMMING] ({commit}, payload) {
+    console.log('Search upcoming bills', payload);
+    
+  },
+  async [types.FETCH_BY_SUBJECT] ({commit}, payload) {
+    console.log('Search bills by subject', payload);
     
   }
+
 };
 
 export const getters = {
