@@ -43,6 +43,13 @@ app.use('/api/user', userRouter);
 const port = process.env.PORT || 8081
 app.listen(port, () => console.log(`Server ready on port ${port}`))
 
-app.get('/api/test', (req, res) => {
-  res.send({success: 'YES!'});
-});
+
+
+// !!!!!!!!!!!!!!!!!!!!!!!!!!! *********************** ################### /////
+///////// ONLY RUN ONCE TO GET BILL SUBJECT JSON FROM congress.gov ////////////
+///////// SET UP CRON JOB LATER TO KEEP CURRENT //////////////////////////////
+// !!!!!!!!!!!!!!!!!!!!!!!!!!! *********************** ################### // 
+// const bigOlScraperDatabaseInserterMessyFunctionGoodtime = require('./modules/congress.subjects.scraper')
+// app.get('/grab/bill/subjects', (req, res) => {
+//   bigOlScraperDatabaseInserterMessyFunctionGoodtime()
+// })

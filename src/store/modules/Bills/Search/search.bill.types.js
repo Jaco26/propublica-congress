@@ -2,7 +2,7 @@
 export const FETCH_RECENT = 'fetchRecentBills';
 export const FETCH_SEARCH = 'fetchSearchBills';
 export const FETCH_BY_SUBJECT = 'fetchBillsBySubject';
-export const FETCH_UPCOMMING = 'fetchUpcomingBills';
+export const FETCH_UPCOMING = 'fetchUpcomingBills';
 export const FETCH_NEXT_PAGE = 'fetchNextPage';
 
 // Mutations

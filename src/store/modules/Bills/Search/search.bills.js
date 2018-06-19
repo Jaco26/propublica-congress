@@ -33,7 +33,7 @@ export const actions = {
     console.log('Search by keyword',payload);
     
   },
-  async [types.FETCH_UPCOMMING] ({commit}, payload) {
+  async [types.FETCH_UPCOMING] ({commit}, payload) {
     console.log('Search upcoming bills', payload);
     
   },

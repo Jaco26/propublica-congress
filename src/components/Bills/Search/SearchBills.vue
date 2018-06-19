@@ -18,9 +18,11 @@
     </div>
     <div v-if="selectedSearchType == 'subject'">
       Search By Subject
+      
     </div>
     <div v-if="selectedSearchType == 'upcoming'">
       Search Upcoming
+      <bill-upcoming-search @searchFor="fetchUpcoming"></bill-upcoming-search>
     </div>
     
   </div>
@@ -30,13 +32,15 @@
 // Components
 import Keyword from './Keyword'
 import Recent from './Recent'
+import Upcoming from './Upcoming'
 // Vuex
-import {FETCH_RECENT, FETCH_SEARCH} from '@/store/modules/Bills/Search/search.bill.types'
+import {FETCH_RECENT, FETCH_SEARCH, FETCH_UPCOMING} from '@/store/modules/Bills/Search/search.bill.types'
 import {mapState, mapActions} from 'vuex'
 export default {
   components: {
     billKeywordSearch: Keyword,
     billRecentSearch: Recent,
+    billUpcomingSearch: Upcoming,
   },
   data () {
     return {
@@ -46,15 +50,12 @@ export default {
         subject: {
           subject: '' // A slug version of a legislative subject, displayed as url_name in subject responses
         },
-        upcoming: {
-          chamber: '', // "house" or "senate"
-        },
+      
       },
       selectOptions: {
         upcoming: {
           chamber: [
-            {title: 'House', value: 'house'},
-            {title: 'Senate', value: 'senate'},
+            
           ]
         }
       }  
@@ -64,6 +65,7 @@ export default {
     ...mapActions('bills', {
       fetchRecent: FETCH_RECENT,
       fetchSearch: FETCH_SEARCH,
+      fetchUpcoming: FETCH_UPCOMING
     }),
 
   } 
