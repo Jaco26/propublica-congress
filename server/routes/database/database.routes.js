@@ -3,7 +3,7 @@ const router = express.Router();
 const pool = require('../../modules/pool');
 
 router.get('/bill-subjects/keyword', (req, res) => {
-  console.log(req.query);
+  // console.log(req.query);
   
   const { query, offset} = req.query;
   // For multiple words not inside double quotes:
@@ -17,14 +17,20 @@ router.get('/bill-subjects/keyword', (req, res) => {
       a += ` OR name ILIKE $${index+1}`;
       return a;
     }, '');
-    const sqlText = `SELECT * FROM bill_subjects WHERE name ILIKE ${searchWords}`;
-    res.send({sqlText})
+    const sqlText = `SELECT * FROM bill_subjects WHERE name ILIKE ${searchWords} OFFSET $${query.split(' ').length + 1}`;
+    pool.query(sqlText, [...query.split(' ').map(word => '%'+word+'%'), offset])
+      .then(response => {
+        res.send(response.rows)
+      })
+      .catch(err => {
+        console.log(err);
+        res.sendStatus(500);
+      })
   // For single keyword queries or ones bound inside double quotes
   } else {
-    console.log(query.replace(/"/g, ''));
-    
-    const sqlText = `SELECT * FROM bill_subjects WHERE name ILIKE $1 OFFSET $2;`;
-    pool.query(sqlText, [`%${query}%`, offset])
+    let q = query.replace(/[""]/g, '');   
+    const sqlText = `SELECT * FROM bill_subjects WHERE name ILIKE $1`;    
+    pool.query(sqlText, ['%'+q+'%'])
       .then(response => {
         res.send(response.rows)
       })
