@@ -3,8 +3,6 @@ const router = express.Router();
 const pool = require('../../modules/pool');
 
 router.get('/bill-subjects/keyword', (req, res) => {
-  // console.log(req.query);
-  
   const { query, offset} = req.query;
   // For multiple words not inside double quotes:
   // Search for match to any
@@ -29,24 +27,45 @@ router.get('/bill-subjects/keyword', (req, res) => {
   // For single keyword queries or ones bound inside double quotes
   } else {
     let q = query.replace(/[""]/g, '');   
-    const sqlText = `SELECT * FROM bill_subjects WHERE name ILIKE $1`;    
+    const sqlText = `SELECT * FROM bill_subjects WHERE name ILIKE $1;`;    
     pool.query(sqlText, ['%'+q+'%'])
       .then(response => {
         res.send(response.rows)
       })
       .catch(err => {
-        throw err;
+        console.log(err);
+        res.sendStatus(500);
       });
   }
   
 });
 
 router.get('/bill-subjects/:letter', (req, res) => {
-
+  const {letter} = req.params;
+  const sqlText = `SELECT * FROM bill_subjects WHERE name ILIKE $1;`;
+  pool.query(sqlText, [letter+'%'])
+    .then(response => {
+      res.send(response.rows);
+    })
+    .catch(err => {
+      console.log(err);
+      res.sendStatus(500);
+    });
 });
 
-router.get('/bill-subjects/:popularity/:offset', (req, res) => {
-
+router.get('/bill-subjects/order-by/:order/:offset', (req, res) => {
+  const {order, offset} = req.params;  
+  const sqlText = order == 'desc' 
+    ? 'SELECT * FROM bill_subjects ORDER BY number_of_bills DESC LIMIT 20 OFFSET $1;'
+    : 'SELECT * FROM bill_subjects ORDER BY number_of_bills ASC LIMIT 20 OFFSET $1;'
+  pool.query(sqlText, [offset])
+    .then(response => {
+      res.send(response.rows)
+    })
+    .catch(err => {
+      console.log(err);
+      res.sendStatus(500);
+    });
 });
 
 module.exports = router;
