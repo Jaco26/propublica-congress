@@ -4,17 +4,14 @@ const pool = require('../../modules/pool');
 
 router.get('/bill-subjects/keyword', (req, res) => {
   const { query, offset} = req.query;
-  // For multiple words not inside double quotes:
-  // Search for match to any
+  // For multiple words not inside double quotes: Search for match to any
   if (query.split(' ').length > 1 && !query.startsWith('"')) {
     let searchWords = query.split(' ').reduce( (a, b, index) => {
-      if (index == 0) {
-        a = `$${index+1}`;
-        return a;
-      } 
-      a += ` OR name ILIKE $${index+1}`;
+      index == 0 
+        ? a = `$${index + 1}`
+        : a += ` OR name ILIKE $${index + 1}`;
       return a;
-    }, '');
+    }, '');    
     const sqlText = `SELECT * FROM bill_subjects WHERE name ILIKE ${searchWords} OFFSET $${query.split(' ').length + 1}`;
     pool.query(sqlText, [...query.split(' ').map(word => '%'+word+'%'), offset])
       .then(response => {

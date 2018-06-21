@@ -29,8 +29,6 @@ router.get(`/subjects/bills/search`, (req, res) => {
 router.get(`/recent/:type/:congress/:chamber`, (req, res) => {
   let { type, congress, chamber } = req.params,
       offset = req.query.offset;
-      console.log(offset);
-      
   PropublicaAPI.get(`/${congress}/${chamber}/bills/${type}.json?offset=${offset}`)
     .then(response => res.send(response.data))
     .catch(err => {
@@ -38,6 +36,19 @@ router.get(`/recent/:type/:congress/:chamber`, (req, res) => {
       res.sendStatus(500);
     });
 });
+
+// Get a list of upcoming bills
+router.get('/upcoming/:chamber', (req, res) => {
+  let {chamber} = req.params,
+      {offset} = req.query;
+  PropublicaAPI.get(`/upcoming/${chamber}.json?offset=${offset}`)
+    .then(response => res.send(response.data))
+    .catch(err => {
+      console.log(err);
+      res.sendStatus(500);
+    });
+});
+
 
 /**
  * Use this request type to get details about a particular bill, including actions taken 

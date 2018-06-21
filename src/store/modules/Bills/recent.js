@@ -37,6 +37,8 @@ export default {
       }
     },
     'SET_SEARCH_PARAMS' (state, payload) {
+      console.log(payload);
+      
       if (payload) {
         const {congress, chamber, type} = payload;
         state.bills.searchParams.congress = congress;
