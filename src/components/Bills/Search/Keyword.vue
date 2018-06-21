@@ -1,23 +1,17 @@
 <template>
-  <div>
-    <v-layout justify-center="">
-      <v-flex>
-        <v-text-field 
-          class="ma-3"
-          append-icon="search"
-          single-line
-          v-model="query"
-          label="Search Bills"
-          hide-details
-        ></v-text-field>
-      </v-flex>
-      <v-flex>
-        <v-btn flat color="info" @click="$emit('searchFor', {query})">
-          Search 
-        </v-btn>
-      </v-flex>
-    </v-layout>
-  </div>
+  <v-toolbar-items style="min-width: 600px;">
+    <v-text-field 
+      class="mx-3"
+      append-icon="search"
+      single-line
+      v-model="query"
+      label="Search Bills"
+      hide-details
+    ></v-text-field>
+    <v-btn  color="info" @click="$emit('searchFor', {query})">
+      Search 
+    </v-btn>    
+  </v-toolbar-items>
 </template>
 
 <script>

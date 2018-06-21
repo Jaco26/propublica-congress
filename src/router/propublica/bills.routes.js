@@ -5,7 +5,6 @@ import Upcoming from '@/components/Bills/Upcoming'
 import Bill from '@/components/Bills/Bill'
 
 import SearchBills from '@/components/Bills/Search/SearchBills'
-import SearchForm from '@/components/Bills/Search/Form/SearchForm'
 
 export default {
   path: '/bills',

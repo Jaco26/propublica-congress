@@ -7,6 +7,7 @@
           <v-btn
             v-for="type in searchTypes" :key="type"
             class="mx-2"
+            depressed
             :class="type == selectedSearchType ? 'active-search-type' : ''"
             @click="selectedSearchType = type"
           > {{type}} </v-btn>
@@ -17,24 +18,10 @@
     <v-toolbar dense flat color="transparent">
       <v-layout justify-center>
         <bill-recent-search v-show="selectedSearchType == 'recent'" @searchFor="fetchRecent"></bill-recent-search>
+        <bill-keyword-search v-show="selectedSearchType == 'keyword'" @searchFor="fetchSearch"></bill-keyword-search>
+        <bill-upcoming-search v-show="selectedSearchType == 'upcoming'" @searchFor="fetchUpcoming"></bill-upcoming-search>
       </v-layout>
     </v-toolbar>
-
-  
-    <v-flex v-show="selectedSearchType == 'keyword'">
-      <bill-keyword-search @searchFor="fetchSearch"></bill-keyword-search>
-    </v-flex>
-    <!-- <v-flex v-show="selectedSearchType == 'recent'">
-      <bill-recent-search v-show="selectedSearchType == 'recent'" @searchFor="fetchRecent"></bill-recent-search>
-    </v-flex> -->
-    <v-flex v-if="selectedSearchType == 'upcoming'">
-      <bill-upcoming-search @searchFor="fetchUpcoming"></bill-upcoming-search>
-    </v-flex>
-
-
-    
-
-  
 
     <bill-search-results ></bill-search-results>
     
@@ -82,7 +69,7 @@ export default {
 <style scoped>
 
 .active-search-type {
-  background-color: aquamarine !important;
+  background-color: #cde0da !important;
 }
 
 </style>
