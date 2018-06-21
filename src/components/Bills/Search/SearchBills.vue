@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-toolbar dense flat color="transparent" >
+    <v-toolbar extended extension-height="30" dense flat color="grey lighten-4" >
       <v-layout justify-center>
         <v-toolbar-title class="headline mx-3">Search Bills</v-toolbar-title>
         <v-toolbar-items>
@@ -13,10 +13,11 @@
           > {{type}} </v-btn>
         </v-toolbar-items>
       </v-layout>
+     
     </v-toolbar>
-    
-    <v-toolbar dense flat color="transparent">
-      <v-layout justify-center>
+
+    <v-toolbar id="search-forms" flat color="grey lighten-2">
+      <v-layout  justify-center>
         <bill-recent-search v-show="selectedSearchType == 'recent'" @searchFor="fetchRecent"></bill-recent-search>
         <bill-keyword-search v-show="selectedSearchType == 'keyword'" @searchFor="fetchSearch"></bill-keyword-search>
         <bill-upcoming-search v-show="selectedSearchType == 'upcoming'" @searchFor="fetchUpcoming"></bill-upcoming-search>
@@ -71,5 +72,10 @@ export default {
 .active-search-type {
   background-color: #cde0da !important;
 }
+
+#search-forms {
+
+}
+
 
 </style>

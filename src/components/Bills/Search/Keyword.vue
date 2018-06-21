@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar-items style="min-width: 600px;">
+  <v-toolbar-items style="min-width: 490px;">
     <v-text-field 
       class="mx-3"
       append-icon="search"

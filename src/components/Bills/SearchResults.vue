@@ -3,8 +3,20 @@
     <v-container fluid grid-list-md>
       <v-layout wrap>
         <h4 v-if="bills[0]"> Results: {{numOfResults}} {{prevSearchType ? prevSearchType : null}} Bills </h4>
-        <v-flex v-for="(bill, i) in bills" :key="i" xs12> 
-          {{bill.short_title}} {{bill.bill_id}}
+        <v-flex v-for="(bill, i) in bills" :key="i" xs12 class="my-2 grey lighten-3"> 
+          <v-layout v-if="bill.title || bill.description">
+            <v-flex>
+              <b> <router-link :to="{name: 'specificBill', params: {billId: bill.bill_id}}"> {{bill.bill_id}} </router-link> {{bill.title ? bill.title : bill.description}}</b>
+            </v-flex>
+          </v-layout>
+          <v-divider></v-divider>
+          <v-layout v-if="bill.sponsor_id">
+            <v-flex class="text-xs-left">
+              <small><b>Sponsor:</b></small>
+              <router-link :to="`/members/member/${bill.sponsor_id}`"><strong>{{bill.sponsor_name}}</strong></router-link> 
+              <small> {{bill.sponsor_party}}, {{bill.sponsor_state}} </small> 
+            </v-flex>
+          </v-layout>
         </v-flex>
         <v-btn 
           v-if="bills.length >= 20 && prevSearchType != 'upcoming'" 
@@ -16,6 +28,7 @@
         </v-btn>
       </v-layout>
     </v-container>
+     <v-progress-linear v-if="billsLoading" indeterminate></v-progress-linear>
   </div>
 </template>
 

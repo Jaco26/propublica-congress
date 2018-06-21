@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar-items style="min-width: 600px;">
+  <v-toolbar-items style="min-width: 490px;">
     <v-select
       class="mx-2"
       min-width="200"
@@ -29,7 +29,7 @@
       single-line
       hide-details=""
     ></v-select>
-    <v-btn color="info" @click="$emit('searchFor', {congress, chamber, type})">Submit</v-btn>  
+    <v-btn color="info" style="width: 91px;" @click="$emit('searchFor', {congress, chamber, type})">Search</v-btn>  
   </v-toolbar-items> 
 </template>
 

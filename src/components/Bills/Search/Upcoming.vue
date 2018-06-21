@@ -1,6 +1,6 @@
 <template>
-  <v-toolbar-items style="min-width: 600px;">
-    <v-layout justify-center >
+  <v-toolbar-items style="min-width: 490px;">
+    <v-layout justify-center>
       <v-flex xs6 offset-xs2>
         <v-radio-group row v-model="chamber">
           <v-radio
@@ -12,7 +12,7 @@
         </v-radio-group>  
       </v-flex>
     </v-layout>
-    <v-btn color="info" id="submit-btn" @click="$emit('searchFor', {chamber})">Submit</v-btn>   
+    <v-btn color="info" id="submit-btn" @click="$emit('searchFor', {chamber})">Search</v-btn>   
   </v-toolbar-items>
    
 </template>
