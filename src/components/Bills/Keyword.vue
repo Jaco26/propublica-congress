@@ -2,7 +2,7 @@
   <div>
     <!-- TODO: This search bar could be a candidate for being
     a reusable component... -->
-    <v-layout justify-center>
+     <v-layout justify-center>
       <v-flex xs12 sm8 lg6 class="text-xs-center">
         <form @submit.prevent="submit">
           <v-toolbar dense prominent>

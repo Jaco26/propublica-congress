@@ -1,35 +1,44 @@
 <template>
   <div>
-    <h1>Search Bills</h1>
-    <select v-model="selectedSearchType" value="" style="background-color: beige; color: #112211;">
-      <option v-for="type in searchTypes" :key="type" :value="type"> {{type}} </option>
-    </select>
-    <br>
-    <br>
-    <hr>
+    <v-toolbar dense flat color="transparent" >
+      <v-layout justify-center>
+        <v-toolbar-title class="headline mx-3">Search Bills</v-toolbar-title>
+        <v-toolbar-items>
+          <v-btn
+            v-for="type in searchTypes" :key="type"
+            class="mx-2"
+            :class="type == selectedSearchType ? 'active-search-type' : ''"
+            @click="selectedSearchType = type"
+          > {{type}} </v-btn>
+        </v-toolbar-items>
+      </v-layout>
+    </v-toolbar>
+    
+    <v-toolbar dense flat color="transparent">
+      <v-layout justify-center>
+        <bill-recent-search v-show="selectedSearchType == 'recent'" @searchFor="fetchRecent"></bill-recent-search>
+      </v-layout>
+    </v-toolbar>
 
-    <div v-show="selectedSearchType == 'keyword'">
-      Search By Keyword       
+  
+    <v-flex v-show="selectedSearchType == 'keyword'">
       <bill-keyword-search @searchFor="fetchSearch"></bill-keyword-search>
-    </div>
-    <div v-show="selectedSearchType == 'recent'">
-      Search By Recent
-      <bill-recent-search @searchFor="fetchRecent"></bill-recent-search>
-    </div>
-    <div v-if="selectedSearchType == 'subject'">
-      Search By Subject
-      <bill-subject-search @searchFor="fetchBySubject"></bill-subject-search>
-    </div>
-    <div v-if="selectedSearchType == 'upcoming'">
-      Search Upcoming
+    </v-flex>
+    <!-- <v-flex v-show="selectedSearchType == 'recent'">
+      <bill-recent-search v-show="selectedSearchType == 'recent'" @searchFor="fetchRecent"></bill-recent-search>
+    </v-flex> -->
+    <v-flex v-if="selectedSearchType == 'upcoming'">
       <bill-upcoming-search @searchFor="fetchUpcoming"></bill-upcoming-search>
-    </div>
+    </v-flex>
 
-    <ul>
-      <li v-for="bill in bills" :key="bill.bill_id">{{bill.bill_id}}</li>
-    </ul>
-    <v-btn @click="getNextPage">Next Page</v-btn>
-    <h2> {{prevSearchType ? prevSearchType : null}} </h2>
+
+    
+
+  
+
+    <bill-search-results ></bill-search-results>
+    
+
     
   </div>
 </template>
@@ -39,7 +48,8 @@
 import Keyword from './Keyword'
 import Recent from './Recent'
 import Upcoming from './Upcoming'
-import Subject from './Subject'
+
+import SearchResults from '@/components/Bills/SearchResults'
 // Vuex
 import {FETCH_RECENT, FETCH_SEARCH, FETCH_UPCOMING, FETCH_BY_SUBJECT} from '@/store/modules/Bills/Search/search.bill.types'
 import {mapState, mapActions} from 'vuex'
@@ -48,21 +58,15 @@ export default {
     billKeywordSearch: Keyword,
     billRecentSearch: Recent,
     billUpcomingSearch: Upcoming,
-    billSubjectSearch: Subject,
+    billSearchResults: SearchResults,
   },
   data () {
     return {
-      searchTypes: ['keyword', 'recent', 'subject', 'upcoming'],
+      searchTypes: ['keyword', 'recent', 'upcoming'],
       selectedSearchType: '',
     };
   },
-  computed: {
-    ...mapState('bills', {
-      bills: state => state.searchBills.results.list,
-      billsLoading: state => state.searchBills.results.loading,
-      prevSearchType: state => state.searchBills.search.type,
-    })
-  },
+  
   methods: {
     ...mapActions('bills', {
       fetchRecent: FETCH_RECENT,
@@ -70,22 +74,15 @@ export default {
       fetchUpcoming: FETCH_UPCOMING,
       fetchBySubject: FETCH_BY_SUBJECT,
     }),
-    getNextPage () {
-      switch (this.prevSearchType) {
-        case 'keyword':
-          this.fetchSearch();
-          return;
-        case 'recent':
-          this.fetchRecent();
-          return;
-        case 'subject':
-          this.fetchBySubject();
-          return;
-        case 'upcoming':
-          this.fetchUpcoming();
-          return;  
-      }
-    }
   } 
 }
 </script>
+
+
+<style scoped>
+
+.active-search-type {
+  background-color: aquamarine !important;
+}
+
+</style>

@@ -39,9 +39,8 @@ router.get(`/recent/:type/:congress/:chamber`, (req, res) => {
 
 // Get a list of upcoming bills
 router.get('/upcoming/:chamber', (req, res) => {
-  let {chamber} = req.params,
-      {offset} = req.query;
-  PropublicaAPI.get(`/upcoming/${chamber}.json?offset=${offset}`)
+  let {chamber} = req.params;
+  PropublicaAPI.get(`/bills/upcoming/${chamber}.json`)
     .then(response => res.send(response.data))
     .catch(err => {
       console.log(err);

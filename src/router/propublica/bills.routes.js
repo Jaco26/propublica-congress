@@ -1,9 +1,11 @@
 import Bills from '@/components/Bills/Bills'
-import SearchBills from '@/components/Bills/Search/SearchBills'
 import Keyword from '@/components/Bills/Keyword'
 import Recent from '@/components/Bills/Recent'
 import Upcoming from '@/components/Bills/Upcoming'
 import Bill from '@/components/Bills/Bill'
+
+import SearchBills from '@/components/Bills/Search/SearchBills'
+import SearchForm from '@/components/Bills/Search/Form/SearchForm'
 
 export default {
   path: '/bills',
@@ -33,8 +35,8 @@ export default {
     },
     {
       component: SearchBills,
-      name: 'searchBills2',
-      path: ''
+      path: '',
+      
     }
   ]
 }

@@ -1,7 +1,9 @@
 <template>
-  <div>
+
+  <v-toolbar-items style="min-width: 600px">
     <v-select
-      class="ma-2"
+      class="mx-2"
+      min-width="200"
       :items="options.chamber"
       v-model="chamber"
       item-text="title"
@@ -10,7 +12,7 @@
       hide-details
     ></v-select>
     <v-select
-      class="ma-2"
+      class="mx-2"
       :items="options.type"
       v-model="type"
       item-text="title"
@@ -19,7 +21,7 @@
       hide-details
     ></v-select>
     <v-select 
-      class="ma-2"
+      class="mx-2"
       :items="options.congress"
       v-model="congress"
       item-text="title"
@@ -28,9 +30,8 @@
       single-line
       hide-details=""
     ></v-select>
-    <v-btn @click="$emit('searchFor', {congress, chamber, type})">Submit</v-btn>
-            
-  </div>
+    <v-btn @click="$emit('searchFor', {congress, chamber, type})">Submit</v-btn>  
+  </v-toolbar-items> 
 </template>
 
 <script>

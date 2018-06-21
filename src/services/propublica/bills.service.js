@@ -11,8 +11,8 @@ export default {
       .then(response => response.data)
       .catch(err => console.log(err));
   },
-  getUpcoming: ({chamber, offset}) => {
-    return axios.get(`/api/congress/bills/upcoming/${chamber}?offset=${offset}`)
+  getUpcoming: ({chamber}) => {
+    return axios.get(`/api/congress/bills/upcoming/${chamber}`)
       .then(response => response.data)
       .catch(err => console.log(err));
   },

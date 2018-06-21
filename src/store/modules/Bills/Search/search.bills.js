@@ -94,8 +94,8 @@ export const actions = {
     commit(types.IS_LOADING, { propsPath: 'results', is: false });
   },
 
-  async [types.FETCH_SEARCH] ({commit}, payload) {
-    commit(types.IS_LOADING, { propsPath: 'results', is: true });
+  async [types.FETCH_SEARCH] ({commit, state}, payload) {
+    commit(types.IS_LOADING, { propsPath: 'results', is: true });    
     const {query, dir} = state.search.keyword;
     if (payload) {
       if (query != payload.query || dir != payload.dir) {
@@ -112,8 +112,25 @@ export const actions = {
     commit(types.IS_LOADING, { propsPath: 'results', is: false });
   },
 
-  async [types.FETCH_UPCOMING] ({commit}, payload) {
-        
+  async [types.FETCH_UPCOMING] ({commit, state}, payload) {
+    commit(types.IS_LOADING, { propsPath: 'results', is: true });
+    const { chamber } = state.search.upcoming;
+    if (payload) {
+      if (chamber != payload.chamber) {
+        // upcoming bills results are not paginated
+        commit(types.SET_SEARCH_PARAMS, {params: payload, searchType: 'upcoming'});
+        const response = await billsService.getUpcoming(payload);  
+        console.log(response);
+              
+        commit(types.SET_RESULTS, {bills: response.results[0].bills});
+      } 
+    } else {
+      // upcoming bills results are not paginated
+      const response = await billsService.getUpcoming(state.search.upcoming);
+      console.log(response);
+      commit(types.SET_RESULTS, { bills: response.results[0].bills});
+    }
+    commit(types.IS_LOADING, { propsPath: 'results', is: false });
   },
   async [types.FETCH_BY_SUBJECT] ({commit}, payload) {
     console.log('Search bills by subject', payload);
