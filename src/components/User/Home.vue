@@ -74,20 +74,11 @@ export default {
           actions: [
             {
               title: 'Search Bills',
-              path: '/bills/search'
+              path: '/bills'
             }
           ]
         },
-        {
-          title: 'Recent Bills',
-          text: 'Search for recent bills by congress, chamber, and type.',
-          actions: [
-            {
-              title: 'Find Bills',
-              path: '/bills/recent'
-            }
-          ]
-        },
+      
         {
           title: 'Recent Votes',
           text: 'Get a list of recent votes from the House, Senate or both chambers.',

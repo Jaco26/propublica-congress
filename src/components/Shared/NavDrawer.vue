@@ -139,9 +139,7 @@ export default {
               active: true,
               title: 'Bills',
               children: [
-                { title: 'Search Bills', path: '/bills/search' },
-                { title: 'Recent Bills', path: '/bills/recent' },
-                { title: 'Upcoming Bills', path: '/bills/upcoming' },
+                { title: 'Search Bills', path: '/bills' },
               ]
             },
             {

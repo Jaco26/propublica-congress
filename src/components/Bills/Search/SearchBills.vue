@@ -51,7 +51,7 @@ export default {
   data () {
     return {
       searchTypes: ['keyword', 'recent', 'upcoming'],
-      selectedSearchType: '',
+      selectedSearchType: 'keyword',
     };
   },
   
