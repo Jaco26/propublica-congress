@@ -14,14 +14,13 @@
     </v-layout>
     <v-btn color="info" id="submit-btn" @click="$emit('searchFor', {chamber})">Search</v-btn>   
   </v-toolbar-items>
-   
 </template>
 
 <script>
 export default {
   data () {
     return {
-      chamber: '', // "house" or "senate"
+      chamber: 'house', // "house" or "senate"
       options: [
         {title: 'House', value: 'house'},
         {title: 'Senate', value: 'senate'},

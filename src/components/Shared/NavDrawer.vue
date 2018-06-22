@@ -131,8 +131,8 @@ export default {
               active: true,
               title: 'Votes',
               children: [
-                // { title: 'Recent Explanations', path: '/votes/explanations' },
                 { title: 'Recent Votes', path: '/votes/recent' },
+                { title: 'Recent Explanations', path: '/votes/explanations' },
               ]
             },
             {

@@ -4,7 +4,7 @@
       <v-flex xs12>
         <v-toolbar>
           <v-toolbar-title v-if="!personLoading" class="headline"> 
-            {{member.first_name}} {{member.last_name}}  
+            {{member.first_name}} {{member.last_name}} <small>{{member.current_party}} {{member.roles[0].state}}</small> 
           </v-toolbar-title>
           <v-spacer></v-spacer>
           <!-- If the screen is larger than xs (v-if) -->

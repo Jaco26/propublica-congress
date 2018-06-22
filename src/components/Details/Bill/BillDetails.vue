@@ -49,19 +49,12 @@ export default {
       fetchBill: FETCH_SPEC_BILL,
     }),
   },
-  beforeRouteEnter (to, from, next) {
-    console.log('BILL DETAILS',to);
-    
-    next(vm => {   
-      console.log('IN NEXT');
-         
+  beforeRouteEnter (to, from, next) {    
+    next(vm => {            
       vm.fetchBill(to.params)
     })
   },
-  beforeRouteUpdate(to, from, next) {
-    console.log('ROUTE UPDATING');
-    
-  }
+
   
 }
 </script>

@@ -37,9 +37,9 @@
 export default {
   data () {
     return {
-      congress: '', // 105-115
-      chamber: '', // "house", "senate" or "both"
-      type: '', // "introduced", "updated", "active", "passed", "enacted", "vetoed"
+      congress: '115', // 105-115
+      chamber: 'house', // "house", "senate" or "both"
+      type: 'introduced', // "introduced", "updated", "active", "passed", "enacted", "vetoed"
       options: {
         congress: this.congressFunc(105),
         chamber: [
