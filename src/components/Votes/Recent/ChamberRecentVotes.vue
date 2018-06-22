@@ -16,25 +16,26 @@
             class="vote-item"
           ></app-vote>
         </transition-group>
-        
       </v-layout>
     </v-container>
   </div>
 </template>
 
 <script>
-import Vote from './Vote'
+import Vote from '../Vote'
+
 export default {
   props: {
     votes: {
       type: Array,
-      required: true
+      required: true,
     },
-    chamber: String
+    chamber: String,
   },
   components: {
     appVote: Vote
   },
+
 }
 </script>
 

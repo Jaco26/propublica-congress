@@ -25,8 +25,8 @@
               <v-icon >more_vert</v-icon>
             </v-btn>
             <v-list>
-              <v-list-tile  v-for="tab in tabs" :key="tab.title" @click="show(tab.action)">
-                <v-list-tile-title  v-if="!tab.loading">
+              <v-list-tile v-for="tab in tabs" :key="tab.title" router :to="tab.path">
+                <v-list-tile-title v-if="!tab.loading">
                   {{tab.title}}
                 </v-list-tile-title>
               </v-list-tile> 
