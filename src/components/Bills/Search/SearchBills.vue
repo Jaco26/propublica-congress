@@ -26,8 +26,6 @@
 
     <bill-search-results ></bill-search-results>
     
-
-    
   </div>
 </template>
 
@@ -73,9 +71,7 @@ export default {
   background-color: #cde0da !important;
 }
 
-#search-forms {
 
-}
 
 
 </style>
