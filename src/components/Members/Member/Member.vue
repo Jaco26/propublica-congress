@@ -69,21 +69,11 @@ export default {
       statementsLoading: state => state.statements.loading,
       
     }),
-    memberParty () {
-      if (this.person.party == 'D') {
-        return 'Democrat'
-      } else if (this.person.party == 'R') {
-        return 'Republican';
-      } else if (this.person.party == 'I') {
-        return 'Independent';
-      }
-    },
     memberState () {
       return this.member.roles 
         ? this.member.roles[0].state
         : '';
     }
-    
   },
   methods: {
     ...mapActions('members/specificMember', {
@@ -96,7 +86,6 @@ export default {
       });
   },
   beforeRouteUpdate (to, from, next) {
-    // if (to.fullPath.split('').filter(char => char == '/').length == 3) {
     if ( !to.fullPath.includes('votes') && !to.fullPath.includes('bills') && !to.fullPath.includes('statements')) {
       console.log(to.fullPath);
       console.log('MEMBER PATH MATCH');
