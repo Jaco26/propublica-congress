@@ -123,8 +123,15 @@ export default {
               children: [
                 { title: 'Senate', path: '/members/senate' },
                 { title: 'House', path: '/members/house' },
-                { title: 'New Members', path: '/members/new' },
-                { title: 'Members Leaving Office', path: '/members/leaving' },
+                // { title: 'New Members', path: '/members/new' },
+                // { title: 'Members Leaving Office', path: '/members/leaving' },
+              ]
+            },
+             {
+              active: true,
+              title: 'Bills',
+              children: [
+                { title: 'Search Bills', path: '/bills' },
               ]
             },
             {
@@ -135,27 +142,21 @@ export default {
                 { title: 'Recent Explanations', path: '/votes/explanations' },
               ]
             },
-            {
-              active: true,
-              title: 'Bills',
-              children: [
-                { title: 'Search Bills', path: '/bills' },
-              ]
-            },
-            {
-              active: true,
-              title: 'Statements', 
-              children: [
+           
+            // {
+            //   active: true,
+            //   title: 'Statements', 
+            //   children: [
 
-              ]
-            },
-            {
-              active: true,
-              title: 'Committees',
-              children: [
+            //   ]
+            // },
+            // {
+            //   active: true,
+            //   title: 'Committees',
+            //   children: [
 
-              ]
-            }
+            //   ]
+            // }
           ]
         } 
       ]

@@ -35,7 +35,7 @@
               <v-card-actions fill-height>
                 <v-btn
                   v-for="action in card.actions" :key="action.path"
-                  flat color="purple darken-4"  :to="action.path"
+                  outline block color="purple darken-4" :to="action.path"
                 >
                   {{action.title}}
                 </v-btn>
@@ -78,16 +78,7 @@ export default {
             }
           ]
         },
-        {
-          title: 'Recent Explanations',
-          text: 'See a list of recent personal explanations given by legislators about missed or mistaken votes on the congressional record',
-          actions: [
-            {
-              title: 'Explanations',
-              path: '/votes/explanations'
-            }
-          ]
-        },
+
         {
           title: 'Recent Votes',
           text: 'Get a list of recent votes from the House, Senate or both chambers.',
