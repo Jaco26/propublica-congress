@@ -20,9 +20,10 @@
 
 <script>
 // Components
-import Role from './Role';
+import Role from './Role'
 // Vuex
-import {mapState} from 'vuex'
+import {mapState, mapActions} from 'vuex'
+import {FETCH_MEMBER} from '@/store/modules/Members/specificMember.types'
 export default {
   components: {
     Role,
@@ -32,7 +33,19 @@ export default {
       person: state => state.profile.main,
       personLoading: state => state.profile.loading,
     })
-  }
+  },
+  methods: {
+    ...mapActions('members/specificMember', {
+      fetchMember: FETCH_MEMBER,
+    })
+  },
+  // beforeRouteEnter (to, from, next) {
+  //   next(vm => {
+  //     if (vm.person.member_id != to.params.id && to.params.id) {
+  //       vm.fetchMember(to.params.id)
+  //     }
+  //   })
+  // }
 
 }
 

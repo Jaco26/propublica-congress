@@ -4,7 +4,7 @@
       <v-flex xs12>
         <v-toolbar>
           <v-toolbar-title v-if="!personLoading" class="headline"> 
-            {{member.first_name}} {{member.last_name}} <small>{{member.current_party}} {{member.roles[0].state}}</small> 
+            {{member.first_name}} {{member.last_name}} <small>{{member.current_party}} {{memberState}}</small> 
           </v-toolbar-title>
           <v-spacer></v-spacer>
           <!-- If the screen is larger than xs (v-if) -->
@@ -42,22 +42,9 @@
 </template>
 
 <script>
-import {mapState, mapActions} from 'vuex';
-import * as types from '@/store/modules/Members/specificMember.types';
-import store from '@/store/store';
-import Votes from './Votes';
-import Bills from './Bills';
-import Statements from './Statements';
-import PastRoles from './PastRoles';
-
-
+import {mapState, mapActions} from 'vuex'
+import * as types from '@/store/modules/Members/specificMember.types'
 export default {
-  components: {
-    Votes,
-    Bills,
-    Statements,
-    PastRoles,
-  },
   data () {
     return {
       tabs: [
@@ -82,7 +69,7 @@ export default {
       statementsLoading: state => state.statements.loading,
       
     }),
-    party () {
+    memberParty () {
       if (this.person.party == 'D') {
         return 'Democrat'
       } else if (this.person.party == 'R') {
@@ -90,6 +77,11 @@ export default {
       } else if (this.person.party == 'I') {
         return 'Independent';
       }
+    },
+    memberState () {
+      return this.member.roles 
+        ? this.member.roles[0].state
+        : '';
     }
     
   },
@@ -104,12 +96,13 @@ export default {
       });
   },
   beforeRouteUpdate (to, from, next) {
-    if (to.fullPath.split('').filter(char => char == '/').length == 3) {
+    // if (to.fullPath.split('').filter(char => char == '/').length == 3) {
+    if ( !to.fullPath.includes('votes') && !to.fullPath.includes('bills') && !to.fullPath.includes('statements')) {
+      console.log(to.fullPath);
       console.log('MEMBER PATH MATCH');
       this.fetchMember(to.params.id)
     }
     next();
-    
   },
 
 }
